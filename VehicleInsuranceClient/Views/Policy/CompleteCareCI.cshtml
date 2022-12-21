@@ -1,0 +1,457 @@
+﻿@using VehicleInsuranceClient.Models
+@{
+    ViewData["Title"] = "Comprehensive Car Insurance";
+}
+@model List<PolicyModel>
+<div id="home" class="mb-5">
+    <div class="container">
+        <div class="row pt-4">
+            <div class="col-12 col-lg-6 my-5">
+                <h1 class="fw-bolder">
+                    <span>X Complete Care® Car </span> <br />
+                    <span>Insurance</span>
+                </h1>
+                <p class="" style="font-weight:bold">
+                    Quality cover with all the perks so you can drive with confidence. <br />
+
+                </p>
+
+                <a class="btn btn-primary">Retrieve An Estimate</a>
+
+                <a asp-controller="Estimate" asp-action="Index" class="btn btn-secondary">Get An Estimate</a>
+            </div>
+        </div>  <!-- End of Row -->
+    </div>  <!-- End of Container -->
+</div>
+<!-- About -->
+<section id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" style="float:left; margin-bottom: 0; padding-right: 3rem;">
+                <h2 style="font-weight:bold;">What is Complete Care® Car Insurance?</h2>
+                <p>
+                    <!-- Filter Policy by Id-->
+                    @foreach (PolicyModel item in Model.Where(u => u.Id == 4))
+                    {
+                        @item.Description
+                    }
+                </p>
+            </div>
+
+            <div class="col-md-4 bg-warning" style="padding: 2rem">
+                <h4 style="font-weight:bold">Key inclusion:</h4>
+                <p class="">New replacement vehicle if yours is considered a total loss, X Insurance agrees to pay your claim, the vehicle was purchased new and the incident occurred within the first 3 years of its registration.</p>
+            </div>
+        </div><!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of About -->
+<!-- Reason to choose-->
+<section id="reason">
+    <div class="container">
+        <div class="row">
+            <article>
+                <h2 style="font-weight:bold">
+                    Why choose X Car Insurance
+                </h2>
+            </article><!-- End of Article-->
+        </div><!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of About -->
+<!-- Reason to choose 2-->
+<section id="reason2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="text-align:center;">
+                <i style="display:inline-flex;">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M16.109 7.115a3.918 3.918 0 100 7.835 3.918 3.918 0 000-7.835zm-5.418 3.917a5.418 5.418 0 1110.835 0 5.418 5.418 0 01-10.835 0z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M9.327 9.321c0-3.278 3.204-5.69 6.82-5.69 3.614 0 6.818 2.412 6.818 5.69a.75.75 0 11-1.5 0c0-2.176-2.23-4.19-5.319-4.19-3.09 0-5.319 2.014-5.319 4.19a.75.75 0 11-1.5 0zM12.886 11.215a.75.75 0 00-1.458.352l.731-.167a39.79 39.79 0 00-.73.168v.005l.002.006.004.015a1.31 1.31 0 00.047.15c.032.086.08.2.15.329.143.26.376.585.75.901.758.64 2.014 1.178 4.062 1.178a.75.75 0 100-1.5c-1.78 0-2.666-.463-3.094-.824a1.695 1.695 0 01-.401-.475.926.926 0 01-.063-.138zM23.114 27.619a.75.75 0 01-.75.75h-12.5a.75.75 0 01-.75-.75V18.5a3.22 3.22 0 013.22-3.22h7.56a3.22 3.22 0 013.22 3.22v9.119zm-1.5-.75V18.5a1.72 1.72 0 00-1.72-1.72h-7.56a1.72 1.72 0 00-1.72 1.72v8.369h11z" clip-rule="evenodd"></path> <path d="M22.621 10.082v1.84h-.814v-1.84h.814zm.023-1.512h-2.35v4.864h2.35a1.49 1.49 0 001.49-1.492v-1.88a1.488 1.488 0 00-1.49-1.492zM10.194 10.082v1.84h-.815v-1.84h.815zm1.512-1.512h-2.35a1.492 1.492 0 00-1.489 1.492v1.88a1.492 1.492 0 001.49 1.492h2.349V8.57z"></path> </svg>
+                    </span>
+                </i>
+                <div style="margin-top: 16px">
+                    <h3 style="text-align: center; font-weight: bold">Local care</h3>
+                    <p style="text-align: center; padding: 1.5rem">Speak to our Victorian-based consultants when you need help.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="text-align:center;">
+                <i style="display:inline-flex;">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M13.818 11.072c-.99 0-1.712.054-1.731.056h-.003c-2.945.215-4.653 1.715-4.953 1.979l-.042.036-.002.002c-.143.11-.304.165-.389.191a2.957 2.957 0 01-.324.077c-.213.04-.457.07-.677.091-.375.037-.74.057-.855.062l-1.266.057c-.28.014-.416.112-.488.19a.566.566 0 00-.14.286.753.753 0 01-.024.11c-.064.215-.112.638-.14 1.094-.027.421-.033.793-.034.884v.488c.02.715.388 1.21.803 1.552a3.203 3.203 0 00.708.441h.07a3.438 3.438 0 016.845.001h9.646a3.438 3.438 0 016.844-.008h.686c.388-.194.62-.565.756-1.005.142-.458.14-.88.14-.931v-.016l.002-.377c-.006-.246-.125-.532-.564-.855-.457-.338-1.2-.663-2.282-.94a21.043 21.043 0 00-3.026-.514 7.256 7.256 0 01-3.083-1.164c-.85-.591-1.98-1.124-2.14-1.2l-.006-.002c-.498-.222-1.204-.374-2.002-.466-.79-.091-1.62-.12-2.33-.12zm12.345 8.189a1.938 1.938 0 11-3.838-.54 1.938 1.938 0 013.838.54zm-5.149.908a3.439 3.439 0 006.463-.008h1.036a.75.75 0 00.303-.064l.079-.035h.001c.984-.43 1.438-1.29 1.646-1.964a4.773 4.773 0 00.206-1.386l.002-.377v-.02c-.013-.848-.476-1.53-1.173-2.045-.68-.503-1.635-.888-2.801-1.187h-.002a22.561 22.561 0 00-3.22-.55 5.82 5.82 0 01-2.353-.871 15.323 15.323 0 00-1.595-.955 21.54 21.54 0 00-.748-.374l-.052-.025-.02-.01-.017-.007c-.707-.317-1.595-.491-2.45-.59-.867-.1-1.758-.13-2.501-.13-1.03 0-1.787.056-1.845.06a10.343 10.343 0 00-4.244 1.242c-.495.272-.88.539-1.15.746a7.448 7.448 0 00-.36.294c-.03.008-.07.017-.12.026a6.761 6.761 0 01-.549.073c-.312.03-.596.046-.701.052l-.041.002a.78.78 0 00-.034.001l-1.268.058h-.002c-.665.032-1.171.296-1.516.668a2.069 2.069 0 00-.517 1.04c-.109.398-.158.953-.185 1.377-.029.461-.035.864-.036.957v.536c.031 1.291.719 2.16 1.347 2.68a4.703 4.703 0 001.226.727l.027.01.01.004.003.001h.002s.001.001.249-.707l-.248.708a.75.75 0 00.248.042h.409a3.439 3.439 0 006.46.001h10.031zm-11.34-.92a.748.748 0 00-.017.103 1.938 1.938 0 01-3.808-.004 1.954 1.954 0 01-.033-.357 1.937 1.937 0 113.858.258z" clip-rule="evenodd"></path> </svg>
+                    </span>
+                </i>
+                <div style="margin-top: 16px">
+                    <h3 style="text-align: center; font-weight: bold">Any driver covered</h3>
+                    <p style="text-align: center; padding: 1.5rem">No matter who’s driving your car, any licensed driver is covered, including Learner drivers.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="text-align:center;">
+                <i style="display:inline-flex;">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M13.694 2.67h14.452A2.615 2.615 0 0130.67 5.34v7.881a2.61 2.61 0 01-2.55 2.672H13.694a2.615 2.615 0 01-2.524-2.668V5.339a2.615 2.615 0 012.524-2.669zM29.17 5.603V5.31a1.115 1.115 0 00-1.065-1.141h-14.37a1.115 1.115 0 00-1.065 1.141V5.602h16.5zm-16.5 1.5h16.5v6.148a1.11 1.11 0 01-1.063 1.142H13.735a1.115 1.115 0 01-1.065-1.142V9.835c.134.124.313.2.51.2h9.21a.75.75 0 000-1.5h-9.21a.747.747 0 00-.51.2V7.103zm11.48 2.182a.75.75 0 01.75-.75h3.35a.75.75 0 010 1.5H24.9a.75.75 0 01-.75-.75zm-8.052 8.91l.296.133 5.832 1.25a2.101 2.101 0 011.721 1.632l.49-.15 1.851-2.112a3.057 3.057 0 014.212-.772.75.75 0 01.227 1l-2.36 4.026a.75.75 0 01-.097.13c-.398.43-.681.67-1.07.899-.178.104-.374.203-.59.313l-.043.02c-.212.108-.46.233-.773.4m0 0l-4.25 2.27-.002.001c-.756.4-1.561.447-2.296.366-.694-.076-1.39-.274-1.983-.442l-.078-.022-4.04-1.15-.017-.005a3.937 3.937 0 00-2.662.12l-1.29.573.026.06a.75.75 0 01-.403.982l-3.725 1.555a.75.75 0 01-.98-.403l-2.866-6.855a.75.75 0 01.403-.981l3.72-1.555a.75.75 0 01.98.402l.069.163a5.251 5.251 0 001.358-.956c1.215-1.037 2.538-1.637 3.966-1.777 1.42-.14 2.881.182 4.374.886M5.27 21.226a.757.757 0 00.083.197l2.176 5.2-2.34.976-2.287-5.471 2.337-.977.031.075zm3.328 4.065L6.98 21.428a6.75 6.75 0 001.768-1.213c1.01-.858 2.047-1.307 3.123-1.412 1.088-.107 2.279.131 3.594.753l.014.006.375.168a.756.756 0 00.15.048l5.93 1.27a.695.695 0 00.047.009.6.6 0 01.477.796.76.76 0 00-.067.134.58.58 0 01-.193.18.597.597 0 01-.475.059.76.76 0 00-.051-.013l-5.9-1.303a.75.75 0 10-.324 1.465l5.877 1.297a2.1 2.1 0 002.265-.783l1.49-.457a.751.751 0 00.344-.223l2.02-2.305a.762.762 0 00.056-.072 1.558 1.558 0 011.495-.667l-1.88 3.206c-.296.315-.461.441-.674.566a9.45 9.45 0 01-.507.267l-.043.022c-.213.107-.475.24-.804.415L20.84 25.91h-.002c-.394.21-.863.262-1.428.2-.566-.062-1.155-.23-1.784-.408l-4.062-1.156a5.438 5.438 0 00-3.68.174l-.018.007-1.268.564z" clip-rule="evenodd"></path> </svg>
+                    </span>
+                </i>
+                <div style="margin-top: 16px">
+                    <h3 style="text-align: center; font-weight: bold">Pay your way</h3>
+                    <p style="text-align: center; padding: 1.5rem">Pay the way that suits you – annually or monthly. You can save on the price of your premium when you pay annually.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="text-align:center;">
+                <i style="display:inline-flex;">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M28.31 3.695a.75.75 0 010 1.06l-3.528 3.527 1.081 7.079a.75.75 0 01-.21.643L13.36 28.305a.75.75 0 01-1.061 0l-8.61-8.624a.75.75 0 010-1.06l12.283-12.31a.75.75 0 01.646-.212l7.122 1.103 3.508-3.507a.75.75 0 011.06 0zm-4.988 4.96L16.766 7.64 5.28 19.15l7.55 7.563 11.493-11.502-1.001-6.557zm-6.62 6.615a.75.75 0 010 1.06l-.386.387a2.123 2.123 0 01-.321 2.265.75.75 0 11-1.138-.977.624.624 0 00-.731-.974.748.748 0 01-.08.092.624.624 0 00-.079.786l.05.046a2.132 2.132 0 01.107 2.876.749.749 0 01-.112.141 2.119 2.119 0 01-2.37.428l-.323.317a.75.75 0 11-1.052-1.069l.316-.31a2.116 2.116 0 01.439-2.368.75.75 0 011.058 1.063.619.619 0 00-.067.797c.024.02.048.04.07.063a.61.61 0 001.047-.442c0-.13-.04-.257-.115-.363a.77.77 0 01-.081-.075 2.124 2.124 0 01-.156-2.708.748.748 0 01.212-.309 2.124 2.124 0 012.261-.336l.39-.39a.75.75 0 011.061 0z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M20.021 11.275a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0z" clip-rule="evenodd"></path> </svg>
+                    </span>
+                </i>
+                <div style="margin-top: 16px">
+                    <h3 style="text-align: center; font-weight: bold">Flexi excess discount</h3>
+                    <p style="text-align: center; padding: 1.5rem">Reduce your premium upfront by selecting a higher basic excess.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="text-align:center;">
+                <i style="display:inline-flex;">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M7.78 10.713a.75.75 0 01.75.75v1.315a.75.75 0 01-1.5 0v-1.316a.75.75 0 01.75-.75zM7.78 19.422a.75.75 0 01.75.75v1.31a.75.75 0 01-1.5 0v-1.31a.75.75 0 01.75-.75z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M6.262 15.52a.75.75 0 011.035-.23l1.637 1.04.025.014a.667.667 0 01.037.022l.014.01c.387.243 1.139.718 1.289 1.87.004.035.006.07.006.106a2.528 2.528 0 11-5.055-.064.75.75 0 111.5.019 1.028 1.028 0 002.053.078.834.834 0 00-.195-.435c-.098-.11-.218-.192-.396-.305l-.026-.014a.793.793 0 01-.038-.023l-1.655-1.053a.75.75 0 01-.23-1.035z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M7.797 13.674a1.03 1.03 0 00-1.04.91 1 1 0 00.54.7c.02.01.04.022.06.034l.056.034 1.652 1.053a.75.75 0 01-.805 1.265l-1.647-1.049-.012-.007a2.5 2.5 0 01-1.342-1.901.75.75 0 01-.006-.135 2.53 2.53 0 015.057.081.75.75 0 01-1.5.027 1.03 1.03 0 00-1.013-1.012zM23.343 10.713a.75.75 0 01.75.75v1.315a.75.75 0 01-1.5 0v-1.316a.75.75 0 01.75-.75zM23.343 19.422a.75.75 0 01.75.75v1.31a.75.75 0 01-1.5 0v-1.31a.75.75 0 01.75-.75z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M21.822 15.52a.75.75 0 011.036-.23l1.636 1.04.025.014a.672.672 0 01.037.022l.014.01c.387.244 1.137.717 1.29 1.867.007.045.009.09.007.135a2.53 2.53 0 01-5.057-.064.75.75 0 011.5-.034 1.03 1.03 0 002.053.092.835.835 0 00-.194-.421c-.099-.112-.219-.193-.397-.306l-.026-.014a.771.771 0 01-.038-.023l-1.655-1.053a.75.75 0 01-.23-1.035z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M23.354 13.671a1.03 1.03 0 00-1.037.913 1.002 1.002 0 00.54.7c.02.01.04.022.06.034l.056.034 1.652 1.053a.75.75 0 11-.805 1.265l-1.647-1.049-.012-.007a2.5 2.5 0 01-1.342-1.901.75.75 0 01-.006-.134 2.53 2.53 0 015.057.067.75.75 0 11-1.5.033 1.03 1.03 0 00-1.016-1.008zM15.557 6.25a.75.75 0 01.75.75v2.215a.75.75 0 01-1.5 0V7a.75.75 0 01.75-.75zM15.56 20.922a.75.75 0 01.75.75v2.215a.75.75 0 01-1.5 0v-2.215a.75.75 0 01.75-.75z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M13.437 14.093a.75.75 0 011.035-.23l2.78 1.766.066.04.015.01.02.012c.634.4 1.72 1.085 1.943 2.773a.746.746 0 01.006.108 3.75 3.75 0 11-7.5-.097.75.75 0 111.5.02 2.25 2.25 0 004.5.111c-.143-.938-.686-1.291-1.263-1.655l-.067-.04-.017-.01-2.787-1.773a.75.75 0 01-.23-1.035z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M15.594 10.116a2.251 2.251 0 00-2.278 2.168c.142.935.683 1.29 1.258 1.652l.065.038a580.988 580.988 0 001.586 1.009l1.228.781a.75.75 0 01-.811 1.262l-1.144-.728-1.628-1.036-.062-.036a.575.575 0 01-.023-.014l-.021-.014c-.634-.4-1.72-1.084-1.943-2.772a.746.746 0 01-.006-.108 3.75 3.75 0 117.5.097.75.75 0 11-1.5-.02 2.25 2.25 0 00-2.22-2.279z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M16 2.5C8.544 2.5 2.5 8.544 2.5 16S8.544 29.5 16 29.5 29.5 23.456 29.5 16 23.456 2.5 16 2.5zM1 16C1 7.716 7.716 1 16 1c8.284 0 15 6.716 15 15 0 8.284-6.716 15-15 15-8.284 0-15-6.716-15-15z" clip-rule="evenodd"></path> </svg>
+                    </span>
+                </i>
+                <div style="margin-top: 16px">
+                    <h3 style="text-align: center; font-weight: bold">Everyday savings</h3>
+                    <p style="text-align: center; padding: 1.5rem">Save on exclusive offers and discounts with us, and our retail, entertainment, and travel partners.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="text-align:center;">
+                <i style="display:inline-flex;">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M16.41 12.687a.75.75 0 01.75-.75h4.587a.75.75 0 110 1.5H17.16a.75.75 0 01-.75-.75zM16.41 19.428a.75.75 0 01.75-.75h7.425a.75.75 0 010 1.5H17.16a.75.75 0 01-.75-.75zM16.41 16.059a.75.75 0 01.75-.75h7.425a.75.75 0 010 1.5H17.16a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M4.952 7.607c-1.051 0-2.012.953-2.012 2.23v12.314c0 1.29.963 2.242 2.012 2.242h22.096c1.053 0 2.012-.945 2.012-2.23V9.849c0-1.291-.963-2.242-2.012-2.242H4.952zM1.44 9.837c0-1.995 1.526-3.73 3.512-3.73h22.096c1.988 0 3.512 1.737 3.512 3.742v12.314c0 2.006-1.527 3.73-3.512 3.73H4.952c-1.988 0-3.512-1.74-3.512-3.742V9.837z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M10.386 10.928a1.759 1.759 0 100 3.518 1.759 1.759 0 000-3.518zm-3.258 1.759a3.259 3.259 0 116.517 0 3.259 3.259 0 01-6.517 0z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M9.284 16.125a1.506 1.506 0 00-1.51 1.504v3.21h5.218v-3.208a1.505 1.505 0 00-1.506-1.506H9.284zm.003-1.5a3.006 3.006 0 00-3.013 3.003v3.961c0 .415.335.75.75.75h6.718a.75.75 0 00.75-.75v-3.958a3.005 3.005 0 00-3.006-3.006H9.287z" clip-rule="evenodd"></path> </svg>
+                    </span>
+                </i>
+                <div style="margin-top: 16px">
+                    <h3 style="text-align: center; font-weight: bold">Stay with us and save</h3>
+                    <p style="text-align: center; padding: 1.5rem">Save on your policy with discounts the longer you’re with us.^ Plus, take out two or more eligible insurance policies and save 10% on each.</p>
+                </div>
+            </div>
+        </div><!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of About -->
+<!-- Features -->
+<section id="features">
+    <div class="container">
+        <div style="padding: 1.25rem; background:#ccc">
+            <div style="display:flex; justify-content:center; font-weight:bold">
+                <h4>What does Complete Care Car Insurance cover? </h4>
+            </div>
+            <div class="feature-tab" style="display:flex; justify-content:center; font-weight:bold">
+                <input type="radio" id="tab-inclusions" name="feature-tab" checked />
+                <label for="tab-inclusions">Inclusions</label>
+                <div class="tab">
+                    <!-- Filter Policy by Id-->
+                    @foreach (PolicyModel item in Model.Where(u => u.Id == 4))
+                    {
+                        @item.Coverage
+                    }
+                </div>
+                <input type="radio" id="tab-exclusions" name="feature-tab" />
+                <label for="tab-exclusions">Exclusions</label>
+                <div class="tab">
+                    <p>
+                        Accommodation rates beyond the cost of the room (such as mini bar costs)<br />
+                        Veterinary costs if your pet is injured.<br />
+                        Running costs of a hire car, such as petrol or tolls.<br />
+                        Loss or damage to a hire car.<br />
+                        Liability from the use of a hire car.<br />
+                        A hire car arranged by you, unless RACV Insurance approved it beforehand.<br />
+                    </p>
+                </div>
+            </div>
+        </div>  <!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of Features -->
+<!-- Claims and Document-->
+<section id="claimAndDocument">
+    <div class="container">
+        <div class="row">
+            <article>
+                <h2 style="font-weight:bold">
+                    Insurance Claims and Documents
+                </h2>
+            </article><!-- End of Article-->
+        </div><!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of About -->
+<!-- Claims and Document 2 -->
+<section id="claimAndDocument">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="float:left; margin-bottom: 0; padding-right: 3rem;">
+                <h3 style="font-weight:bold;">Need to make a claim?</h3>
+                <p style="margin-bottom: 2rem;">
+                    If you’ve recently been involved in a road accident and need to make a claim
+                    , you can lodge one online or call 0900000000.
+                </p>
+                <a href="#">Claim online now</a><br />
+                <a href="#">How to make a claim</a><br />
+                <a href="#">Manage a claim</a><br />
+            </div>
+
+            <div class="col-md-6" style="float:left; margin-bottom: 0; padding-right: 3rem;">
+                <h3 style="font-weight:bold;">Review policy information</h3>
+                <p style="margin-bottom: 2rem;">
+                    For full details on how you’re covered, read the Motor Insurance Product Disclosure Statement.
+                </p>
+                <a href="#">Update your details</a><br />
+                <a href="#">Find a policy document</a><br />
+            </div>
+        </div><!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of About -->
+<section id="frequentlyasked">
+    <div class="container">
+        <div class="row">
+            <article>
+                <h2 style="font-weight:bold">
+                    Frequently Asked Questions
+                </h2>
+            </article><!-- End of Article-->
+        </div><!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of About -->
+<!-- Frequently asked questions 2-->
+<section id="frequentlyasked2">
+    <div class="o-grid">
+        <div class="canvas-article">
+            <ul id="accordion" style="background-color: #d9dfe2;">
+                <li>
+                    <label for="first">What’s the difference between Comprehensive and Complete Care® Insurance? <span>&#x3e</span></label>
+                    <input type="radio" name="accordion" id="first" checked />
+                    <div class="answear">
+                        <ul>
+                            <li>
+                                Here is a summary of the main differences in cover:
+
+                                Summary of Cover
+                                Comprehensive
+                                GET A QUOTE
+                                Complete Care®
+                                GET A QUOTE
+                                No extra to pay by the month
+                                Vehicle pick up and return
+                                Emergency accommodation 100km from home
+                                Post repair vehicle inspection for authorized repairs
+                                Pet assistance
+                                Cover for unintentional collision damage to your vehicle
+                                Cover for theft, fire, flood, storm or a malicious act
+                                Towing
+                                Agreed value
+                                Optional
+
+                                There are also some differences in the amount of value you will be covered for with certain inclusions; for example, with Complete Care® you’re covered for up to $100 per day for a hire car after an accident until your claim is settled, whereas it is only $60 per day for up to 14 days with Comprehensive Car Insurance.
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <label for="two">What is agreed value and market value? <span>&#x3e</span></label>
+                    <input type="radio" name="accordion" id="two" />
+                    <div class="answear">
+                        <ul>
+                            <li>
+                                Market Value is an assessment of the value of the vehicle at the time of the incident based on its age and condition. Because it is not a fixed amount, you won’t know how much compensation you’ll receive if you need to make a claim.
+                            </li>
+                            <li>
+                                Agreed value is the amount you will be reimbursed in the event of a claim where your car is in which your car is declared a total loss and is agreed on by you (the car owner) and the insurer. The agreed value amount is agreed upon by the car owner and their insurer. Because it is a fixed amount, it provides more certainty on what compensation you can expect if your car is considered a write off after an accident.
+                            </li>
+                            <li>
+                                You can only choose between agreed and market value if you purchase a Comprehensive Car Insurance policy.
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <label for="three">Does this policy cover anyone who has permission to drive the vehicle? <span>&#x3e</span></label>
+                    <input type="radio" name="accordion" id="three" />
+                    <div class="answear">
+                        <ul>
+                            <li>
+                                Yes, as long as they have a valid driver’s license. Additional excesses may apply for drivers under 25 and inexperienced drivers.
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div><!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of About -->
+<!-- Experience -->
+<section id="experience">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <h3>
+                    We are bringing experience <br />
+                    <span>and ...</span>.
+                </h3>
+                <p class="large">If you need help. X is here to handle that. ...</p>
+                <div class="d-flex">
+                    <div class="pe-4">
+                        <h5>2010</h5>
+                        <p>Launched in</p>
+                    </div>
+
+                    <div class="ps-4 pe-4">
+                        <h5>100</h5>
+                        <p>Happy Clients</p>
+                    </div>
+
+                    <div class="ps-4">
+                        <h5>24/7</h5>
+                        <p>Support</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <img src="" alt="Image" class="img-fluid" />
+            </div>
+
+        </div>  <!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of Experience -->
+<!-- Cars -->
+<div id="cars">
+    <div class="container">
+        <div class="row">
+            <p>card-image of cars</p>
+        </div>  <!-- End of Row -->
+    </div>  <!-- End of Container -->
+</div>  <!-- End of Contact -->
+<div id="line-footer">
+    <div class="container-fluid">
+    </div>  <!-- End of Container -->
+</div>  <!-- End of Contact -->
+
+<style>
+    .feature-tab {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 25px
+    }
+
+        .feature-tab input[type="radio"] {
+            display: none;
+        }
+
+        .feature-tab label {
+            padding: 25px;
+            background: #e2e2e2;
+            font-weight: bold;
+        }
+
+        .feature-tab .tab {
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            order: 1;
+            display: none;
+        }
+
+        .feature-tab input[type='radio']:checked + label + .tab {
+            display: block;
+        }
+
+        .feature-tab .tab .first-half {
+            float: left;
+            display: block;
+            margin-right: 1.69%;
+            width: 49.15254%;
+        }
+
+            .feature-tab .tab .first-half .context {
+                list-style-type: none;
+                margin-bottom: 1.875rem;
+                padding: 0;
+                position: relative;
+            }
+
+    li::marker {
+        font-weight: bold;
+        font-size: 150%;
+        color: lightskyblue;
+    }
+
+    label:active {
+        background-color: tomato;
+    }
+
+    labepl::after {
+        content: "";
+        height: 5px;
+        width: 0px;
+        background: tomato;
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        transition: all 0.5s ease-in-out;
+    }
+
+    labepl:hover::after {
+        width: 50%;
+        transform: translateX(100%);
+    }
+
+    .o-grid {
+        max-width: 1360px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        padding: 0.9375rem;
+    }
+
+    .canvas-article {
+        padding: 1.25rem;
+    }
+
+    #accordion li {
+        list-style: none;
+        width: 100%;
+        margin-bottom: 10px;
+        background: #fff;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+        #accordion li label {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #c20000;
+        }
+
+            #accordion li label span {
+                transform: rotate(90deg);
+                font-size: 22px;
+                color: #333;
+            }
+
+    #accordion label + input[type="radio"] {
+        display: none;
+    }
+
+    #accordion .answear {
+        padding: 0 10px;
+        line-height: 26px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }
+
+    #accordion label + input[type="radio"]:checked + .answear {
+        max-height: 400px;
+    }
+</style>

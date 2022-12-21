@@ -1,0 +1,69 @@
+﻿<!-- Title -->
+<h3 class="title">Certificates</h3>
+
+<div class="container border my-4 p-4">
+    <table id="myTable" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Customer Name</th>
+                <th>Policy No.</th>
+                <th>Policy Type</th>
+                <th>Vehicle Info</th>
+                <th>Vehicle Warranty</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Ross</td>
+                <td>1111</td>
+                <td>Complete Care</td>
+                <td>Honda City VTi-L</td> 
+                <td>Available</td>
+                <td>
+                    <button type="button" class="btn btn-info">Details</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Monica</td>
+                <td>2222</td>
+                <td>Comprehensive</td>
+                <td>BMW M5 F10</td>
+                <td>Available</td>
+                <td>
+                    <button type="button" class="btn btn-info">Details</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>No.</th>
+                <th>Customer Name</th>
+                <th>Policy No.</th>
+                <th>Policy Type</th>
+                <th>Vehicle Info</th>
+                <th>Vehicle Warranty</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    $(function () {
+        $('#myTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "order": [
+                [0, 'desc']
+            ],
+            "info": true,
+            "autoWidth": false,
+        });
+    }());
+</script>

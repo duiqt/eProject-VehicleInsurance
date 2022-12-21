@@ -1,0 +1,103 @@
+﻿
+
+<section id="personal" class="text-center">
+    <div class="p-5 bg">
+        <h2>Account Information</h2>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="card-item py-5 bg-white">
+
+            <div class="row card-content">
+
+                <div class="col-lg-12">
+                    <ul class="nav nav-pills nav-justified personal-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="details" data-bs-toggle="tab" data-bs-target="#personal-details" type="button" role="tab" aria-controls="personal-details" aria-selected="true">Personal Details</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="password" data-bs-toggle="tab" data-bs-target="#change-password" type="button" role="tab" aria-controls="change-password" aria-selected="false">Change Password</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content d-flex flex-column" id="myTabContent">
+                    <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="details" tabindex="0">
+                        <div class="mt-3">
+                            <form class="" id="detailsForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control details-input" type="text" id="username" name="username" placeholder="Your username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control details-input" type="text" name="name" id="name-" placeholder="Your name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control details-input" type="text" id="address" name="address" placeholder="Your address">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control details-input" type="number" name="phone" id="phone" placeholder="Your phone number">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center mt-3">
+                                    <button class="save-btn" type="submit">
+                                        Save Changes
+                                    </button>
+                                </div>
+
+                            </form>
+                  
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="change-password" role="tabpanel" aria-labelledby="password" tabindex="0">
+                        <div class="mt-3">
+                            <form class="" id="detailsForm">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control details-input" type="password" id="current-pwd" name="current-password" placeholder="Current password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control details-input" type="password" name="new-pwd" id="new-pwd" placeholder="New password">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control details-input" type="password" name="retype-pwd" id="retype-pwd" placeholder="Retype new password">
+                                        </div>
+                                    </div>
+                                </div>
+   
+                                <div class="d-flex justify-content-center mt-3">
+                                    <button class="save-btn" type="submit">
+                                        Save Changes
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

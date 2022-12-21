@@ -1,0 +1,10 @@
+﻿@{
+    Layout = null;
+}
+
+@model List<PolicyModel>
+
+@foreach (PolicyModel item in Model)
+{
+    @Html.Partial("BoxPolicy", item)
+}

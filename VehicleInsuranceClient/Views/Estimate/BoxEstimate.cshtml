@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+@model EstimateViewModel;
+<div class="m-auto mt-2 pb-2 border-bottom w-75">
+    <span>Reference number: </span><strong id="EstimateNo">@ViewBag.EstimateNo</strong>
+</div>
+<div class="d-flex justify-content-between my-2 py-2">
+
+    <a asp-action="Index" asp-controller="Home" class="align-self-center btn btn-secondary btn_estimate rounded-1" role="button">
+        <small>PREVIOUS</small>
+    </a>
+    <div class="flex-fill px-2 align-items-stretch">
+        <div class=" d-flex justify-content-around">
+            <span>@Model.PolicyType</span>
+            <strong>@ViewBag.Premium<small class="fw-light">/Year</small> </strong>
+
+        </div>
+        <small class="d-block text-secondary">Estimate valid until @DateTime.Today.AddDays(Program.CookieEstimateDuration).ToString("ddMMMyyyy")</small>
+    </div>
+
+    <a asp-action="Index" asp-controller="#" id="btn_buynow" class="align-self-center btn btn_estimate rounded-1" style="background-color: rgb(238, 209, 46);" role="button">
+        <small style="font-size: 12px;">BUY NOW</small>
+    </a>
+</div>

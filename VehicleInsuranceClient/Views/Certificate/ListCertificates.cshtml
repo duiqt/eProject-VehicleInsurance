@@ -1,0 +1,10 @@
+﻿@{
+    Layout = null;
+}
+
+@model List<CertificatesModel>
+
+@foreach (CertificatesModel item in Model)
+{
+    @Html.Partial("BoxCertificate", item)
+}

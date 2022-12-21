@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Vehicle Insurance Portal";
+}
+
+@model List<PolicyModel>
+
+<div id="home" class="mb-5">
+    <div class="container">
+        <div class="row pt-4" >
+            <div class="col-12 col-lg-6 my-5">
+                <h1 class="fw-bolder">
+                    <span>Welcome to </span>
+                    <span>Vehicle Insurance Portal</span> <br />
+                    ...
+                </h1>
+                <p class="text-muted">
+                    ... <br />
+                    ...
+                </p>
+                <a class="btn btn-primary">Retrieve An Estimate</a>
+
+                <a asp-controller="Estimate" asp-action="Index" class="btn btn-secondary">Get An Estimate</a>
+            </div>
+        </div>  <!-- End of Row -->
+    </div>  <!-- End of Container -->
+</div>
+
+<partial name="_Reason" />
+
+<!-- Type of Insurance -->
+<section id="insurances">
+    <div class="container">
+        <div class="row d-flex justify-content-evenly" id="policies-content">
+   
+        </div>  <!-- End of Row -->
+    </div>  <!-- End of Container -->
+</section>  <!-- End of Type of Insurance -->
+
+<partial name="_LineFooter" />

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - VehicleInsuranceClient</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/employee.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/lib/DataTables/css/datatables.min.css" asp-append-version="true" />
+
+   
+</head>
+
+<body>
+
+    <partial name="_Sidebar" />
+
+    <section id="header">
+        <div class="navigation">
+            <!-- Search -->
+            <div class="hamburger">
+                <div>
+                    <i id="header-btn" class="fas fa-bars"></i>
+                </div>
+                <div class="search">
+                    <i class="fas fa-search"></i>
+                    <form action="">
+                        <input type="text" placeholder="Search...">
+                    </form>
+                </div>
+            </div>
+            <!-- Profile -->
+            <div class="profile">
+                <img src="" alt="profile-image">
+            </div>
+        </div>
+
+        @RenderBody()
+
+    </section>
+ 
+  
+</body>
+</html>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="~/lib/DataTables/js/datatables.min.js" asp-append-version="true"></script>
+<script src="~/js/employee.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("CustomJS", required: false)

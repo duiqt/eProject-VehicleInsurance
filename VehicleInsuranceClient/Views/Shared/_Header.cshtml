@@ -1,0 +1,88 @@
+﻿<div class="container-fluid bg-white">
+    <div class="container">
+        <div class="header-top-bar">
+            <nav class="top-nav-bar">
+                <ul class="top-grid">
+                    <li class="nav-bar-item">
+                        <a class="text-link" asp-controller="Home" asp-action="AboutUs">
+                            About X
+                        </a>
+                    </li>
+                    <li class="nav-bar-item">
+                        <a class="text-link">
+                            Help &amp; Support
+                        </a>
+                    </li>
+                    <li class="nav-bar-item">
+                        <a class="text-link" asp-controller="Home" asp-action="Sitemap">
+                            Sitemap
+                        </a>
+                    </li>
+                    <li class="nav-bar-item">
+                        <a class="text-link" asp-controller="Home" asp-action="Contact">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- Navigation Bar -->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg pb-3">
+
+            <a href="#" class="navbar-brand">X</a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#res_nav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collapsing Menu and Links -->
+            <div class="collapse navbar-collapse" id="res_nav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a id="coverageBtn" class="nav-link text-dark dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Coverage Plans</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item text-dark" asp-controller="Policy" asp-action="ThirdPartyFireAndTheftCI">Third-Party Fire and Theft</a></li>
+                                <li><a class="dropdown-item text-dark" asp-controller="Policy" asp-action="ThirdPartyPropertyDamageCI">Third-Party Property Damage</a></li>
+                                <li><a class="dropdown-item text-dark" asp-controller="Policy" asp-action="ComprehensiveCI">Comprehensive</a></li>
+                                <li><a class="dropdown-item text-dark" asp-controller="Policy" asp-action="CompleteCareCI">Complete Care®</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Testimonials">Testimonials</a>
+                    </li>
+                </ul>
+
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav ms-5">
+                            <li>
+                                <a asp-controller="Account" asp-action="Logout" class="btn btn-primary">Logout</a>
+                            </li>
+                        </ul>
+                    }
+
+                    else
+                    {
+                        <ul class="navbar-nav ms-5">
+                            <li>
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Log In</a>
+                            </li>
+                        </ul>
+                    }
+                }
+            </div>  <!-- End of Collapsing Menu and Links -->
+
+
+        </nav>  <!-- End of Navigation Bar -->
+    </div>
+    <!-- End of Header -->
+
+</div>
+

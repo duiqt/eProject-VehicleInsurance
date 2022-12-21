@@ -1,0 +1,207 @@
+﻿
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    --primary-color: rgb(51, 94, 234);
+    --primary-dark: rgb(23, 70, 224);
+    --primary-light: rgb(211, 221, 255);
+    --white-color: rgb(255, 255, 255);
+    --black-color: rgb(15, 15, 15);
+    --yellow-color: rgb(248, 219, 0);
+}
+
+body {
+    width: 100%;
+    background-color: var(--white-color);
+    position: relative;
+    display: flex;
+}
+
+/****************** SideMenu ********************/
+#sidebar {
+    background-color: var(--primary-dark);
+    width: 300px;
+    height: 100%;
+    position: fixed; /* take complete heigh */
+    top: 0;
+    left: 0;
+}
+
+    #sidebar .logo img {
+        width: 40px;
+        margin-right: 50px;
+    }
+
+    #sidebar .logo {
+        display: flex;
+        align-items: center;
+        color: var(--white-color);
+        padding: 30px 0 0 30px;
+    }
+
+    #sidebar .items {
+        margin-top: 40px;
+    }
+
+        #sidebar .items li {
+            list-style: none;
+            padding: 15px 0;
+            transition: 0.3s ease;
+        }
+
+            #sidebar .items li i {
+                color: var(--yellow-color);
+                width: 30px;
+                height: 20px;
+                line-height: 30px;
+                text-align: center;
+                font-size: 14px;
+                margin: 0 10px 0 25px;
+            }
+
+            #sidebar .items li a {
+                text-decoration: none;
+                color: var(--yellow-color);
+                font-weight: 800;
+                font-size: 17px;
+                transition: 0.3s ease;
+            }
+
+            #sidebar .items li:hover {
+                background-color: var(--primary-light);
+                cursor: pointer;
+            }
+
+                #sidebar .items li:hover i,
+                #sidebar .items li:hover a {
+                    color: var(--primary-dark);
+                }
+
+
+/********************** Header **********************/
+#header {
+    width: calc(100% - 300px); /* #sidebar - width:300px */
+    position: relative;
+    margin-left: 300px;
+}
+
+    #header .navigation {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--white-color);
+        padding: 15px 30px;
+        border-bottom: 3px solid #5d5c61;
+        position: fixed;
+        width: calc(100% - 300px);
+    }
+
+        #header .navigation .search {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px 14px;
+            border: 1px solid #d7dbe5;
+            border-radius: 4px;
+        }
+
+            #header .navigation .search input {
+                border: none;
+                outline: none;
+                font-size: 14px;
+            }
+
+            #header .navigation .search i {
+                margin-right: 12px;
+            }
+
+        #header .navigation .profile {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+            #header .navigation .profile img {
+                width: 40px;
+                height: 40px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+.title {
+    color: var(--black-color);
+    padding: 30px 30px 0 30px;
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 70px;
+}
+
+/******************* Toggle button **********************/
+.hamburger {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#header-btn {
+    color: var(--black-color);
+    cursor: pointer;
+    margin-right: 20px;
+    font-size: 20px;
+    display: none; /* display on small screens */
+}
+
+/******************* Responsive **********************/
+@media (max-width: 769px) {
+
+    #sidebar { /* hide the sidebar */
+        width: 270px;
+        position: fixed;
+        left: -270px;
+        transition: 0.3s ease;
+    }
+
+    #header {
+        width: 100%;
+        margin-left: 0px;
+        display: inline-block;
+        transition: 0.3s ease;
+    }
+
+        #header .navigation {
+            width: 100%;
+        }
+
+    #header-btn {
+        display: initial; /* display the button */
+    }
+
+    #sidebar.active { /* if the sidebar display, hide the button */
+        left: 0px;
+    }
+
+        #sidebar.active ~ #header { /* ~: if sidebar is active, then header will following */
+            width: calc(100% - 270px); /* small screen the width is 270px */
+            margin-left: 270px;
+            transition: 0.3s ease;
+        }
+}
+
+@media (max-width: 480px) {
+    #header .navigation {
+        padding: 15px;
+    }
+
+        #header .navigation .search input {
+            width: 150px;
+        }
+
+    .hamburger {
+        padding: 30px 15px 0 15px;
+    }
+}

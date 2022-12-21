@@ -1,0 +1,182 @@
+﻿@using VehicleInsuranceClient.Models.Dtos
+@model CustomerDto
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var url = ViewBag.url == null ? "" : ViewBag.url;
+}
+
+<style>
+    .login-section {
+        margin-bottom: 200px;
+    }
+
+    .card-wrapper {
+        margin: 0 250px;
+    }
+
+    .login-title {
+        font-weight: bold;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #f8db00;
+    }
+
+    .login-input {
+        margin: 15px 0;
+        border-radius: unset;
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .login-btn {
+        color: #37393a;
+        background-color: #f8db00;
+        border: none;
+        box-shadow: none;
+        padding: 8px 100px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    .register-btn {
+        color: #FFFFFF;
+        background-color: #454849;
+        border: none;
+        box-shadow: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    .login-btn:hover {
+        background-color: #e0c426;
+    }
+
+    .register-btn:hover {
+        background-color: #000;
+    }
+
+    .card-content-body {
+        padding: 10px 100px;
+    }
+
+</style>
+
+<!-- Section: Design Block -->
+<section class="text-center login-section">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+        background: #1F5AA5;
+        height: 300px;
+        ">
+        <h2 style="color:white">Login</h2>
+        <h4 style="color:white">View your products and manage personal details and payments</h4>
+    </div>
+    <!-- Background image -->
+
+    <div class="card-wrapper shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        /*">
+        <div class="card-item py-5 bg-white">
+
+            <div class="row d-flex justify-content-center card-content">
+                <div class="col-lg-12 card-content-body">
+                    <h2 class="fw-bold mb-2 login-title" style="text-align: left">Login</h2>
+                    <form class="user-form" id="loginForm">
+                        <input hidden value="@url" id="url" />
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input class="form-control login-input" type="text" id="username" name="username" placeholder="User name">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input class="form-control login-input" type="password" name="password" id="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div>
+                                <span id="errorMessage"></span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <button onclick="@("window.location.href='/Account/SignUp'");" class="default-btn register-btn">
+                                    First time? Register Here
+                                </button>
+                                <button class="default-btn login-btn" type="submit">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->
+<!-- Section: Design Block -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(() => {
+            $("#loginForm").validate({
+                rules: {
+                    username: {
+                        required: true,
+                    },
+                    password: {
+                        required: true,
+                    }
+                }, messages: {
+                    username: {
+                        required: "Please enter username"
+                    },
+                    password: {
+                        required: "Please enter password"
+                    }
+                }
+            });
+            $("#loginForm").on("submit", (e) => {
+                e.preventDefault();
+                if ($("#loginForm").valid()) {
+                    var user = $("#username").val();
+                    var pass = $("#password").val();
+                    var url = $("#url").val();
+                    $.ajax({
+                        url: "/login",
+                        data: {
+                            cus: {
+                                UserName: user,
+                                Password: pass
+                            }, returnUrl: url
+                        },
+                        type: "POST",
+                        success: (data) => {
+                            if (data.status == true) {
+                                if (data.url != null) {
+                                    window.location.href = data.url;
+                                } else {
+                                    window.location.href = "/";
+                                }
+                            } else {
+                                $("#errorMessage").html("<b style='color:red'>" + data.msg + "</b>");
+                            }
+
+                        }
+                    });
+                }
+            })
+        });
+    </script>
+    }
+
+
