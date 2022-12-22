@@ -17,6 +17,8 @@ public partial class Certificate
 
     public long CustomerPhone { get; set; }
 
+    public int VehicleNumber { get; set; }
+
     public string VehicleBodyNumber { get; set; } = null!;
 
     public string VehicleEngineNumber { get; set; } = null!;
