@@ -90,6 +90,7 @@ create table [Certificate] (
 	CustomerName varchar(50) not null,
 	CustomerAddress varchar(100),
 	CustomerPhone bigint not null,
+	VehicleNumber int not null,
 	VehicleBodyNumber varchar(50) not null,
 	VehicleEngineNumber varchar(50) not null,
 
@@ -581,8 +582,8 @@ INSERT INTO [Estimate] Values
 go
 
 INSERT INTO [Certificate] Values
-(5555, 1, 'OwnerName', 'OwnerAddress', 903368689,'VB5566778893MZ', 'EG-378899-INE', null, null),
-(5556, 2, 'OwnerName 2', 'OwnerAddress 2', 903379789, 'VB5566778823MZ', 'EG-77886645-INE', null, null)
+(5555, 1, 'OwnerName', 'OwnerAddress', 903368689, 1115,'VB5566778893MZ', 'EG-378899-INE', null, null),
+(5556, 2, 'OwnerName 2', 'OwnerAddress 2', 903379789, 1206,'VB5566778823MZ', 'EG-77886645-INE', null, null)
 go
 
 INSERT INTO [CustomerBill] Values
