@@ -85,14 +85,15 @@ create table [Certificate] (
 	ID int primary key identity(1,1),
 	PolicyNo int unique not null,
 	EstimateNo int not null,
-	CustomerEmail varchar(50) not null,
+	CustomerID int not null,
 	VehicleNumber int not null,
 	VehicleBodyNumber varchar(50) not null,
 	VehicleEngineNumber varchar(50) not null,
 	VehicleWarranty varchar(50) default 'Not Available' 
 		Check (VehicleWarranty IN ('Not Available','Available','Pending')),
 	Prove varchar(200)
-	CONSTRAINT FK_Estimate_Certificate FOREIGN KEY (EstimateNo) REFERENCES [Estimate](EstimateNo)
+	CONSTRAINT FK_Estimate_Certificate FOREIGN KEY (EstimateNo) REFERENCES [Estimate](EstimateNo),
+	CONSTRAINT FK_Customer_Certificate FOREIGN KEY (CustomerID) REFERENCES Customer(ID)
 ); 
 go
 
@@ -663,8 +664,8 @@ INSERT INTO [Estimate] Values
 go
 
 INSERT INTO [Certificate] Values
-(5555, 3333, 'toann@gmail.com', 1115,'VB5566778893MZ', 'EG-378899-INE', null, null),
-(5556, 3334, 'toann1@gmail.com', 1206,'VB5566778823MZ', 'EG-77886645-INE', null, null)
+(5555, 3333, 1, 1115,'VB5566778893MZ', 'EG-378899-INE', null, null),
+(5556, 3334, 2, 1206,'VB5566778823MZ', 'EG-77886645-INE', null, null)
 go
 
 INSERT INTO [CustomerBill] Values
