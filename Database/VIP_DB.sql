@@ -110,7 +110,7 @@ go
 
 create table [Company_Expense] (
 	ID int primary key identity(1,1),
-	DateOfExpense varchar(50) not null,
+	DateOfExpense date not null,
 	TypeOfExpense varchar(50) not null,
 	AmountOfExpense money not null
 ); 
@@ -121,7 +121,10 @@ create table [Claim] (
 	ClaimNo int not null,
 	PolicyNo int not null,
 	PlaceOfAccident varchar(100) not null,
-	DateOfAccident varchar(50) not null,
+	DateOfAccident date not null,
+	[Description] varchar(500) not null,
+	[Status] varchar(20) default 'Lodged' CHECK ([Status] in ('Lodged', 'Inspecting', 'Approved', 'Insufficient','Rejected')),
+	[Image] varchar(1000),
 	InsuredAmount money not null,
 	ClaimableAmount money not null
 	CONSTRAINT FK_Claim_Certificate FOREIGN KEY (PolicyNo) REFERENCES [Certificate](PolicyNo)
