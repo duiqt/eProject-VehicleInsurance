@@ -7,15 +7,11 @@ namespace VehicleInsuranceAPI.IResponsitory
 {
     public interface ICustomer
     {
-
         public Task<Customer> CheckLogin(string username, string password);
         public Task<CustomerDto> Login(LoginDto req);
-
-        //public Task<bool> Register(SignUpDto request);
-        //Task<AddNewModel> GetNewByIdAsync(int newId);
-
-        Task<IdentityResult> SignUpAsync(SignUpDto signUpDto);
-        //Task<int> AddNewAsync(AddNewModel addNewModel);
-
+        Task<Customer> SignUpCustomer(Customer objCustomer);
+        Task<List<Customer>> GetOneById(int customerId);
+        //Task<Customer> EditCustomer(Customer editCustomer, int Code);
+        Task<Customer> ChangePassword(ChangePasswordDto changePasswordDto);
     }
 }

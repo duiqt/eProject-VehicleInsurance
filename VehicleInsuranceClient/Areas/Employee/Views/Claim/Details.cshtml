@@ -1,0 +1,43 @@
+﻿@using VehicleInsuranceClient.Areas.Employee.Models;
+
+@model List<ClaimModel>
+<!-- Title -->
+@foreach (ClaimModel item in Model)
+{
+    <h3 class="title" style="text-align:center;">@item.CustomerName's Claim Detail</h3>
+}
+
+<h3 class="title" style="text-align:center;">Claim Detail</h3>
+
+<div class="container border">
+    <div class="d-flex flex-wrap">
+        @foreach (ClaimModel item in Model)
+        {
+            <div>
+                <div>Claim no: @item.ClaimNo</div>
+                <div>Policy no: @item.PolicyNo</div>
+                <div>Place Of Accident: @item.PlaceOfAccident</div>
+                <div>Date of Accident: @item.DateOfAccident</div>
+                <div>Description: @item.Description</div>
+                <div>Image: @item.Image</div>
+                <div>Insured Amount: @item.InsuredAmount</div>
+            </div>
+
+            <div class="px-3">
+                <div>@item.PolicyType</div>
+                <div>@item.PolicyNo</div>
+            </div>
+
+            <div>
+                <div>@item.CustomerName</div>
+                <div>@item.CustomerPhone</div>
+                <div>@item.CustomerAddress</div>
+            </div>
+
+            <div class="px-3">
+                <div>@item.VehicleNumber @item.VehicleName @item.VehicleModel @item.VehicleVersion</div>
+            </div>
+        }
+
+    </div>
+</div>

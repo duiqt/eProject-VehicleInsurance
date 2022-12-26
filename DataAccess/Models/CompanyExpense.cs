@@ -7,7 +7,7 @@ public partial class CompanyExpense
 {
     public int Id { get; set; }
 
-    public string DateOfExpense { get; set; } = null!;
+    public DateTime DateOfExpense { get; set; }
 
     public string TypeOfExpense { get; set; } = null!;
 

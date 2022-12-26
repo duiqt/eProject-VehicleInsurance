@@ -17,20 +17,11 @@ namespace VehicleInsuranceClient.Models
         public string VehicleModel { get; set; } = null!;
         public string VehicleVersion { get; set; } = null!;
     }
-    public class EstimateViewModel
-    {
-        public string PolicyType { get; set; }
-        public string VehicleName { get; set; }
-        public string VehicleModel { get; set; }
-        public string VehicleVersion { get; set; }
-        public decimal VehicleRate { get; set; }
-    }
 
-    public class EstimateClientViewModel
+    public class EstimateViewModel
     {
         public int? EstimateNo { get; set; } = 0;
 
-        public int? CustomerId { get; set; }
         [Required(ErrorMessage = "Vehicle Name is required")]
         public string VehicleName { get; set; } = null!;
         [Required(ErrorMessage = "Vehicle Model is required")]
@@ -38,13 +29,16 @@ namespace VehicleInsuranceClient.Models
         [Required(ErrorMessage = "Vehicle Version is required")]
         public string VehicleVersion { get; set; } = string.Empty;
         [Required]
-        public string PolicyType { get; set; } = string.Empty;
-        public int? OptionDetailsId { get; set; }
+        public int PolicyId { get; set; }
         [Required(ErrorMessage = "Start date is required")]
-        [DataType(DataType.DateTime)]
-        public DateTime? PolicyDate { get; set; }
 
-        public int? PolicyDuration { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? EstimateDate { get; set; } = DateTime.Now!;
+
+        [DataType(DataType.Date)]
+        public DateTime? PolicyDate { get; set; } = null!;
+
+        public int PolicyDuration { get; set; } = 12;
 
         public decimal? Premium { get; set; }
         [Required(ErrorMessage = "Vehicle Rate is required")]

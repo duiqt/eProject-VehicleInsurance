@@ -24,7 +24,7 @@ body {
 
 /****************** SideMenu ********************/
 #sidebar {
-    background-color: var(--primary-dark);
+    background-color: #1F5AA5;
     width: 300px;
     height: 100%;
     position: fixed; /* take complete heigh */
@@ -79,7 +79,7 @@ body {
 
                 #sidebar .items li:hover i,
                 #sidebar .items li:hover a {
-                    color: var(--primary-dark);
+                    color: var(--black-light);
                 }
 
 

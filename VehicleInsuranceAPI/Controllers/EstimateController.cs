@@ -12,43 +12,35 @@ namespace VehicleInsuranceAPI.Controllers
         {
             _db = db;
         }
-        [HttpGet]
-        [Route("GetVehicles")]
-        public IActionResult GetVehicles()
-        {
-            //List<Vehicle> vehicles = new List<Vehicle>();
-            var data = _db.Vehicles.Select(v => new
-            {
-                VehicleName = v.VehicleName,
-                VehicleModel = v.VehicleModel,
-                VehicleVersion = v.VehicleVersion
-            }).ToList();
 
-            return Ok(data);
-        }
-        [HttpGet]
-        [Route("GetPolicies")]
-        public IActionResult GetPolicies()
+        /// <summary>
+        /// Store the estimate to database if customer pay the policy
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Estimate number</returns>
+        [HttpPost]
+        [Route("StoreEstimate")]
+        public IActionResult StoreEstimate(Estimate model)
         {
-            using (var _db = new VipDbContext())
+            if (ModelState.IsValid)
             {
-                try
+                var policy = _db.Policies.Where(p => p.Id == model.PolicyId).FirstOrDefault();
+                _db.Attach(policy);
+                policy.Estimates.Add(model);
+                //_db.Estimates.Add(model);
+                if (_db.SaveChanges() > 0)
                 {
-                    return Ok(_db.Policies.Select(p => new
-                    {
-                        PolicyId = p.Id,
-                        PolicyType = p.PolicyType,
-                        Description = p.Description,
-                        Coverage = p.Coverage,
-                        Annually = p.Annually
-                    }).ToList());
+                    return Ok(model.EstimateNo);
                 }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
+                //resultInfo = new ResultInfo();
+                //resultInfo.Status = false;
+                //resultInfo.Message = "Cannot store this Estimate";
+                //resultInfo.Data = model;
+                return Ok(-1);
             }
+            return BadRequest();
         }
+
         /// <summary>
         /// Estimate car insurance premium
         /// </summary>
@@ -71,15 +63,11 @@ namespace VehicleInsuranceAPI.Controllers
             decimal premium = 0;
             try
             {
-                Policy policy = _db.Policies.Where(p => p.PolicyType.Equals(model.PolicyType)).FirstOrDefault()!;
+                Policy policy = _db.Policies.Where(p => p.Id.Equals(model.PolicyId)).FirstOrDefault()!;
                 if (policy != null)
                 {
                     premium += policy.Annually;
                 }
-                //if (model.Seats > 4)
-                //{
-                //    premium += 0.05m * model.VehicleRate;
-                //}
                 premium += GetRateOnPrice(model.VehicleRate) * model.VehicleRate;
                 //premium += GetRateOnVersion(model.VehicleVersion) * model.VehicleRate;
             }
@@ -144,5 +132,63 @@ namespace VehicleInsuranceAPI.Controllers
         //            break;
         //    }
         //}
+
+        /// <summary>
+        /// Get vehicles list for estimate view
+        /// </summary>
+        /// <returns>List of vehicles</returns>
+        [HttpGet]
+        [Route("GetVehicles")]
+        public IActionResult GetVehicles()
+        {
+            //List<Vehicle> vehicles = new List<Vehicle>();
+            var data = _db.Vehicles.Select(v => new
+            {
+                VehicleName = v.VehicleName,
+                VehicleModel = v.VehicleModel,
+                VehicleVersion = v.VehicleVersion
+            }).ToList();
+
+            return Ok(data);
+        }
+        /// <summary>
+        /// Get policies list for estimate view
+        /// </summary>
+        /// <returns>List of policies</returns>
+        [HttpGet]
+        [Route("GetPolicies")]
+        public IActionResult GetPolicies()
+        {
+            using (var _db = new VipDbContext())
+            {
+                try
+                {
+                    return Ok(_db.Policies.Select(p => new
+                    {
+                        PolicyId = p.Id,
+                        PolicyType = p.PolicyType,
+                        Description = p.Description,
+                        Coverage = p.Coverage,
+                        Annually = p.Annually
+                    }).ToList());
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+        }
+
+        [HttpPost]
+        [Route("CreateVehicle")]
+        public IActionResult CreateVehicle(Vehicle model)
+        {
+            _db.Vehicles.Add(model);
+            if (_db.SaveChanges() > 0)
+            {
+                return Ok(model);
+            }
+            return BadRequest();
+        }
     }
 }

@@ -1,0 +1,101 @@
+﻿
+@model CertificateModel
+
+<section id="cer-details">
+    <div class="card-wrapper bg-white">
+        <div class="card-content m-5 p-5">
+            <h3 class="pb-4">@Model.PolicyType Car Insurance</h3> 
+            <div class="card-item">
+                <h5 class="pb-1">Product details</h5>
+                <ul class="px-0 my-0">
+                    <li class="fw-bold d-flex flex-row">Policy type: <div class="fw-normal mx-3">@Model.PolicyType</div></li>
+                    <li class="fw-bold d-flex flex-row">Policy number: <div class="fw-normal mx-3">@Model.PolicyNo</div></li>
+                    <li class="fw-bold d-flex flex-row">Status: <div class="fw-normal mx-3">@Model.VehicleWarranty</div></li>
+                    <li class="fw-bold d-flex flex-row">Policy Date: <div class="fw-normal mx-3">@Model.PolicyDate.ToString("ddMMMyyyy")</div></li>
+                    <li class="fw-bold d-flex flex-row">Expiry date: <div class="fw-normal mx-3">@Model.PolicyDate.AddMonths(12).AddDays(-1).ToString("ddMMMyyyy")</div></li>
+                </ul>
+            </div>
+            <hr>
+            <div class="card-item">
+                <h5 class="pb-1">Vehicle details</h5>
+                <ul class="px-0 my-0">
+                    <li class="fw-bold d-flex flex-row">Your car: <div class="fw-normal mx-3">@Model.VehicleName @Model.VehicleModel @Model.VehicleVersion </div></li>
+                    <li class="fw-bold d-flex flex-row">Vehicle number: <div class="fw-normal mx-3">@Model.VehicleNumber </div></li>
+                </ul>
+            </div>
+            <hr>
+            <div class="card-item">
+                <h5 class="pb-1">The driver</h5>
+                <ul class="px-0 my-0">
+                    <li class="fw-bold d-flex flex-row">Owner/Policy holder: <div class="fw-normal mx-3">@Model.CustomerName</div></li>
+                </ul>
+            </div>
+            <hr>
+            <div class="card-item">
+                <h5 class="pb-1">Address details</h5>
+                <ul class="px-0 my-0 pb-2">
+                    <li class="fw-bold d-flex flex-row">Your address: 
+                        <div class="fw-normal mx-3" id="current-address">@Model.CustomerAddress </div>
+                    </li>
+                </ul>    
+            </div>
+            <hr>
+            <div class="card-item">
+                <h5 class="pb-1">Payment details</h5>
+                <ul class="px-0 my-0">
+                    <li class="fw-bold d-flex flex-row">Amount: <div class="fw-normal mx-3">@Model.Amount</li>
+                </ul>
+            </div>
+            <hr>
+            <div class="card-item">
+               
+                @if (@Model.Status == "Pending")
+                {
+                    <h5 class="pb-2">Cancellation</h5>
+                    <button type="button" class="btn btn-outline-danger px-4" style="">Cancel certificate</button>
+                }
+                else if (@Model.Status == "Completed")
+                {
+                    <a href="@Url.Action("Print","Certificate", new { Id = Model.Id })" class="btn btn-outline-info px-5 ">Bill</a>
+                }else
+                {
+                    <div></div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //$("#input-address").hide();
+        //$("#saveChanges").hide();
+        //$("#updateBtn").click(function (){
+        //    $("#updateBtn").hide();
+        //    $("#saveChanges").show();
+        //    $("#current-address").hide();
+        //    $("#input-address").show();
+     
+        $("#address-form").on("submit", function () {
+            var address = $("#address").val();
+            var path = $("#path").val();
+            var id = @Model.Id;
+                $.ajax({
+                    url: "@(Program.ApiAddress + "/Certificate/UpdateAddress/")",
+                    type: "PUT",
+                    //contentType: "application/json",
+                    data: {
+                        CustomerAddress : address,
+                        Id : id
+                    },
+                    success: function (result) {
+                        //$("#input-address").show();
+                        //$("#updateBtn").show();
+                    }
+                });
+        })
+    });
+</script>*@

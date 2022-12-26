@@ -2,7 +2,7 @@
     Layout = null;
 }
 
-@model CertificatesModel
+@model CertificateModel
 
 <div class="d-flex cert mb-3">
     <svg class="align-self-center mx-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -10,9 +10,38 @@
     </svg>
     <div class="flex-grow-1 align-self-center">
             <p class="m-0 pol-type">@Model.PolicyType</p>
-            <p class="m-0">@Model.VehicleName @Model.VehicleModel @Model.VehicleVersion</p>
-        <p class="m-0">policy No. @Model.PolicyNo - expires @Model.PolicyDate.ToString("MM/dd/yyyy")</p>
+        <p class="m-0 fw-semibold">@Model.VehicleNumber @Model.VehicleName @Model.VehicleModel @Model.VehicleVersion</p>
+        <p class="m-0">Policy no. @Model.PolicyNo - expires @Model.PolicyDate.ToString("ddMMMyyyy")</p>
     </div>
 
-    <a class="btn btn-outline-warning align-self-center me-4 px-4" href="@Url.Action("","", new { id = Model.Id })">View details</a>
+    <a class="btn btn-outline-warning align-self-center me-4 px-4" href="@Url.Action("Details","Certificate", new { Id = Model.Id })">View details</a>
 </div>
+
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "@(Program.ApiAddress + "/Certificate/Details")",
+            type: "GET",
+            data: {
+                id: @Model.Id
+                    },
+            success: function (result) {
+                GetCertificate(result);
+            }
+        });
+    });
+
+    function GetCertificate(certificate) {
+        $.ajax({
+            url: "/Certificate/Details",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(certificate),
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+</script>*@

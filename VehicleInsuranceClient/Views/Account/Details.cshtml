@@ -1,0 +1,156 @@
+﻿@model DataAccess.Models.Customer
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<style>
+    .login-section {
+        margin-bottom: 200px;
+    }
+
+    .card-wrapper {
+        margin: 0 250px;
+    }
+
+    .login-title {
+        font-weight: bold;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #f8db00;
+    }
+
+    .login-input {
+        margin: 15px 0;
+        border-radius: unset;
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .register-btn {
+        color: #FFFFFF;
+        background-color: #454849;
+        border: none;
+        box-shadow: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    .login-btn:hover {
+        background-color: #e0c426;
+    }
+
+    .register-btn:hover {
+        background-color: #000;
+    }
+
+    .card-content-body {
+        padding: 10px 100px;
+    }
+
+
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+    .detail {
+        text-align: left;
+    }
+
+    button.primary {
+        background-color: #03BFCB;
+        border: 1px solid #03BFCB;
+        border-radius: 3px;
+        color: #231E39;
+        font-family: Montserrat, sans-serif;
+        font-weight: 500;
+        padding: 10px 30px;
+        margin-top: 20px;
+    }
+
+        button.primary.ghost {
+            background-color: transparent;
+            color: #e0c426;
+        }
+
+    .left {
+        width: 35%;
+    }
+
+    .right {
+        width: 65%;
+    }
+</style>
+
+<!-- Section: Design Block -->
+<section class="text-center login-section">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+        background: #1F5AA5;
+        height: 300px;
+        ">
+        <h2 style="color:white">Customer Profile</h2>
+
+    </div>
+    <!-- Background image -->
+
+    <div class="card-wrapper shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        /*">
+        <div class="card-item py-5 bg-white">
+
+            <div class="row d-flex justify-content-center card-content">
+                <div class="col-lg-12 card-content-body">
+                    <h2 class="fw-bold mb-2 login-title" style="text-align: left">@Model.CustomerName</h2>
+                    <p hidden class="customerId">@Model.Id</p>
+                    <table id="customers">
+                        <tr class="detail">
+                            <td class="left">@Html.DisplayNameFor(model => model.CustomerEmail)</td>
+                            <td class="right">@Html.DisplayFor(model => model.CustomerEmail)</td>
+
+                        </tr>
+                        <tr class="detail">
+                            <td class="left">@Html.DisplayNameFor(model => model.CustomerName) </td>
+                            <td class="right">@Html.DisplayFor(model => model.CustomerName)</td>
+
+                        </tr>
+                        <tr class="detail">
+                            <td class="left">@Html.DisplayNameFor(model => model.CustomerAddress)</td>
+                            <td class="right">@Html.DisplayFor(model => model.CustomerAddress)</td>
+
+                        </tr>
+                        <tr class="detail">
+                            <td>@Html.DisplayNameFor(model => model.CustomerPhone)</td>
+                            <td>@Html.DisplayFor(model => model.CustomerPhone)</td>
+
+                        </tr>
+
+                    </table>
+                    <button class="primary ghost">
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id})
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -15,18 +15,10 @@ namespace VehicleInsuranceAPI.Controllers
             this.service = service;
         }
 
-        //[HttpGet("{username}/{password}")]
-        //public async Task<Admin> Get(string username, string password)
-        //{
-        //    return await service.CheckLogin(username, password);
-        //}
-
-
-        [HttpGet]
-        public async Task<Admin> GetOne()
+        [HttpGet("{username}/{password}")]
+        public async Task<Admin> Get(string username, string password)
         {
-            return await service.Get();
+            return await service.CheckLogin(username, password);
         }
-
     }
 }

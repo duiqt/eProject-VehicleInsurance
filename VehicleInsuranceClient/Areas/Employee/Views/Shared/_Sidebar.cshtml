@@ -1,18 +1,19 @@
 ﻿
 <section id="sidebar">
     <div class="logo">
-        <img src="" alt="logo">
+      @*  <img src="" alt="logo">*@
         <h2>X</h2>
     </div>
+
     <div class="items">
         <li><i class="fal fa-beer"></i><a asp-controller="Certificate" asp-action="Index">Certificates</a></li>
-        <li><i class="fal fa-beer"></i><a>Claims</a></li>
+        <li><i class="fal fa-beer"></i><a asp-controller="Claim" asp-action="Index">Claims</a></li>
         <li><i class="fal fa-beer"></i><a>Payment Schedule</a></li>
         <li><i class="fal fa-beer"></i><a>Monthly sell report</a></li>
         <li><i class="fal fa-beer"></i><a>Claims report</a></li>
         <li><i class="fal fa-beer"></i><a>Vehicle wise report</a></li>
         <li><i class="fal fa-beer"></i><a>Policies due renewals report</a></li>
         <li><i class="fal fa-beer"></i><a>Policies lapsed report</a></li>
-        <li><a asp-controller="Account" asp-action="logoutAdmin" class="btn btn-primary" style="background:#F3DC49; color:white">Logout</a></li>
+        <li><a asp-controller="Account" asp-action="logoutAdmin" class="btn btn-primary" style="background:#F3DC49; color:black">Logout</a></li>
     </div>
 </section>

@@ -1,9 +1,6 @@
-﻿@using VehicleInsuranceClient.Helper;
-
+﻿
 <!DOCTYPE html>
-@{
-    var userId = Context.GetUserId();
-}
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,14 +13,9 @@
 </head>
 
 <body>
-    <partial name="_Header" />
-    @RenderBody()
-    <partial name="_Footer" />
-
-    @*<script>
-    var userId = @userId;
-    </script>*@
-
+        <partial name="_Header" />
+        @RenderBody()
+        <partial name="_Footer" />
 </body>
 </html>
 

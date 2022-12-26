@@ -596,6 +596,46 @@ footer {
     font-size: 18px;
 }
 
+/*################################### Certificate Details #########################################*/
+#cer-details .card-wrapper {
+    margin: 0 300px;
+    box-shadow: 0 4px 10px rgba(22, 28, 45, 0.1), 0 2px 4px 3px rgba(22, 28, 45, 0.1) !important;
+}
+
+    #cer-details button {
+        border-radius: 30px;
+        border-width: 2.6px;
+        font-weight: 500;
+    }
+
+    #cer-details a {
+        border-radius: 30px;
+        border-width: 2.6px;
+        font-weight: 500;
+    }
+
+    #cer-details .card-item {
+        margin-top: 10px;
+    }
+
+    #cer-details hr {
+        margin: 2rem 0;
+    }
+
+    #cer-details h3, h5 {
+        color: #1F5AA5;
+    }
+
+        #cer-details .card-content ul li {
+            list-style: none;
+            padding: 7px 0;
+        /*    font-weight: 500;*/
+        }
+
+/*#cer-details .card-content ul li p {
+ 
+}
+*/
 
 /*################################### Personal Details #########################################*/
 

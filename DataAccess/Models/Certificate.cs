@@ -9,13 +9,9 @@ public partial class Certificate
 
     public int PolicyNo { get; set; }
 
-    public int EstimateId { get; set; }
+    public int EstimateNo { get; set; }
 
-    public string CustomerName { get; set; } = null!;
-
-    public string? CustomerAddress { get; set; }
-
-    public long CustomerPhone { get; set; }
+    public int CustomerId { get; set; }
 
     public int VehicleNumber { get; set; }
 
@@ -29,7 +25,9 @@ public partial class Certificate
 
     public virtual ICollection<Claim> Claims { get; } = new List<Claim>();
 
+    public virtual Customer Customer { get; set; } = null!;
+
     public virtual ICollection<CustomerBill> CustomerBills { get; } = new List<CustomerBill>();
 
-    public virtual Estimate Estimate { get; set; } = null!;
+    public virtual Estimate EstimateNoNavigation { get; set; } = null!;
 }

@@ -1,7 +1,5 @@
-﻿@model VehicleInsuranceClient.Models.EstimateClientViewModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@model VehicleInsuranceClient.Models.EstimateViewModel
 @using Microsoft.AspNetCore.Http
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @using System.Text.Json
 @{
     ViewData["Title"] = "Estimate";
@@ -10,17 +8,23 @@
     List<SelectListItem>? vehiclesModels = ViewBag.VehicleModels as List<SelectListItem>;
     List<SelectListItem>? vehiclesVersions = ViewBag.VehicleVersions as List<SelectListItem>;
     List<PoliciesViewModel>? policies = ViewBag.Policies as List<PoliciesViewModel>;
-    bool isHasEstimateNoCookie = HttpContextAccessor.HttpContext.Request.Cookies[@Model.EstimateNo.ToString()] != null;
 }
 <div class="container-fluid mb-3 px-0">
     <div class="border-bottom text-center  p-3" style="background: rgb(31, 89, 165); height:200px;">
         <h3 class="fw-semibold text-light">Your Car Insurance Quote Estimate</h3>
     </div>
 
-    <div class="container w-50 bg-white p-3 rounded">
+    <div class="container w-50 bg-white p-3 rounded" style="margin-top:-58px;">
         <h3 class="pb1">
             Your Estimate
         </h3>
+        @{
+            string estimateNoErrMessage = TempData["EstimateNoErrMessage"] as string;
+            if (!String.IsNullOrEmpty(estimateNoErrMessage))
+            {
+                <input id="estimateNoErrMessage" type="hidden" value="@estimateNoErrMessage" />
+            }
+        }
         <hr class="bg-warning pt-0 mt-0" />
         <div>
             <span class="d-flex">
@@ -62,7 +66,7 @@
                             @foreach (var item in policies)
                             {
                                 <div class="form-check">
-                                    @if (item.PolicyType.Equals(Model.PolicyType))
+                                    @if (item.PolicyId.Equals(Model.PolicyId))
                                     {
                                         <input checked type="radio" name="PolicyType" id="policyRadio_@item.PolicyId" value="@item.PolicyType" class="form-check-input">
                                         <label class="form-check-label" for="policyRadio_@item.PolicyId" href="#collapse_@item.PolicyId" data-bs-toggle="collapse" aria-controls="@item.PolicyType" aria-expanded="false">
@@ -93,14 +97,14 @@
                                 <div class="form-check">
                                     @if (item.PolicyType.Equals("Comprehensive"))
                                     {
-                                        <input checked type="radio" asp-for="PolicyType" id="policyRadio_@item.PolicyId" value="@item.PolicyType" class="form-check-input">
+                                        <input checked type="radio" asp-for="PolicyId" id="policyRadio_@item.PolicyId" value="@item.PolicyId" class="form-check-input">
                                         <label class="form-check-label" for="policyRadio_@item.PolicyId" href="#collapse_@item.PolicyId" data-bs-toggle="collapse" aria-controls="@item.PolicyType" aria-expanded="false">
                                             @item.PolicyType <small class="fw-light">(Most popular)</small>
                                         </label>
                                     }
                                     else
                                     {
-                                        <input type="radio" asp-for="PolicyType" id="policyRadio_@item.PolicyId" value="@item.PolicyType" class="form-check-input">
+                                        <input type="radio" asp-for="PolicyId" id="policyRadio_@item.PolicyId" value="@item.PolicyId" class="form-check-input">
                                         <label class="form-check-label" for="policyRadio_@item.PolicyId" href="#collapse_@item.PolicyId" data-bs-toggle="collapse" aria-controls="@item.PolicyType" aria-expanded="false">
                                             @item.PolicyType
                                         </label>
@@ -145,12 +149,15 @@
                                 </a>
                                 <div class="flex-fill px-2 align-items-stretch">
                                     <div class=" d-flex justify-content-around">
-                                        <span>@Html.DisplayFor(m => m.PolicyType)</span>
+                                        @{
+                                            var policyType = policies.Where(p => p.PolicyId == Model.PolicyId).Select(p => p.PolicyType).FirstOrDefault();
+                                        }
+                                        <span>@policyType</span>
                                         <strong>@Html.DisplayFor(m => m.Premium)<small class="fw-light">/Year</small> </strong>
                                     </div>
-                                    <small class="d-block text-secondary">Estimate valid until @DateTime.Today.AddDays(Program.CookieEstimateDuration).ToString("ddMMMyyyy")</small>
+                                    <small class="d-block text-secondary">Estimate valid until @Model.EstimateDate.Value.AddDays(Program.CookieEstimateDuration).ToString("ddMMMyyyy")</small>
                                 </div>
-                                <a asp-action="Contract" asp-controller="Estimate" id="btn_buynow" class="align-self-center btn btn_estimate rounded-1" style="background-color: rgb(238, 209, 46);" role="button">
+                                <a asp-controller="Certificate" asp-action="Contract" asp-route-estimateNo="@Model.EstimateNo" id="btn_buynow" class="align-self-center btn btn_estimate rounded-1" style="background-color: rgb(238, 209, 46);" role="button">
                                     <small style="font-size: 12px;">BUY NOW</small>
                                 </a>
                             </div>

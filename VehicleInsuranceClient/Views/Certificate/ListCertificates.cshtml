@@ -2,9 +2,9 @@
     Layout = null;
 }
 
-@model List<CertificatesModel>
+@model List<CertificateModel>
 
-@foreach (CertificatesModel item in Model)
+@foreach (CertificateModel item in Model)
 {
     @Html.Partial("BoxCertificate", item)
 }
