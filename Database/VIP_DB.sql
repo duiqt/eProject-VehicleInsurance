@@ -24,10 +24,10 @@ create table [Vehicle] (
 	VehicleOwnerName varchar(50) not null,
 	VehicleModel varchar(50) not null,
 	VehicleVersion varchar(50) not null,
-	VehicleRate money not null,
+	VehicleRate money not null CHECK(VehicleRate >= 0),
 	VehicleBodyNumber varchar(50) not null,
 	VehicleEngineNumber varchar(50) not null,
-	VehicleNumber int unique not null
+	VehicleNumber int unique not null CHECK(VehicleNumber > 0)
 );
 go
 
@@ -37,7 +37,7 @@ create table [Policy] (
 	[Description] varchar(500) not null,
 	-- Coverage: Dynamic content - display All coverage of each policy
 	Coverage varchar(8000) not null,
-	Annually money not null
+	Annually money not null CHECK(Annually >= 0)
 ); 
 go
 
@@ -70,12 +70,12 @@ create table [Estimate] (
 	VehicleName varchar(50) not null,
 	VehicleModel varchar(50) not null,
 	VehicleVersion varchar(50) not null,
-	PolicyID int not null,
+	PolicyID int not null CHECK(PolicyID > 0),
 	--OptionDetailsID int default 1,
 	EstimateDate date not null CHECK(DATEDIFF(day, GetDate(), EstimateDate) <=0 ),
 	PolicyDate date not null,
-	PolicyDuration int default 12 not null,
-	Premium money not null,
+	PolicyDuration int default 12 not null CHECK(PolicyDuration > 0),
+	Premium money not null CHECK(Premium >= 0),
 	CONSTRAINT FK_Estimate_Policy FOREIGN KEY (PolicyID) REFERENCES [Policy](ID),
 	--CONSTRAINT FK_Estimate_OptionDetails FOREIGN KEY (OptionDetailsID) REFERENCES [OptionDetails](ID)
 ); 
@@ -103,7 +103,7 @@ create table [CustomerBill] (
 	PolicyNo int not null,
 	[Status] varchar(50) default 'Pending' Check([Status] IN ('Pending', 'Completed')),
 	[Date] date default cast(getdate() as date),
-	Amount money,
+	Amount money CHECK(Amount >= 0),
 	CONSTRAINT FK_Certificate_Bill FOREIGN KEY (PolicyNo) REFERENCES [Certificate](PolicyNo)
 ); 
 go
@@ -112,7 +112,7 @@ create table [Company_Expense] (
 	ID int primary key identity(1,1),
 	DateOfExpense date not null,
 	TypeOfExpense varchar(50) not null,
-	AmountOfExpense money not null
+	AmountOfExpense money not null CHECK(AmountOfExpense > 0)
 ); 
 go
 
@@ -125,8 +125,8 @@ create table [Claim] (
 	[Description] varchar(500) not null,
 	[Status] varchar(20) default 'Lodged' CHECK ([Status] in ('Lodged', 'Inspecting', 'Approved', 'Insufficient','Rejected')),
 	[Image] varchar(1000),
-	InsuredAmount money not null,
-	ClaimableAmount money not null
+	InsuredAmount money not null CHECK(InsuredAmount > 0),
+	ClaimableAmount money CHECK(ClaimableAmount >= 0),
 	CONSTRAINT FK_Claim_Certificate FOREIGN KEY (PolicyNo) REFERENCES [Certificate](PolicyNo)
 ); 
 go
