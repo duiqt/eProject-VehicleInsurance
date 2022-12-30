@@ -8,7 +8,7 @@ create table [Customer] (
 	CustomerEmail varchar(50) unique not null,
 	[Password] varchar(50) not null,
 	CustomerName varchar(50) not null,
-	CustomerAddress varchar(100),
+	CustomerAddress varchar(100) not null,
 	CustomerPhone bigint unique not null
 );
 go
@@ -91,7 +91,7 @@ create table [Certificate] (
 	VehicleEngineNumber varchar(50) not null,
 	VehicleWarranty varchar(50) default 'Not Available' 
 		Check (VehicleWarranty IN ('Not Available','Available','Pending')),
-	Prove varchar(200)
+	Prove varchar(200) not null,
 	CONSTRAINT FK_Estimate_Certificate FOREIGN KEY (EstimateNo) REFERENCES [Estimate](EstimateNo),
 	CONSTRAINT FK_Customer_Certificate FOREIGN KEY (CustomerID) REFERENCES Customer(ID)
 ); 
@@ -256,7 +256,7 @@ go
 
 INSERT INTO [Policy] Values
 ('Third Party Fire and Theft',
-	'Get great value cover with RACV Third Party Fire and Theft Insurance. You’ll be covered for unintentional damage you cause to other people’s property. And you can rest at ease knowing you’re also covered for up to $10,000 if your car is stolen or damaged by a fire.',
+	'Get great value cover with RACV Third Party Fire and Theft Insurance. Youâ€™ll be covered for unintentional damage you cause to other peopleâ€™s property. And you can rest at ease knowing youâ€™re also covered for up to $10,000 if your car is stolen or damaged by a fire.',
 	'<div class="tab-component" id="inclusions">
 <h4>What does Third Party Fire and Theft Car Insurance cover? </h4>
 <div class="tabs">
@@ -271,7 +271,7 @@ INSERT INTO [Policy] Values
 <div class="o-grid">
 <div class="o-content-wrap">
 <div id="canvas_365535739_cop_392723712_canvas_par_rte" class="rte ">
-<div>With an RACV Third Party Property Fire and Theft Insurance policy, you’ll be covered for a range of events. Here’s a summary of what’s included:<br>
+<div>With an RACV Third Party Property Fire and Theft Insurance policy, youâ€™ll be covered for a range of events. Hereâ€™s a summary of whatâ€™s included:<br>
 <br>
 </div>
 </div><div class="gridColumn parbase section">
@@ -280,9 +280,9 @@ INSERT INTO [Policy] Values
 <div class="u-1/2 u-padding-base-LR@small u-spacing-bottom-zero@xsmall u-container-form-builder">
 <div id="canvas_365535739_canvas_par_rte" class="rte c-list c-list--tick ">
 <ul style="list-style-position: inside;">
-<li><b>Liability cover up to $20 million</b> for unintentional damage to someone else’s vehicle or property.</li>
+<li><b>Liability cover up to $20 million</b> for unintentional damage to someone elseâ€™s vehicle or property.</li>
 <li><b>Up to $10,000 in cover for loss or damage</b> to your vehicle caused by fire, theft or attempted theft.</li>
-<li><b>Hire car after a theft or attempted theft</b> where your vehicle can’t be driven, for up to 21 days.<br>
+<li><b>Hire car after a theft or attempted theft</b> where your vehicle canâ€™t be driven, for up to 21 days.<br>
 </li>
 </ul>
 </div>
@@ -291,7 +291,7 @@ INSERT INTO [Policy] Values
 <div class="u-1/2 u-padding-base-LR@small  u-container-form-builder">
 <div id="canvas_365535739_canvas_par_rte" class="rte c-list c-list--tick ">
 <ul style="list-style-position: inside;">
-<li><b>Up to $5000 in limited cover</b> for damage to your vehicle if you’re not at fault in the collision, the other driver is uninsured and you can provide their details.<br>
+<li><b>Up to $5000 in limited cover</b> for damage to your vehicle if youâ€™re not at fault in the collision, the other driver is uninsured and you can provide their details.<br>
 </li>
 <li><b>One tow</b> from an incident to a safe place or repairer.<br>
 </li>
@@ -349,7 +349,7 @@ INSERT INTO [Policy] Values
 </div>',
 	500),
 ('Third-Party Property Damage',
-	'Third Party Property Damage insurance is the most affordable, basic cover offered by RACV for unintentional damage you cause to another person’s vehicle or property, such as colliding with another car or hitting someone’s fence.',
+	'Third Party Property Damage insurance is the most affordable, basic cover offered by RACV for unintentional damage you cause to another personâ€™s vehicle or property, such as colliding with another car or hitting someoneâ€™s fence.',
 	'<div class="tab-component" id="inclusions">
 <h4>What does Third Party Property Damage Car Insurance cover? </h4>
 <div class="tabs">
@@ -364,7 +364,7 @@ INSERT INTO [Policy] Values
 <div class="o-grid">
 <div class="o-content-wrap">
 <div id="canvas_365535739_cop_392723712_canvas_par_rte" class="rte ">
-<div>With an RACV Third Party Property Damage car insurance policy, you’ll be covered for a range of events. Here’s a summary of what’s included:<br>
+<div>With an RACV Third Party Property Damage car insurance policy, youâ€™ll be covered for a range of events. Hereâ€™s a summary of whatâ€™s included:<br>
 <br>
 </div>
 </div><div class="gridColumn parbase section">
@@ -373,8 +373,8 @@ INSERT INTO [Policy] Values
 <div class="u-1/2 u-padding-base-LR@small u-spacing-bottom-zero@xsmall u-container-form-builder">
 <div id="canvas_365535739_canvas_par_rte" class="rte c-list c-list--tick ">
 <ul style="list-style-position: inside;">
-<li><b>Liability cover up to $20 million </b>for unintentional damage to someone else’s vehicle or property.</li>
-<li><b>Up to $5000 in limited cover</b> for damage to your vehicle if you’re not at fault in the collision, the other driver is uninsured and you can provide their details.</li>
+<li><b>Liability cover up to $20 million </b>for unintentional damage to someone elseâ€™s vehicle or property.</li>
+<li><b>Up to $5000 in limited cover</b> for damage to your vehicle if youâ€™re not at fault in the collision, the other driver is uninsured and you can provide their details.</li>
 </ul>
 </div>
 </div>
@@ -438,9 +438,9 @@ INSERT INTO [Policy] Values
 </div>',
 	490),
 ('Comprehensive',
-'Comprehensive car insurance protects you from potentially hefty bills when an accident occurs. No matter who’s at fault, you and anyone permitted to drive your vehicle1 , will be covered for collision damage to your vehicle and other people’s property.
+'Comprehensive car insurance protects you from potentially hefty bills when an accident occurs. No matter whoâ€™s at fault, you and anyone permitted to drive your vehicle1 , will be covered for collision damage to your vehicle and other peopleâ€™s property.
 
-Go with the standard inclusions, or add optional extras to suit your needs and budget — like hire car cover, windscreen cover with no excess or pick your own licensed repairer.*',
+Go with the standard inclusions, or add optional extras to suit your needs and budget â€” like hire car cover, windscreen cover with no excess or pick your own licensed repairer.*',
 '<div class="tab-component" id="inclusions">
 <h4>What does RACV Comprehensive Car Insurance cover? </h4>
 <div class="tabs">
@@ -456,7 +456,7 @@ Go with the standard inclusions, or add optional extras to suit your needs and b
 <div class="o-grid">
 <div class="o-content-wrap">
 <div id="canvas_365535739_cop_392723712_canvas_par_rte" class="rte ">
-<div>With an RACV Comprehensive Car Insurance policy, you’ll be covered for a range of events. Here’s a summary of what’s included:<br>
+<div>With an RACV Comprehensive Car Insurance policy, youâ€™ll be covered for a range of events. Hereâ€™s a summary of whatâ€™s included:<br>
 <br>
 </div>
 </div><div class="gridColumn parbase section">
@@ -466,9 +466,9 @@ Go with the standard inclusions, or add optional extras to suit your needs and b
 <div id="canvas_365535739_canvas_par_rte" class="rte c-list c-list--tick ">
 <ul style="list-style-position: inside;">
 <li><b>Loss or damage to your vehicle</b> caused by an accident, flood, fire, malicious act, storm, theft or attempted theft.</li>
-<li><b>Hire car after a not-at-fault collision</b> if your car is unsafe to drive or is in for repairs. The at-fault driver’s details must be provided.<br>
+<li><b>Hire car after a not-at-fault collision</b> if your car is unsafe to drive or is in for repairs. The at-fault driverâ€™s details must be provided.<br>
 </li>
-<li><b>Liability cover up to $20 million</b> for damage to someone else’s vehicle or property.<br>
+<li><b>Liability cover up to $20 million</b> for damage to someone elseâ€™s vehicle or property.<br>
 </li>
 </ul>
 </div>
@@ -477,7 +477,7 @@ Go with the standard inclusions, or add optional extras to suit your needs and b
 <div class="u-1/2 u-padding-base-LR@small  u-container-form-builder">
 <div id="canvas_365535739_canvas_par_rte" class="rte c-list c-list--tick ">
 <ul style="list-style-position: inside;">
-<li><b>Up to $500 for personal items</b> if they’re stolen with your vehicle or damaged in an incident. Some exclusions apply.<br>
+<li><b>Up to $500 for personal items</b> if theyâ€™re stolen with your vehicle or damaged in an incident. Some exclusions apply.<br>
 </li>
 <li><b>New replacement vehicle</b>&nbsp;where available if your vehicle is up to 2 years old and RACV Insurance considers it to be a total loss and agrees to pay your claim.<br>
 </li>
@@ -534,7 +534,7 @@ Go with the standard inclusions, or add optional extras to suit your needs and b
 <div class="o-grid">
 <div class="o-content-wrap">
 <div id="canvas_1819562518_canvas_par_rte" class="rte ">
-<p>For added peace of mind, you can choose to boost your cover with optional extras. If you do this, you’ll need to pay more on your premium.<br>
+<p>For added peace of mind, you can choose to boost your cover with optional extras. If you do this, youâ€™ll need to pay more on your premium.<br>
 </p>
 </div><div class="gridColumn parbase section">
 <div class="form_row clearfix" id="canvas_1819562518_canvas_par_gridcolumn">
@@ -542,10 +542,10 @@ Go with the standard inclusions, or add optional extras to suit your needs and b
 <div class="u-1/2  u-spacing-bottom-small@xsmall u-container-form-builder">
 <div id="gridcolumn_0_rte" class="rte ">
 <p><b>Hire Car regardless of who is at fault</b><br>
-Under Comprehensive Insurance, you’re covered for a hire car for not-at-fault collisions if you can provide the details of the at-fault driver, as well as theft or attempted theft of your vehicle. By adding this option, you’ll be covered for a hire car regardless of who is at fault.<br>
+Under Comprehensive Insurance, youâ€™re covered for a hire car for not-at-fault collisions if you can provide the details of the at-fault driver, as well as theft or attempted theft of your vehicle. By adding this option, youâ€™ll be covered for a hire car regardless of who is at fault.<br>
 </p>
 <p><b>Windscreen cover with no excess</b><br>
-If you add this option, you won’t need to pay any excess when only your vehicle’s windscreen, sunroof or window glass is damaged as a result of an incident.</p>
+If you add this option, you wonâ€™t need to pay any excess when only your vehicleâ€™s windscreen, sunroof or window glass is damaged as a result of an incident.</p>
 </div>
 </div>
 <form><input type="hidden" disabled="" name="gridcolumn"></form>
@@ -567,10 +567,10 @@ If you add this option, you won’t need to pay any excess when only your vehicle’
 </div>
 </div>',
 2000),
-('Complete Care®', 
-	'Complete Care® Car Insurance covers all the things you’d expect from comprehensive cover, plus extra inclusions like emergency accommodation, pet assistance, and no excess for windscreen, sunroof and window glass repairs. Drive with confidence when you choose the highest level of RACV Motor Insurance available.',
+('Complete CareÂ®', 
+	'Complete CareÂ® Car Insurance covers all the things youâ€™d expect from comprehensive cover, plus extra inclusions like emergency accommodation, pet assistance, and no excess for windscreen, sunroof and window glass repairs. Drive with confidence when you choose the highest level of RACV Motor Insurance available.',
 '<div class="tab-component" id="inclusions">
-<h4>What does Complete Care® Car Insurance cover? </h4>
+<h4>What does Complete CareÂ® Car Insurance cover? </h4>
 <div class="tabs">
 <ul class="nav nav-tabs yellow-tab">
 <li class="active in"><a class="tab-links" id="inclusions0" data-toggle="tab" href="javascript:void(0);" data-tabid="#tabmenuinclusions0">Inclusions</a></li>
@@ -583,7 +583,7 @@ If you add this option, you won’t need to pay any excess when only your vehicle’
 <div class="o-grid">
 <div class="o-content-wrap">
 <div id="canvas_365535739_cop_392723712_canvas_par_rte" class="rte ">
-<div>With an RACV Complete Care® Car Insurance policy, you’ll be covered for a range of events. Here’s a summary of what’s included:<br>
+<div>With an RACV Complete CareÂ® Car Insurance policy, youâ€™ll be covered for a range of events. Hereâ€™s a summary of whatâ€™s included:<br>
 </div>
 </div><div class="gridColumn parbase section">
 <div class="form_row clearfix" id="canvas_365535739_cop_392723712_canvas_par_gridcolumn">
@@ -593,7 +593,7 @@ If you add this option, you won’t need to pay any excess when only your vehicle’
 <ul style="list-style-position: inside;">
 <li><b>Loss or damage to your vehicle</b> caused by an accident, flood, fire, malicious act, storm, theft or attempted theft.</li>
 <li><b>Hire car after an incident or theft</b> until your vehicle is repaired and returned to you.</li>
-<li><b>Pet assistance</b> in the event you’re involved in an incident more that 100km from home and need to stay in pet-friendly accommodation.</li>
+<li><b>Pet assistance</b> in the event youâ€™re involved in an incident more that 100km from home and need to stay in pet-friendly accommodation.</li>
 <li><b>Cover for windscreen, sunroof and window glass damage</b> as a result of an incident, without any excess payment.<br>
 </li>
 </ul>
@@ -603,8 +603,8 @@ If you add this option, you won’t need to pay any excess when only your vehicle’
 <div class="u-1/2 u-padding-base-LR@small  u-container-form-builder">
 <div id="canvas_365535739_canvas_par_rte" class="rte c-list c-list--tick ">
 <ul style="list-style-position: inside;">
-<li><b>Vehicle towing, pickup and return</b> if you’re involved in an incident.</li>
-<li><b>Liability cover up to $20 million</b> for unintentional collision damage to someone else’s vehicle or property.</li>
+<li><b>Vehicle towing, pickup and return</b> if youâ€™re involved in an incident.</li>
+<li><b>Liability cover up to $20 million</b> for unintentional collision damage to someone elseâ€™s vehicle or property.</li>
 <li><b>New replacement vehicle</b>&nbsp;if RACV Insurance considers your vehicle to be a total loss and agrees to pay your claim. Conditions apply.<br>
 </li>
 <li><b>Any licenced driver (including learners) </b>with permission to drive your vehicle will be covered. Additional excess may apply to inexperienced drivers or drivers under 25.</li>
@@ -614,7 +614,7 @@ If you add this option, you won’t need to pay any excess when only your vehicle’
 </div>
 </div>
 <div id="canvas_365535739_cop_1798917204_canvas_par_rte" class="rte ">
-<p><sub><i>This is only a summary of the inclusions&nbsp;for&nbsp;Complete Care® Motor Insurance. For more information, such as conditions, limits and exclusions, please read the&nbsp;<a href="/insurance/policy-documents/motor.html#pds" target="_self">Product Disclosure Statement</a>.</i></sub></p>
+<p><sub><i>This is only a summary of the inclusions&nbsp;for&nbsp;Complete CareÂ® Motor Insurance. For more information, such as conditions, limits and exclusions, please read the&nbsp;<a href="/insurance/policy-documents/motor.html#pds" target="_self">Product Disclosure Statement</a>.</i></sub></p>
 </div>
 </div>
 </div>
