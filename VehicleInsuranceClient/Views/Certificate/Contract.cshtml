@@ -11,7 +11,7 @@
             <span>Reference Number: </span><span><strong>@Html.DisplayFor(m=>m.Estimation.EstimateNo)</strong></span>
         </h4>
     </div>
-    @using (Html.BeginForm("CreateCertificate", "Certificate", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Contract", "Certificate", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formContract" }))
     {
         <div class="row">
             <div class="col-md-6 p-5 pt-4 ">
@@ -59,16 +59,23 @@
                         </div>
                         <div class="col-md-6">
                             <label for="Prove" class="form-label">Documents</label>
-                            @Html.TextBoxFor(m=>m.Contract.Prove, new {  type="file", title="", @class = "form-control" })
+                            @Html.TextBoxFor(m=>m.Contract.Prove, new {  type="file", @multiple = "multiple", @class = "form-control" })
                             <p><span asp-validation-for="Contract.Prove" class="text-danger small"></span></p>
+                            @if (ViewBag.InvalidNameImage != null)
+                            {
+                                <p><span class="text-danger small">@ViewBag.InvalidNameImage</span></p>
+                            }
                         </div>
                     </div>
                     <hr />
                     <div class="row mb-3">
+                        <div id="checkBoxAgreeErr" class="">
+                            <small class="text-danger">You haven't agreed with companys' terms and conditions</small>
+                        </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="checkBoxAgree">
                             <label class="form-check-label" for="checkBoxAgree">
-                                I certify that all information provided is accurate and complete, I understand and agree to the Summary of Benefits, Insurance Wording, I agree that submitting information on this site will be deemed to be a request to provide insurance to Bao Long in accordance with the provisions set forth in the Summary of Benefits and Insurance wording. Vehicle Insurance Portal reserves the right to accept or reject my claim, depending on the outcome of the assessment.
+                                I certify that all information provided is accurate and complete, I understand and agree to the Summary of Benefits, Insurance Wording, I agree that submitting information on this site will be deemed to be a request to provide insurance to Company in accordance with the provisions set forth in the Summary of Benefits and Insurance wording. Vehicle Insurance Portal reserves the right to accept or reject my claim, depending on the outcome of the assessment.
                             </label>
                         </div>
                     </div>
@@ -76,7 +83,7 @@
                         <a asp-action="Index" asp-controller="Home" class="btn btn-secondary btn_estimate rounded-1 me-3" role="button">
                             <small>PREVIOUS</small>
                         </a>
-                        <button type="submit" role="button" id="" class="btn btn-lg rounded-1 ms-3" style="background-color: rgb(238, 209, 46);">
+                        <button type="submit" role="button" id="btnSubmitContract" class="btn btn-lg rounded-1 ms-3" style="background-color: rgb(238, 209, 46);">
                             <strong style="font-size: 15px;">SUBMIT</strong>
                         </button>
                     </div>

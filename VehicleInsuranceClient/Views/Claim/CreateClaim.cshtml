@@ -1,0 +1,133 @@
+﻿@model VehicleInsuranceClient.Models.Dtos.CreateClaimDto
+
+@{
+    ViewData["Title"] = "CreateClaim";
+}
+
+<style>
+    .login-section {
+        margin-bottom: 200px;
+    }
+
+    .card-wrapper {
+        margin: 0 250px;
+    }
+
+    .login-title {
+        font-weight: bold;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #f8db00;
+    }
+
+    .login-input {
+        margin: 15px 0;
+        border-radius: unset;
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .create-btn {
+        color: #FFFFFF;
+        background-color: #454849;
+        border: none;
+        box-shadow: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+        .create-btn:hover {
+            background-color: #1F5AA5;
+        }
+
+    .card-content-body {
+        padding: 10px 100px;
+    }
+
+    .form-group {
+        text-align: left;
+        padding-top: 20px;
+    }
+
+</style>
+<hr />
+
+
+<!-- Section: Design Block -->
+<section class="text-center login-section">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+        background: #1F5AA5;
+        height: 300px;
+        ">
+        <h2 style="color:white">Initiate a Claim</h2>
+    </div>
+    <!-- Background image -->
+
+    <div class="card-wrapper shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        /*">
+        <div class="card-item py-5 bg-white">
+
+            <div class="row d-flex justify-content-center card-content">
+                <div class="col-lg-12 card-content-body">
+                    <h2 class="fw-bold mb-2 login-title" style="text-align: left">Claim Form</h2>
+                    <h5 class="text-danger" style="color:red">@ViewBag.msg </h5>
+
+                    <form asp-action="CreateClaim" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="PlaceOfAccident" class="control-label"></label>
+                            <input asp-for="PlaceOfAccident" class="form-control" />
+                            <span asp-validation-for="PlaceOfAccident" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DateOfAccident" class="control-label"></label>
+                            <input asp-for="DateOfAccident" class="form-control" />
+                            <span asp-validation-for="DateOfAccident" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="InsuredAmount" class="control-label left"></label>
+                            <input asp-for="InsuredAmount" class="form-control" />
+                            <span asp-validation-for="InsuredAmount" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label "></label>
+                            <input asp-for="Description" class="form-control" style="height:100px" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="PolicyNo" class="control-label "></label>
+                            <input asp-for="PolicyNo" class="form-control" value="@ViewBag.policyNo" />
+                            <span asp-validation-for="PolicyNo" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @*<input type="file" name="ImageUpload" id="ImageUpload" accept=".jpg,.jpeg,.png" />*@
+                                <input asp-for="ImageUpload">
+                                @Html.ValidationMessageFor(model => model.ImageUpload, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

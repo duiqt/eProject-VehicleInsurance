@@ -2,7 +2,9 @@
 @{
     var returnUrl = ViewBag.returnUrl;
     Layout = "";
+
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +37,8 @@
             left: 50%;
             top: 50%;
         }
+
+
 
         form {
             height: 520px;
@@ -85,6 +89,7 @@
             font-weight: 300;
         }
 
+
         button {
             margin-top: 50px;
             width: 100%;
@@ -104,7 +109,6 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-
     <form method="post" id="loginForm">
         <h3>Admin Login</h3>
         <label for="userName">Username</label>
@@ -120,8 +124,10 @@
 </body>
 </html>
 
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+

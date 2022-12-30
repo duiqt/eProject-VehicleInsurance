@@ -11,6 +11,11 @@ namespace VehicleInsuranceClient.Controllers
 
         public IActionResult Index()
         {
+            var userString = HttpContext.Session.GetString("user");
+            if (userString == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 

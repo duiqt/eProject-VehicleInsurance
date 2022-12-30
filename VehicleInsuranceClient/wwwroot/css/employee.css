@@ -52,7 +52,21 @@ body {
             list-style: none;
             padding: 15px 0;
             transition: 0.3s ease;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
         }
+
+            #sidebar .items li.active {
+                background: var(--primary-light);
+            }
+
+                #sidebar .items li.active a{
+                    color: var(--black-light);
+                }
+
+                #sidebar .items li.active i {
+                    color: var(--black-light);
+                }
 
             #sidebar .items li i {
                 color: var(--yellow-color);

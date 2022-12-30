@@ -1,18 +1,30 @@
 ﻿using DataAccess.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NuGet.Protocol.Plugins;
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Net.WebSockets;
+using System.Security.Claims;
+using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using VehicleInsuranceClient.Models.Contants;
 using VehicleInsuranceClient.Models.Dtos;
 //using DataAccess.Models;
 
 namespace VehicleInsuranceClient.Controllers
 {
+
     public class AccountController : Controller
     {
         private string urlCustomer = "https://localhost:7008/api/Customer/";
         private string urlAccount = "https://localhost:7008/api/Account/";
+
 
         HttpClient client = new HttpClient();
 
@@ -26,12 +38,12 @@ namespace VehicleInsuranceClient.Controllers
         {
             if (!string.IsNullOrEmpty(returnUrl))
             {
-                ViewBag.returnUrdl = returnUrl;
+                ViewBag.returnUrl = returnUrl;
                 return View();
             }
             else
             {
-                ViewBag.returnUrdl = "";
+                ViewBag.returnUrl = "";
                 return View();
             }
         }
@@ -50,7 +62,6 @@ namespace VehicleInsuranceClient.Controllers
                         CustomerEmail = cus.CustomerEmail,
                         Password = cus.Password
                     };
-
                     if (cus.CustomerEmail == req.CustomerEmail && cus.Password == req.Password)
                     {
                         var res = await client.PostAsync(RequestUriContants.Login, new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json"));
@@ -61,7 +72,13 @@ namespace VehicleInsuranceClient.Controllers
                             var str = JsonConvert.SerializeObject(customer);
                             HttpContext.Session.SetString("user", str);
                             ViewBag.msg = string.Format("Login successfull");
+                            ViewBag.user = customer;
+                            if (returnUrl != null) 
+                            {
+                                return Redirect(returnUrl);
+                            }
                             return RedirectToAction("Index", "Certificate");
+
                         }
                         else
                         {
@@ -79,11 +96,14 @@ namespace VehicleInsuranceClient.Controllers
             {
                 throw new Exception(ex.Message);
             }
+
         }
 
+        [HttpGet]
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("user");
+            ViewBag.user = null;
             return RedirectToAction("Index", "Home");
         }
 
@@ -96,7 +116,7 @@ namespace VehicleInsuranceClient.Controllers
         [HttpPost]
         public IActionResult SignUp(SignUpDto signUpDto)
         {
-            var response = client.PostAsJsonAsync(urlCustomer, signUpDto).Result;
+            var response = client.PostAsJsonAsync(urlCustomer + "SignUp", signUpDto).Result;
             if (response.IsSuccessStatusCode)
             {
                 ViewBag.msg = string.Format("Create New Account Successfully");
@@ -106,10 +126,10 @@ namespace VehicleInsuranceClient.Controllers
             return View();
         }
 
+
         [HttpGet]
-        public IActionResult Details(int id)
+        public IActionResult Details()
         {
-            //lay session ra
             var userString = HttpContext.Session.GetString("user");
             if (userString == null)
             {
@@ -117,20 +137,28 @@ namespace VehicleInsuranceClient.Controllers
             }
             // lay ID ra
             var obj = JsonConvert.DeserializeObject<Customer>(userString);
-            id = obj.Id;
-            var userResult = JsonConvert.DeserializeObject<Customer>
-                (client.GetStringAsync(urlCustomer + id).Result);
+            var userResult = JsonConvert.DeserializeObject<CustomerDto>
+                (client.GetStringAsync(urlCustomer + obj.Id).Result);
             return View(userResult);
         }
 
+
         [HttpGet]
-        public IActionResult Edit(int Id)
+        public IActionResult Edit()
         {
-            var model = JsonConvert.DeserializeObject<Customer>(client.GetStringAsync(urlCustomer + Id).Result);
+            var userString = HttpContext.Session.GetString("user");
+            if (userString == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            // lay ID ra
+            var obj = JsonConvert.DeserializeObject<Customer>(userString);
+            var model = JsonConvert.DeserializeObject<ChangePasswordDto>(client.GetStringAsync(urlCustomer + obj.Id).Result);
             ChangePasswordDto changePassword = new ChangePasswordDto
             {
                 Id = model.Id,
                 Password = model.Password
+
             };
             return View(changePassword);
         }
@@ -138,6 +166,7 @@ namespace VehicleInsuranceClient.Controllers
         [HttpPost]
         public IActionResult Edit(ChangePasswordDto changePasswordDto)
         {
+
             if (string.Compare(changePasswordDto.ChangePassword, changePasswordDto.ConfirmPassword) == 0)
             {
                 //lay session ra

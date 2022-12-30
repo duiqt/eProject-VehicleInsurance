@@ -13,12 +13,10 @@ namespace VehicleInsuranceAPI.Responsitory
         {
             this.db = db;
         }
-
         public async Task<Admin> CheckLogin(string username, string password)
         {
             return await db.Admins.SingleOrDefaultAsync(a => a.UserName.Equals(username) && a.Password.Equals(password));
         }
-
         public async Task<AdminDto> Login(LoginAdminDto req)
         {
             AdminDto result = new AdminDto();
@@ -36,8 +34,10 @@ namespace VehicleInsuranceAPI.Responsitory
                     };
                     return result;
                 }
+
             }
             return null;
         }
+
     }
 }

@@ -1,43 +1,140 @@
-﻿@using VehicleInsuranceClient.Areas.Employee.Models;
+﻿
 
-@model List<ClaimModel>
+@model VehicleInsuranceClient.Areas.Employee.Models.ClaimViewModel
 <!-- Title -->
-@foreach (ClaimModel item in Model)
-{
-    <h3 class="title" style="text-align:center;">@item.CustomerName's Claim Detail</h3>
-}
 
 <h3 class="title" style="text-align:center;">Claim Detail</h3>
 
-<div class="container border">
-    <div class="d-flex flex-wrap">
-        @foreach (ClaimModel item in Model)
-        {
+<div class="container border w-50">
+    <div class="p-4">
             <div>
-                <div>Claim no: @item.ClaimNo</div>
-                <div>Policy no: @item.PolicyNo</div>
-                <div>Place Of Accident: @item.PlaceOfAccident</div>
-                <div>Date of Accident: @item.DateOfAccident</div>
-                <div>Description: @item.Description</div>
-                <div>Image: @item.Image</div>
-                <div>Insured Amount: @item.InsuredAmount</div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Claim no :</div> @Model.ClaimNo
+                </div>
+            <hr />        
+            <div class="d-flex flex-row">
+                <div class="fw-semibold me-3">Policy no :</div> @Model.PolicyNo
+            </div>
+                <hr />
+            <div class="d-flex flex-row">
+                <div class="fw-semibold me-3">Place Of Accident :</div> @Model.PlaceOfAccident
+            </div>
+            <div class="d-flex flex-row">
+                <div class ="fw-semibold me-3">Date of Accident:</div> @Model.DateOfAccident
+            </div>
+            <hr />
+            <div>
+                <div class="fw-semibold me-3"> Description :</div>
+                <textarea class="form-control shadow-none" id="description" readonly>@Model.Description</textarea>
+            </div>
+            <hr />
+            <div class="d-flex flex-row">
+                <div class="fw-semibold me-3">Image:</div> @Model.Image
+            </div>
+            <hr />
+            <div class="d-flex flex-row">
+                <div class="fw-semibold me-3">Insured Amount :</div> @Model.InsuredAmount
+            </div>
+            <hr />
+
+            @using (Html.BeginForm("UpdateClaim", "Claim", FormMethod.Post))
+             {
+                <form id="claim-form" asp-action="UpdateClaim" method="post">
+                    <input type="hidden" name="Id" id="Id" value="@Model.Id" class="form-control">
+                    <input type="hidden" name="ClaimNo" id="ClaimNo" value="@Model.ClaimNo" class="form-control">
+                    <input type="hidden" name="PolicyNo" id="PolicyNo" value="@Model.PolicyNo" class="form-control">
+                    <input type="hidden" name="PlaceOfAccident" id="PlaceOfAccident" value="@Model.PlaceOfAccident" class="form-control">
+                    <input type="hidden" name="DateOfAccident" id="DateOfAccident" value="@Model.DateOfAccident" class="form-control">
+                    <input type="hidden" name="Description" id="Description" value="@Model.Description" class="form-control">
+                    @*<input type="hidden" name="Status" id="Status" value="@Model.Status" class="form-control">*@
+                    <input type="hidden" name="Image" id="Image" value="@Model.Image" class="form-control">
+                    <input type="hidden" name="InsuredAmount" id="Image" value="@Model.InsuredAmount" class="form-control">
+
+                   <div class="pb-3">
+                        <div class="pb-3 d-flex flex-row">
+                            <div class="d-flex align-items-center me-3 fw-semibold">Status: </div>
+                            @if (@Model.Status == "Lodged")
+                            {
+                                <button type="button" class="btn btn-warning">@Model.Status</button>
+                            }
+                            else if (@Model.Status == "Inspecting")
+                            {
+                                <button type="button" class="btn btn-info">@Model.Status</button>
+                            }
+                            else if (@Model.Status == "Insufficient")
+                            {
+                                <button type="button" class="btn btn-secondary">@Model.Status</button>
+                            }
+                            else if (@Model.Status == "Approved")
+                            {
+                                <button type="button" class="btn btn-success">@Model.Status</button>
+                            }
+                            else if (@Model.Status == "Rejected")
+                            {
+                                <button type="button" class="btn btn-danger">@Model.Status</button>
+                            }else
+                            {
+                                <div>@Model.Status</div>
+                            }
+
+                        
+                        </div>
+                        <select asp-for="SelectedStatus" class="form-select shadow-none mt-3" asp-items="@ViewBag.Status">
+                            <option>Choose</option>
+                        </select>
+                    </div>
+                    
+                    <span asp-validation-for="SelectedStatus" class="text-danger"></span>
+
+                    <input asp-for="ClaimableAmount" id="claimableamount" name="claimableamount" type="number" class="form-control shadow-none" required>
+                    <span asp-validation-for="ClaimableAmount" class="text-danger small"></span>
+
+                    <button type="submit" id="claimBtn" class="btn btn-primary my-3">Confirm</button>
+                </form>
+            }
+            </div>
+                  
+           @* <div class="px-3">
+            <div>@Model.PolicyType</div>
+            <div>@Model.PolicyNo</div>
+            </div>
+
+            <div>
+            <div>@Model.CustomerName</div>
+            <div>@Model.CustomerPhone</div>
+            <div>@Model.CustomerAddress</div>
             </div>
 
             <div class="px-3">
-                <div>@item.PolicyType</div>
-                <div>@item.PolicyNo</div>
-            </div>
-
-            <div>
-                <div>@item.CustomerName</div>
-                <div>@item.CustomerPhone</div>
-                <div>@item.CustomerAddress</div>
-            </div>
-
-            <div class="px-3">
-                <div>@item.VehicleNumber @item.VehicleName @item.VehicleModel @item.VehicleVersion</div>
-            </div>
-        }
+            <div>@Model.VehicleNumber @Model.VehicleName @Model.VehicleModel @Model.VehicleVersion</div>
+            </div>*@
 
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+ 
+}
+@*
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+  //$(document).ready(function(){
+  //  $("#claimBtn").on("click", function () {
+
+  //          location.reload(true);
+  //  });
+        
+  //})
+    $(document).on("click", "#claimBtn", function () {
+        document.location.reload(true)
+    });
+      
+  
+   
+</script>*@
+         

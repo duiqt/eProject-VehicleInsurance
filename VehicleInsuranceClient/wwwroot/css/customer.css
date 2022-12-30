@@ -84,6 +84,7 @@ body {
     height: 500px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 200px;
 }
     #home::before {
         width:100%;
@@ -156,6 +157,10 @@ body {
         color: var(--primary-color);
         background-color: var(--yellow-color);
     }
+
+#reason {
+    position: relative;
+}
 
 /****************** About ******************/
 #about {
@@ -708,6 +713,15 @@ input[name=PolicyType]:checked ~ label {
     height: 45px;
     text-shadow: 0 0.8px 0.8px black;
 }
+
+#btnEstimate {
+    background-color: rgb(247, 218, 43);
+    transition: all 0.15s ease-in;
+}
+
+    #btnEstimate:hover {
+        background-color: rgba(234, 200, 9);
+    }
 
 #BoxEstimate {
     width: 50%;

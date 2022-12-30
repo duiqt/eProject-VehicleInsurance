@@ -41,10 +41,30 @@
                         @item.InsuredAmount
                     </td>
                     <td>
-                        @item.Status
+                        @if (item.Status == "Rejected")
+                        {
+                            <button type="button" class="btn btn-danger">@item.Status</button>
+                        }
+                        else if (item.Status == "Approved")
+                        {
+                            <button type="button" class="btn btn-success">@item.Status</button>
+                        }
+                        else if (item.Status == "Inspecting")
+                        {
+                            <button type="button" class="btn btn-info">@item.Status</button>
+                        }
+                        else if (item.Status == "Insufficient")
+                        {
+                            <button type="button" class="btn btn-secondary">@item.Status</button>
+                        }
+                        else if (item.Status == "Lodged")
+                        {
+                            <button type="button" class="btn btn-warning">@item.Status</button>
+                        }
+                       
                     </td>
                     <td>
-                        <a type="button" class="btn btn-info" href="@Url.Action("Details", "Claim", new { policyNo = item.PolicyNo })">Details</a>
+                        <a type="button" class="btn btn-primary" href="@Url.Action("Details", "Claim", new { claimNo = item.ClaimNo })"><i class="fas fa-info"></i></a>
                     </td>
                 </tr>
             }

@@ -71,6 +71,5 @@ namespace VehicleInsuranceAPI.Controllers
             var result = await service.ChangePassword(changePasswordDto);
             return result;
         }
-
     }
 }

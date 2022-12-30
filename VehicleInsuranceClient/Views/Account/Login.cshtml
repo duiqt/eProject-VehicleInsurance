@@ -3,9 +3,10 @@
 
 @{
     ViewData["Title"] = "Login";
+    ViewData["User"] = ViewBag.user;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var url = ViewBag.url == null ? "" : ViewBag.url;
+    var returnUrl = ViewBag.url == null ? "" : ViewBag.url;
 }
 
 <style>
@@ -46,7 +47,7 @@
         background-color: #454849;
         border: none;
         box-shadow: none;
-        padding: 8px 15px;
+        padding: 8px 70px;
         border-radius: 4px;
         text-transform: uppercase;
         font-size: 14px;
@@ -88,49 +89,47 @@
             <div class="row d-flex justify-content-center card-content">
                 <div class="col-lg-12 card-content-body">
                     <h2 class="fw-bold mb-2 login-title" style="text-align: left">Login</h2>
-                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
-                    {
-                        @* <h4 style="dang">@ViewBag.msg</h4>*@
-                        <form asp-action="Login" class="user-form" id="loginForm" method="post">
-                            <input hidden value="@url" id="url" />
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input class="form-control login-input" type="text" id="customeremail" name="customeremail" placeholder="User name">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input class="form-control login-input" type="password" name="password" id="password" placeholder="Password">
-                                    </div>
-                                </div>
-                                <div>
-                                    <span id="errorMessage"></span>
-                                </div>
-                                <div class="d-flex justify-content-between mt-3">
-                                    @*<button onclick="@("window.location.href='/Account/SignUp'");" class="default-btn register-btn">
-                                        First time? Register Here
-                                    </button>*@
-                                    <a href="@Url.Action("SignUp","Account")" class="default-btn register-btn">
-                                        First time? Register Here
-                                    </a>
-                                    <button class="default-btn login-btn" type="submit">
-                                        Login
-                                    </button>
+                    @* @using (Html.BeginForm("SignUp","Account", FormMethod.Post))
+                    {*@
+
+                    <form asp-action="Login" class="user-form" id="loginForm" method="post">
+                        <h5 class="text-danger" style="color:red">@ViewBag.msg </h5>
+                        <input hidden value="@returnUrl" id="returnUrl" />
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input class="form-control login-input" type="text" id="customeremail" name="customeremail" placeholder="User name">
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input class="form-control login-input" type="password" name="password" id="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div>
+                                <span id="errorMessage"></span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <button onclick="location.href='@Url.Action("SignUp", "Account")' " type="button" class="default-btn register-btn">
+                                    Register Here
+                                </button>
+                                <button class="default-btn login-btn" type="submit">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
 
-                        </form>
-                    }
+                    </form>
+                    @* }
                     @if (@ViewBag.msg != null)
                     {
-                        <script type="text/javascript">
-                            window.onload = function () {
-                                alert("@ViewBag.msg");
-                            };
+                    <script type="text/javascript">
+                    window.onload = function () {
+                    alert("@ViewBag.msg");
+                    };
 
-                        </script>
-                    }
+                    </script>
+                    }*@
 
                 </div>
             </div>
@@ -194,4 +193,4 @@
             //})
         });
     </script>
-}
+    }

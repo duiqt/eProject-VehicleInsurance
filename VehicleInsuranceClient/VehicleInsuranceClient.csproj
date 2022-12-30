@@ -76,7 +76,11 @@
     <None Include="Areas\Employee\Views\Account\LoginAdmin.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
     <None Include="Views\Account\SignUp.cshtml" />
-    <None Include="Views\Payment\Index.cshtml" />
+    <None Include="Views\Claim\ClaimDetail.cshtml" />
+    <None Include="Views\Claim\CreateClaim.cshtml" />
+    <None Include="Views\Claim\Details.cshtml" />
+    <None Include="Views\Claim\Index.cshtml" />
+    <None Include="Views\Claim\MyClaims.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿var initialLoad = true;
+$(document).ready(function () {
     var apiurl = "https://localhost:7008/api";
 
     // **** Toann Zone ****
@@ -12,22 +13,54 @@
     $("#VehicleModel").change(function () {
         changeVehicleVersionOptions($(this).val());
     });
-    // **** End of Toan Zone ****
+    function checkAgreementBox() {
+        if ($("#checkBoxAgree").is(":checked") == false) {
+            $("#checkBoxAgreeErr").removeClass("d-none");
+        } else {
+            $("#checkBoxAgreeErr").addClass("d-none");
+        }
+    }
+    // Checkbox for agreement of certificate contract
+    $("#formContract").on("submit", function (e) {
 
+        if ($("#checkBoxAgree").is(":checked") == false) {
+            e.preventDefault();
+            alert("Please agree with our terms and conditions!");
+            checkAgreementBox();
+        }
+
+    });
+    $("#checkBoxAgree").change(function () {
+        checkAgreementBox();
+    });
+    if (initialLoad) {
+        $("#checkBoxAgreeErr").addClass("d-none");
+    }
+
+    // Annouce if customer not make an estimate yet
+    if ($("#estimateNoErrMessage").length) {
+        alert($("#estimateNoErrMessage").val());
+    }
+    // Annouce if image prove has problems
+    if ($("#ContractErrMessage").length) {
+        alert($("#ContractErrMessage").val());
+    }
+
+    // **** End of Toan Zone ****
 
 
     // **** Ngan Zone ****
     $.ajax({
         url: apiurl + "/Policy/GetPolicies",
         type: "GET",
-        data: { },
+        data: {},
         success: function (result) {
             GetViewHomePolicies(result);
         }
     });
     // **** End of Ngan Zone ****
 
-
+    initialLoad = false;
 }); // End of document.ready()
 
 // **** Toann Functions Zone
@@ -106,6 +139,8 @@ function removeDuplicateValues() {
         }
     });
 }
+
+
 
 // **** End of Toann Functions Zone
 

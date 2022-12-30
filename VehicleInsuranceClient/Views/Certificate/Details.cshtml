@@ -1,10 +1,9 @@
-﻿
-@model CertificateModel
+﻿@model CertificateModel
 
 <section id="cer-details">
     <div class="card-wrapper bg-white">
         <div class="card-content m-5 p-5">
-            <h3 class="pb-4">@Model.PolicyType Car Insurance</h3> 
+            <h3 class="pb-4">@Model.PolicyType Car Insurance</h3>
             <div class="card-item">
                 <h5 class="pb-1">Product details</h5>
                 <ul class="px-0 my-0">
@@ -34,32 +33,88 @@
             <div class="card-item">
                 <h5 class="pb-1">Address details</h5>
                 <ul class="px-0 my-0 pb-2">
-                    <li class="fw-bold d-flex flex-row">Your address: 
+                    <li class="fw-bold d-flex flex-row">
+                        Your address:
                         <div class="fw-normal mx-3" id="current-address">@Model.CustomerAddress </div>
                     </li>
-                </ul>    
-            </div>
-            <hr>
-            <div class="card-item">
-                <h5 class="pb-1">Payment details</h5>
-                <ul class="px-0 my-0">
-                    <li class="fw-bold d-flex flex-row">Amount: <div class="fw-normal mx-3">@Model.Amount</li>
                 </ul>
             </div>
             <hr>
             <div class="card-item">
-               
-                @if (@Model.Status == "Pending")
+                @if (Model.VehicleWarranty == "Pending")
                 {
-                    <h5 class="pb-2">Cancellation</h5>
-                    <button type="button" class="btn btn-outline-danger px-4" style="">Cancel certificate</button>
+                    <h5 class="pb-1 fw-bold">Your premium</h5>
+                    <ul class="px-0 my-0">
+                        <li class="fw-bold d-flex flex-row"><span class="pt-2">Pay annually: </span> <span class="fw-bolder fs-3 mx-3 text-primary font-monospace">@Model.Premium.Value.ToString("C2")</span> </li>
+                        <li class="d-flex flex-row">
+                            <p class="border-top mt-2 text-secondary"> Please pay by @Model.PolicyDate.AddDays(7).ToString("ddMMMyyyy")</p>
+                        </li>
+                    </ul>
                 }
-                else if (@Model.Status == "Completed")
+
+            </div>
+            <div class="card-item">
+
+                @if (Model.VehicleWarranty == "Pending")
                 {
-                    <a href="@Url.Action("Print","Certificate", new { Id = Model.Id })" class="btn btn-outline-info px-5 ">Bill</a>
-                }else
+
+                    <h5 class="pb-2">Payment method</h5>
+                    <div class="w-50">
+                        @*<a  href="@Url.Action("PayLater","Payment", new { id = Model.PolicyNo })" class="btn btn-secondary rounded-1 align-self-center mb-3 w-50 fs-5 fw-bold ">Pay Later</a>*@
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#confirmPayLater" class="btn btn-secondary rounded-1 align-self-center mb-3 w-50 fs-5 fw-bold ">
+                            Pay later
+                        </button>
+
+
+
+
+                        <!-- Replace "test" with your own sandbox Business account app client ID -->
+                        <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+                        <!-- Set up a container element for the button -->
+                        <div id="paypal-button-container"></div>
+                        <script>
+                            paypal.Buttons({
+                                // Sets up the transaction when a payment button is clicked
+                                createOrder: (data, actions) => {
+                                    return actions.order.create({
+                                        purchase_units: [{
+                                            amount: {
+                                                value: '0.01' // Can also reference a variable or function
+                                            }
+                                        }]
+                                    });
+                                },
+                                // Finalize the transaction after payer approval
+                                onApprove: (data, actions) => {
+                                    return actions.order.capture().then(function (orderData) {
+                                        // Successful capture! For dev/demo purposes:
+                                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                        const transaction = orderData.purchase_units[0].payments.captures[0];
+                                        alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                                        // When ready to go live, remove the alert and show a success message within this page. For example:
+                                        // const element = document.getElementById('paypal-button-container');
+                                        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                        // Or go to another URL:  actions.redirect('thank_you.html');
+
+                                    });
+                                }
+                            }).render('#paypal-button-container');
+                        </script>
+                    </div>
+
+
+                } // End if VehicleWarranty "Pending"
+                else if (Model.VehicleWarranty == "Available")
                 {
-                    <div></div>
+                    <h5 class="pb-2">Print your certificate</h5>
+                    <a href="@Url.Action("Print","Certificate", new { Id = Model.Id })" class="btn btn-outline-info px-5 ">Print</a>
+                }
+                else
+                {
+                    <h5 class="pb-2">Active details</h5>
+                    <p>
+                        Your policy coverage will begin at @Model.PolicyDate.ToString("ddMMMyyyy") and payment completed condition meet
+                    </p>
                 }
 
             </div>
@@ -67,35 +122,49 @@
     </div>
 </section>
 
-@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        //$("#input-address").hide();
-        //$("#saveChanges").hide();
-        //$("#updateBtn").click(function (){
-        //    $("#updateBtn").hide();
-        //    $("#saveChanges").show();
-        //    $("#current-address").hide();
-        //    $("#input-address").show();
-     
-        $("#address-form").on("submit", function () {
-            var address = $("#address").val();
-            var path = $("#path").val();
-            var id = @Model.Id;
-                $.ajax({
-                    url: "@(Program.ApiAddress + "/Certificate/UpdateAddress/")",
-                    type: "PUT",
-                    //contentType: "application/json",
-                    data: {
-                        CustomerAddress : address,
-                        Id : id
-                    },
-                    success: function (result) {
-                        //$("#input-address").show();
-                        //$("#updateBtn").show();
-                    }
-                });
-        })
-    });
-</script>*@
+<!-- Modal -->
+<div class="modal fade p-2" id="confirmPayLater" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background: rgb(31, 89, 165);">
+                <h1 class="modal-title fs-4 fw-bold text-white" id="staticBackdropLabel">Payment Confirmation</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Dear customer, @Model.CustomerName
+                <p>
+                    Thank you for choosing us as trustworthy partner to accompany with you. You will find a
+                    summary of your policy certificate print button below when the
+                    payment is due.
+                </p>
+                <p>
+                    Our customer service department will contact you asap within 7 days of work for:
+                    <ul class="fw-bold fs-4">
+                        <li>
+                            Signature: <span class="fw-light">@Model.PolicyType certificate</span>
+                        </li>
+                        <li>
+                            <span class="pt-2">Pay annually: </span> <span class="fw-bolder fs-3 mx-3 text-primary font-monospace">@Model.Premium.Value.ToString("C2")</span>
+                        </li>
+                    </ul>
+                </p>
+                <p>
+                    The following pages list your Policy details. Please keep
+                    this certificate, along with your Motor Insurance Product
+                    Disclosure Statement and Policy Booklet (PDS), in a safe
+                    place. On full payment these documents will form your
+                    Motor Insurance Contract. Please review this document
+                    including the sum insured to ensure the level of cover is
+                    appropriate for you.
+                </p>
+            </div>
+            <form class="modal-footer p-2" asp-action="PayLater" asp-controller="Payment" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="PolicyNo" id="PolicyNo" value="@Model.PolicyNo" />
+                <input type="hidden" name="Premium" id="Premium" value="@Model.Premium" />
+                <button type="button" class="btn btn-secondary rounded-0 p-3 fs-5" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary rounded-0 p-3 fw-bold fs-5">I Understand & PAY</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 ﻿using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using VehicleInsuranceAPI.Models;
 
 namespace VehicleInsuranceAPI.Controllers
@@ -25,7 +26,6 @@ namespace VehicleInsuranceAPI.Controllers
         {
             List<CertificateModel> model = new List<CertificateModel>();
             model = (from cer in _db.Certificates
-                     join cusbill in _db.CustomerBills on cer.PolicyNo equals cusbill.PolicyNo
                      join est in _db.Estimates on cer.EstimateNo equals est.EstimateNo
                      join cus in _db.Customers on cer.CustomerId equals cus.Id
                      join pol in _db.Policies on est.PolicyId equals pol.Id
@@ -33,29 +33,29 @@ namespace VehicleInsuranceAPI.Controllers
                      select new CertificateModel
                      {
                          Id = cer.Id,
+                         EstimateNo = est.EstimateNo,
+                         CustomerEmail = cus.CustomerEmail,
+                         CustomerName = cus.CustomerName,
+                         CustomerAddress = cus.CustomerAddress,
+                         CustomerPhone = cus.CustomerPhone,
                          PolicyNo = cer.PolicyNo,
                          PolicyType = pol.PolicyType,
-                         PolicyDate = est.PolicyDate.AddMonths(12).AddDays(-1),
+                         PolicyDate = est.PolicyDate,
                          PolicyDuration = est.PolicyDuration,
                          VehicleName = est.VehicleName,
                          VehicleModel = est.VehicleModel,
                          VehicleVersion = est.VehicleVersion,
                          VehicleNumber = cer.VehicleNumber,
-                         VehicleWarranty = cer.VehicleWarranty,
                          VehicleBodyNumber = cer.VehicleBodyNumber,
                          VehicleEngineNumber = cer.VehicleEngineNumber,
+                         VehicleWarranty = cer.VehicleWarranty,
+                         Premium = est.Premium,
                          Prove = cer.Prove,
-                         CustomerEmail = cus.CustomerEmail,
-                         CustomerId = cus.Id,
-                         CustomerName = cus.CustomerName,
-                         CustomerAddress = cus.CustomerAddress,
-                         CustomerPhone = cus.CustomerPhone,
-                         BillNo = cusbill.BillNo,
-                         Status = cusbill.Status,
-                         Amount = cusbill.Amount,
                      }).ToList();
+            _db.Dispose();
             return Ok(model);
         }
+
 
         /// <summary>
         /// Get all certificates - Admin page
@@ -137,42 +137,43 @@ namespace VehicleInsuranceAPI.Controllers
             return Ok(model);
         }
 
+        //[HttpPost]
+        //[Route("UpdateAddress")]
+        //public async Task<IActionResult> UpdateAddress(CertificateModel model)
+        //{
+        //    //var customer = await _db.Customers.FirstOrDefaultAsync(c => c.Id.Equals(model.Id));
+
+        //    var cus = new Customer()
+        //    {
+        //        Id = model.Id,
+        //        CustomerEmail = model.CustomerEmail,
+        //        CustomerAddress = model.CustomerAddress,
+        //        CustomerPhone = model.CustomerPhone,
+        //        CustomerName= model.CustomerName,
+        //    };
+
+        //    _db.Customers.Update(cus);
+        //    await _db.SaveChangesAsync();
+
+        //    return null;
+        //}
+
         [HttpPost]
         [Route("CreateCertificate")]
         public IActionResult CreateCertificate(Certificate model)
         {
             if (ModelState.IsValid)
             {
-                var customer = _db.Customers.Where(p => p.Id == model.CustomerId).FirstOrDefault();
-                _db.Attach(customer);
-                customer.Certificates.Add(model);
-
-                //estimate.Certificates.Add(model);
-                //_db.Estimates.Add(model);
-                //_db.ChangeTracker.Clear();
+                _db.Entry(model.Customer).State = EntityState.Unchanged;
+                _db.Entry(model.EstimateNoNavigation.Policy).State = EntityState.Unchanged;
+                _db.Certificates.Add(model);
                 if (_db.SaveChanges() > 0)
                 {
                     return Ok(model.PolicyNo);
                 }
-                //            var local = _context.Set<YourEntity>()
-                //.Local
-                //.FirstOrDefault(entry => entry.Id.Equals(entryId));
-
-                //            // check if local is not null 
-                //            if (local != null)
-                //            {
-                //                // detach
-                //                _context.Entry(local).State = EntityState.Detached;
-                //            }
-                //            // set Modified flag in your entry
-                //            _context.Entry(entryToUpdate).State = EntityState.Modified;
-
-                //// save 
-                //_context.SaveChanges();
                 return Ok(-1);
             }
             return BadRequest();
         }
-
     }
 }

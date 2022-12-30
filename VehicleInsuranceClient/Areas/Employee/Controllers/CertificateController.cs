@@ -8,9 +8,16 @@ namespace VehicleInsuranceClient.Areas.Employee.Controllers
     public class CertificateController : Controller
     {
         public HttpClient client = new HttpClient();
+
         [HttpGet]
         public IActionResult Index()
         {
+            var userString = HttpContext.Session.GetString("admin");
+            if (userString == null)
+            {
+                return RedirectToAction("LoginAdmin", "Account");
+            }
+
             var model = JsonConvert.DeserializeObject<IEnumerable<CertificateAdminModel>>(client.GetStringAsync(Program.ApiAddress + "/Certificate/GetAllCertificates").Result);
             return View(model);
         }

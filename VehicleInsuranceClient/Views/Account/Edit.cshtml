@@ -6,10 +6,10 @@
 
 <style>
     .left {
-        text-align:left
+        text-align: left
     }
 
-    .form-group{
+    .form-group {
         margin-top: 30px;
     }
 </style>
@@ -17,7 +17,7 @@
     <div class="p-5 bg">
         <h2>Account Information</h2>
     </div>
-    
+
     <div class="card-wrapper">
         <div class="card-item py-5 bg-white">
 
@@ -28,76 +28,75 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="details" data-bs-toggle="tab" data-bs-target="#personal-details" type="button" role="tab" aria-controls="personal-details" aria-selected="true">Change Password</button>
                         </li>
-                      
+
                     </ul>
                 </div>
 
                 <div class="tab-content d-flex flex-column" id="myTabContent">
                     <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="details" tabindex="0">
                         <div class="mt-3">
-                             @using (Html.BeginForm("Edit","Account", FormMethod.Post))
-                        {
-                            @*<h5 class="text-danger">@ViewBag.msg</h5>*@
-                            <form asp-action="Edit" class="" id="detailsForm" method="post">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        @*<div class="form-group ">
-                                            <input class="form-control details-input" type="password" id="password" name="password" placeholder="Current password">
+                            @using (Html.BeginForm("Edit", "Account", FormMethod.Post))
+                            {
+                                @*<h5 class="text-danger">@ViewBag.msg</h5>*@
+                                <form asp-action="Edit" class="" id="detailsForm" method="post">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-6">
+                                            @*<div class="form-group ">
+                                        <input class="form-control details-input" type="password" id="password" name="password" placeholder="Current password">
                                         </div>*@
-                                        <div class="form-group left">
-                                            <label asp-for="Password" class="control-label"></label>
-                                            <input  class="form-control" type="password" />
-                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                            <div class="form-group left">
+                                                <label asp-for="Password" class="control-label"></label>
+                                                <input asp-for="Password" class="form-control" type="password" />
+                                                <span asp-validation-for="Password" class="text-danger"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        @*<div class="form-group">
-                                            <input class="form-control details-input" type="password" name="changepassword" id="changepassword" placeholder="New password">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-6">
+                                            @*<div class="form-group">
+                                        <input class="form-control details-input" type="password" name="changepassword" id="changepassword" placeholder="New password">
                                         </div>*@
-                                        <div class="form-group left">
-                                            <label asp-for="ChangePassword" class="control-label"></label>
-                                            <input asp-for="ChangePassword" class="form-control" type="password"/>
-                                            <span asp-validation-for="ChangePassword" class="text-danger"></span>
+                                            <div class="form-group left">
+                                                <label asp-for="ChangePassword" class="control-label"></label>
+                                                <input asp-for="ChangePassword" class="form-control" type="password" />
+                                                <span asp-validation-for="ChangePassword" class="text-danger"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        @*<div class="form-group">
-                                            <input class="form-control details-input" type="password" name="confirmpassword" id="confirmpassword" placeholder="Retype new password">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-6">
+                                            @*<div class="form-group">
+                                        <input class="form-control details-input" type="password" name="confirmpassword" id="confirmpassword" placeholder="Retype new password">
                                         </div>*@
-                                         <div class="form-group left">
-                                            <label asp-for="ConfirmPassword" class="control-label"></label>
-                                            <input asp-for="ConfirmPassword" class="form-control" type="password"/>
-                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                            <div class="form-group left">
+                                                <label asp-for="ConfirmPassword" class="control-label"></label>
+                                                <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="d-flex justify-content-center mt-3">
-                                    <button class="save-btn" type="submit" value="Save-Changes">
-                                        Save Changes
-                                    </button>
-                                </div>
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <button class="save-btn" type="submit" value="Save-Changes">
+                                            Save Changes
+                                        </button>
+                                    </div>
 
-                            </form>
-                        }
+                                </form>
+                            }
                             @if (@ViewBag.msg != null)
                             {
-                            <script type="text/javascript">
-                              window.onload = function()
-                              {
-                                    alert("@ViewBag.msg");
-                              };
+                                <script type="text/javascript">
+                                    window.onload = function () {
+                                        alert("@ViewBag.msg");
+                                    };
 
-                            </script>
+                                </script>
                             }
                         </div>
                     </div>
-                 
+
                 </div>
 
             </div>

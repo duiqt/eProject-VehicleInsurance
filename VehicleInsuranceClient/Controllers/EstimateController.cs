@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using VehicleInsuranceClient.Models;
-using Contract = VehicleInsuranceClient.Models.Contract;
 
 namespace VehicleInsuranceClient.Controllers
 {
@@ -27,6 +25,8 @@ namespace VehicleInsuranceClient.Controllers
             Vehicles = InitializeVehicles();
             Policies = InitializePolicies();
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             if (Vehicles == null || Policies == null)
@@ -62,7 +62,7 @@ namespace VehicleInsuranceClient.Controllers
         }
 
         [HttpPost]
-        public IActionResult Estimate([FromForm] EstimateViewModel model)
+        public IActionResult Index([FromForm] EstimateViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +102,8 @@ namespace VehicleInsuranceClient.Controllers
                         }
                         ContractModel contract = new ContractModel { Estimation = model, Contract = new Contract() };
                         contract.Contract.CustomerName = String.Empty;
-                        CreateCookie(model.EstimateNo.ToString(), JsonSerializer.Serialize(contract));
+
+                        Helper.CookieHelper.CreateCookie(HttpContext, model.EstimateNo.ToString(), contract);
                     }
                     catch (Exception)
                     {
@@ -162,34 +163,6 @@ namespace VehicleInsuranceClient.Controllers
             }
             return Policies ?? new List<PoliciesViewModel>();
         }
-        /// <summary>
-        /// This method is to create Cookie based on key and value 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public void CreateCookie(string key, string value)
-        {
-            CookieOptions options = new CookieOptions()
-            {
-                //Expires = DateTime.Now.AddMinutes(5)
-                Expires = DateTime.Now.AddDays(Program.CookieEstimateDuration),
-                Secure = true,
-                SameSite = SameSiteMode.None
-            };
-            Response.Cookies.Append(key, value, options);
-        }
 
-        /// <summary>
-        /// This method is to remove Cookie based on key
-        /// </summary>
-        /// <param name="key"></param>
-        public void RemoveCookie(string key)
-        {
-            CookieOptions options = new CookieOptions
-            {
-                Expires = DateTime.Now.AddDays(-1)
-            };
-            Response.Cookies.Append(key, String.Empty, options);
-        }
     } // End of EstimateController
 }
