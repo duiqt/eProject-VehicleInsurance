@@ -137,7 +137,7 @@ namespace VehicleInsuranceClient.Controllers
                 contract.Contract.CustomerPhone = customer.CustomerPhone;
                 contract.Contract.CustomerAddress = customer.CustomerAddress;
 
-                ViewBag.PolicyType = EstimateController.InitializePolicies().Where(p => p.PolicyId == contract.Estimation.PolicyId).Select(m => m.PolicyType).FirstOrDefault();
+                ViewBag.PolicyType = EstimateController.Instance.GetPolicies().Where(p => p.PolicyId == contract.Estimation.PolicyId).Select(m => m.PolicyType).FirstOrDefault();
             }
             catch (Exception)
             {
