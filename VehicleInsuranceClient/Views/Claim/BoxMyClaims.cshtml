@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+
+@model ClaimViewModel
+
+<div class="d-flex cert mb-3 border">
+    <span class="d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M10.368 2.22a.75.75 0 01.75-.75h9.764a.75.75 0 01.75.75v.878h4.271a.75.75 0 01.75.75v25.933a.75.75 0 01-.75.75H6.097a.75.75 0 01-.75-.75V3.848a.75.75 0 01.75-.75h4.271V2.22zm0 2.378H6.847v24.433h18.306V4.598h-3.521v1.279a.75.75 0 01-.75.75h-9.764a.75.75 0 01-.75-.75V4.598zm9.764-1.629h-8.264v2.158h8.264V2.969zm-6.795 7.896a6.848 6.848 0 112.667 13.17h-.003A6.868 6.868 0 019.12 17.19v-.003a6.847 6.847 0 014.218-6.322zM17 11.941a5.347 5.347 0 00-6.38 5.245 5.368 5.368 0 005.378 5.348A5.347 5.347 0 0017 11.941zm2.332 3.09a.75.75 0 01-.005 1.06l-3.71 3.672a.75.75 0 01-1.055.001l-1.896-1.87a.75.75 0 011.054-1.067l1.368 1.349 3.183-3.15a.75.75 0 011.061.005z" clip-rule="evenodd"></path> </svg>
+    </span>
+    <div class="flex-grow-1 align-self-center">
+       
+            <div class="row my-3">
+                <div class="col">
+                    <p class="m-0">Claim no: @Model.ClaimNo</p>
+                    <p class="m-0">Policy no: @Model.PolicyNo</p>
+                </div>
+                <div class="col">
+                    <p class="m-0">Place of Accident: @Model.PlaceOfAccident</p>
+                    <p class="m-0">Date of Accident: @Model.DateOfAccident.ToString("dd-MMM-yyyy")</p>
+                </div>
+                <div class="col">
+                    <p class="m-0">Description: @Model.Description</p>
+                    <p class="m-0">Insured Amount: @Model.InsuredAmount</p>
+                </div>
+            </div>
+          @*  <p class="m-0">Claim no: @Model.ClaimNo</p>
+            <p class="m-0">Policy no: @Model.PolicyNo</p>
+            <p class="m-0">Place of Accident: @Model.PlaceOfAccident</p>
+            <p class="m-0">Date of Accident: @Model.DateOfAccident.ToString("dd-MMM-yyyy")</p>
+            <p class="m-0">Description: @Model.Description</p>
+            <p class="m-0">Insured Amount: @Model.InsuredAmount</p>*@
+      
+      
+  
+        @if (@Model.Status == "Lodged")
+        {
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Animated striped example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%"><div class="text-dark fw-bold fs-6">Lodged</div></div>
+            </div>
+        }
+        else if (@Model.Status == "Inspecting")
+        {
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Animated striped example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%"><div class="text-dark fw-bold fs-6">Inspecting</div></div>
+            </div>
+        }
+        else if (@Model.Status == "Approved")
+        {
+            <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><div class="fw-bold fs-6">Approved</div></div>
+            </div>
+        }
+        else if (@Model.Status == "Insufficient")
+        {
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"><div class="fw-bold fs-6">Insufficient</div></div>
+            </div>
+        }
+        else if (@Model.Status == "Rejected")
+        {
+            <div class="progress">
+                <div class="progress-bar bg-danger" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><div class="fw-bold fs-6">Rejected</div></div>
+            </div>
+        }
+    </div>
+        <div>
+            <a class="btn btn-outline-warning align-self-center me-4 px-4" href="@Url.Action("Details","Claims", new { id = Model.Id })">View details</a>
+        </div>
+</div>

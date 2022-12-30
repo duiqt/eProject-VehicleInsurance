@@ -1,0 +1,87 @@
+﻿@model IEnumerable<VehicleInsuranceClient.Models.Dtos.ClaimDto>
+@*@model List<ClaimDto>*@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ClaimNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PolicyNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceOfAccident)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfAccident)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InsuredAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClaimableAmount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClaimNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PolicyNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceOfAccident)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfAccident)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <img src="~/img/Claim/@item.Image" style="height: 30px; width:30px">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InsuredAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClaimableAmount)
+                </td>
+                @* <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

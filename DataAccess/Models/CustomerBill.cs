@@ -9,13 +9,13 @@ public partial class CustomerBill
 
     public int BillNo { get; set; }
 
-    public int CertificateId { get; set; }
+    public int PolicyNo { get; set; }
 
-    public string? CustomerAddProve { get; set; }
+    public string? Status { get; set; }
 
     public DateTime? Date { get; set; }
 
     public decimal? Amount { get; set; }
 
-    public virtual Certificate Certificate { get; set; } = null!;
+    public virtual Certificate PolicyNoNavigation { get; set; } = null!;
 }

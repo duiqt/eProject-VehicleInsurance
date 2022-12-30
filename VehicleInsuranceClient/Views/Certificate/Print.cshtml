@@ -1,0 +1,104 @@
+﻿@*
+@model CertificateModel
+
+<section class="p-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 px-0">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex flex-row justify-content-between align-items-end">
+                                    <h4 class="font-size-16"><strong>Bill no #@Model.BillNo</strong></h4>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6 mt-4">
+                                        <div>
+                                            <strong>X Car Insurance:</strong><br>
+                                            support@insurance.com
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-4">
+                                        <strong>Bill Date: @Model.Date</strong><br>
+                                    <br><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <div class="p-2">
+                                        <h3 class="font-size-16"><strong>Customer Bill</strong></h3>
+                                    </div>
+    
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <td><strong>Name</strong></td>
+                                                    <td><strong>Phone</strong></td>
+                                                    <td><strong>Address</strong></td>
+                                                    <td><strong>Email</strong></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>@Model.CustomerName</td>
+                                                    <td>@Model.CustomerPhone</td>
+                                                    <td>@Model.CustomerAddress</td>
+                                                    <td>@Model.CustomerEmail</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 p-2">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td><strong>Policy No</strong></td>
+                                                <td><strong>Policy Type</strong></td>
+                                                <td><strong>Policy Date</strong></td>
+                                                <td><strong>Vehicle</strong></td>
+                                                <td><strong>Amount</strong></td>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td>@Model.PolicyNo</td>
+                                                <td>@Model.PolicyType</td>
+                                                <td>@Model.PolicyDate.AddMonths(-12).AddDays(+1).ToString("MM/dd/yyyy")</td>
+                                                <td>@Model.VehicleNumber @Model.VehicleName @Model.VehicleModel @Model.VehicleVersion</td>
+                                                <td>@Model.Amount</td>
+                                            </tr>
+                                                       
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div>
+                                    <a href="javascript:window.print()" class="btn btn-success"><i class="fa fa-print"></i></a>
+                          
+                                </div>
+                                  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+*@

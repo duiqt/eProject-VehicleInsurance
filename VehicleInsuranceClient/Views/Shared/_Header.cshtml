@@ -1,11 +1,13 @@
-﻿<div class="container-fluid bg-white">
+﻿@using Microsoft.AspNetCore.Http;
+
+<div class="container-fluid bg-white">
     <div class="container">
         <div class="header-top-bar">
             <nav class="top-nav-bar">
                 <ul class="top-grid">
                     <li class="nav-bar-item">
                         <a class="text-link" asp-controller="Home" asp-action="AboutUs">
-                            About X
+                            About Us
                         </a>
                     </li>
                     <li class="nav-bar-item">
@@ -31,7 +33,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg pb-3">
 
-            <a href="#" class="navbar-brand">X</a>
+            <a asp-action="Index" asp-controller="Home" class="navbar-brand"><img src="~/img/logo/logo.png" asp-append-version="true" style="width:150px;" /></a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#res_nav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -59,7 +61,7 @@
                 </ul>
 
                 @{
-                    if (User.Identity.IsAuthenticated)
+                    if (Context.Session.GetString("user") != null)
                     {
                         <ul class="navbar-nav ms-5">
                             <li>
@@ -77,12 +79,9 @@
                         </ul>
                     }
                 }
+
             </div>  <!-- End of Collapsing Menu and Links -->
-
-
         </nav>  <!-- End of Navigation Bar -->
     </div>
     <!-- End of Header -->
-
 </div>
-

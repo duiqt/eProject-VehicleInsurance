@@ -1,0 +1,101 @@
+﻿@using VehicleInsuranceClient.Areas.Employee.Models;
+@model List<ClaimModel>
+
+<!-- Title -->
+<h3 class="title">Claims</h3>
+
+<div class="container border my-4 p-4">
+    <table id="myTable" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Claim No.</th>
+                <th>Policy No.</th>
+                <th>Place Of Accident</th>
+                <th>Date Of Accident</th>
+                <th>Insured Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ClaimModel item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.ClaimNo
+                    </td>
+                    <td>
+                        @item.PolicyNo
+                    </td>
+                    <td>
+                        @item.PlaceOfAccident
+                    </td>
+                    <td>
+                        @item.DateOfAccident
+                    </td>
+                    <td>
+                        @item.InsuredAmount
+                    </td>
+                    <td>
+                        @if (item.Status == "Rejected")
+                        {
+                            <button type="button" class="btn btn-danger">@item.Status</button>
+                        }
+                        else if (item.Status == "Approved")
+                        {
+                            <button type="button" class="btn btn-success">@item.Status</button>
+                        }
+                        else if (item.Status == "Inspecting")
+                        {
+                            <button type="button" class="btn btn-info">@item.Status</button>
+                        }
+                        else if (item.Status == "Insufficient")
+                        {
+                            <button type="button" class="btn btn-secondary">@item.Status</button>
+                        }
+                        else if (item.Status == "Lodged")
+                        {
+                            <button type="button" class="btn btn-warning">@item.Status</button>
+                        }
+                       
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-primary" href="@Url.Action("Details", "Claim", new { claimNo = item.ClaimNo })"><i class="fas fa-info"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>No.</th>
+                <th>Claim No.</th>
+                <th>Policy No.</th>
+                <th>Place Of Accident</th>
+                <th>Date Of Accident</th>
+                <th>Insured Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    $(function () {
+        $('#myTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "order": [
+                [0, 'desc']
+            ],
+            "info": true,
+            "autoWidth": false,
+        });
+    }());
+</script>

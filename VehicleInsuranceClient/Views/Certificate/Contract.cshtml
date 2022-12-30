@@ -1,0 +1,183 @@
+﻿@model VehicleInsuranceClient.Models.ContractModel
+
+@{
+    ViewData["Title"] = "Contract";
+}
+
+<div class="container-fluid mb-3 position-relative px-0">
+    <div class="border-bottom text-center text-light p-3" style="background: rgb(31, 89, 165); height:200px;">
+        <h3 class="fw-semibold my-2 py-2">Contract Information</h3>
+        <h4 class="">
+            <span>Reference Number: </span><span><strong>@Html.DisplayFor(m=>m.Estimation.EstimateNo)</strong></span>
+        </h4>
+    </div>
+    @using (Html.BeginForm("Contract", "Certificate", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formContract" }))
+    {
+        <div class="row">
+            <div class="col-md-6 p-5 pt-4 ">
+                @Html.AntiForgeryToken()
+                <div class="w-100 p-4">
+                    <div class="row">
+                        <h3 class="pb1">
+                            Customer Information
+                        </h3>
+                        <div class="col-md-6">
+                            <label for="CustomerName" class="form-label">Your name</label>
+                            @Html.EditorFor(m=>m.Contract.CustomerName, new {  htmlAttributes = new {@readonly = "readonly", placeholder="Vehicle owner name", @class = "form-control" }})
+                            <p><span asp-validation-for="Contract.CustomerName" class="text-danger small"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="owner" class="form-label">Phone number</label>
+                            @Html.EditorFor(m=>m.Contract.CustomerPhone, new { htmlAttributes = new {@readonly = "readonly", placeholder="Phone number", @class = "form-control" }})
+                            <p><span asp-validation-for="Contract.CustomerPhone" class="text-danger small"></span></p>
+                        </div>
+                        <div class="col">
+                            <label for="owner" class="form-label">Address</label>
+                            @Html.EditorFor(m=>m.Contract.CustomerAddress, new { htmlAttributes = new {@readonly = "readonly", placeholder="Address", @class = "form-control" }})
+                            <p><span asp-validation-for="Contract.CustomerAddress" class="text-danger small"></span></p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <h3 class="pb1">
+                            Vehicle Information
+                        </h3>
+                        <div class="col-md-6">
+                            <label for="owner" class="form-label">Registration</label>
+                            @Html.EditorFor(m=>m.Contract.VehicleNumber, new { htmlAttributes = new { placeholder="Vehicle number", @class = "form-control" }})
+                            <p><span asp-validation-for="Contract.VehicleNumber" class="text-danger small"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="CustomerName" class="form-label">Body number</label>
+                            @Html.EditorFor(m=>m.Contract.VehicleBodyNumber, new { htmlAttributes = new { placeholder="Vehicle body number", @class = "form-control" }})
+                            <p><span asp-validation-for="Contract.VehicleBodyNumber" class="text-danger small"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="owner" class="form-label">Engine number</label>
+                            @Html.EditorFor(m=>m.Contract.VehicleEngineNumber, new { htmlAttributes = new { placeholder="Vehicle engine number", @class = "form-control" }})
+                            <p><span asp-validation-for="Contract.VehicleEngineNumber" class="text-danger small"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Prove" class="form-label">Documents</label>
+                            @Html.TextBoxFor(m=>m.Contract.Prove, new {  type="file", @multiple = "multiple", @class = "form-control" })
+                            <p><span asp-validation-for="Contract.Prove" class="text-danger small"></span></p>
+                            @if (ViewBag.InvalidNameImage != null)
+                            {
+                                <p><span class="text-danger small">@ViewBag.InvalidNameImage</span></p>
+                            }
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row mb-3">
+                        <div id="checkBoxAgreeErr" class="">
+                            <small class="text-danger">You haven't agreed with companys' terms and conditions</small>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkBoxAgree">
+                            <label class="form-check-label" for="checkBoxAgree">
+                                I certify that all information provided is accurate and complete, I understand and agree to the Summary of Benefits, Insurance Wording, I agree that submitting information on this site will be deemed to be a request to provide insurance to Company in accordance with the provisions set forth in the Summary of Benefits and Insurance wording. Vehicle Insurance Portal reserves the right to accept or reject my claim, depending on the outcome of the assessment.
+                            </label>
+                        </div>
+                    </div>
+                    <div class=" text-center">
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-secondary btn_estimate rounded-1 me-3" role="button">
+                            <small>PREVIOUS</small>
+                        </a>
+                        <button type="submit" role="button" id="btnSubmitContract" class="btn btn-lg rounded-1 ms-3" style="background-color: rgb(238, 209, 46);">
+                            <strong style="font-size: 15px;">SUBMIT</strong>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 p-5 pt-4">
+                <div class="bg-white p-4 shadow">
+                    <div class="row d-flex justify-content-center ">
+                        <div class="col">
+                            <div class="summaryCard">
+                                <div>
+                                    <div class="d-flex justify-content-between">
+                                        <h3 class="pb1">
+                                            Your Estimate Summary
+                                        </h3>
+                                    </div>
+                                    <hr>
+                                    <div class="policyDuration mb-4">
+                                        <div class="d-flex justify-content-between rounded-1 py-2 px-3 shadow-sm">
+                                            <h5 class="fw-bold">Estimate number</h5>
+                                            <h5>
+                                                @Html.TextBoxFor(m => m.Estimation.EstimateNo, new { @readonly = "readonly", @class="border-0 bg-white text-end text-dark" })
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="policyDuration mb-4">
+                                        <div class="rounded-1 py-2 px-3 shadow-sm">
+                                            <h5 class="fw-bold">Contract duration</h5>
+                                            <div class="d-flex justify-content-between">
+                                                <h5>@Html.Label("Start Date ")</h5>
+                                                <h5>
+                                                    @Html.HiddenFor(m => m.Estimation.VehicleName)
+                                                    @Html.HiddenFor(m => m.Estimation.VehicleModel)
+                                                    @Html.HiddenFor(m => m.Estimation.VehicleVersion)
+                                                    @Html.HiddenFor(m => m.Estimation.VehicleRate)
+                                                    @Html.HiddenFor(m => m.Estimation.EstimateDate)
+                                                    @Html.HiddenFor(m => m.Estimation.PolicyDate)
+                                                    @Model.Estimation.PolicyDate.Value.ToString("ddMMMyyyy")
+                                                </h5>
+                                            </div>
+                                            <div class="d-flex justify-content-between ">
+                                                <h5>Duration</h5>
+                                                <h5>
+                                                    @Html.DisplayFor(m=>m.Estimation.PolicyDuration) <small>months</small>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="policyDuration mb-4">
+                                        <div class="d-flex justify-content-between rounded-1 py-2 px-3 shadow-sm h5">
+                                            <h5 class="fw-bold">Annual premium</h5>
+                                            @Html.HiddenFor(m => m.Estimation.Premium)
+                                            <h5>@String.Format("{0, 0:C2}" ,Model.Estimation.Premium)</h5>
+                                        </div>
+                                    </div>
+                                    <div class="policyDuration mb-4">
+                                        <div class="d-flex justify-content-between rounded-1 py-2 px-3 shadow-sm">
+                                            <h5 class="fw-bold">Vehicle</h5>
+                                            <h5>
+                                                @Html.DisplayFor(m => m.Estimation.VehicleName)
+                                                @Html.DisplayFor(m => m.Estimation.VehicleModel)
+                                                @Html.DisplayFor(m => m.Estimation.VehicleVersion)
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="policyDuration mb-4">
+                                        <div class="d-flex justify-content-between rounded-1 py-2 px-3 shadow-sm">
+                                            <h5 class="fw-bold">Your policy</h5>
+                                            <p>
+                                                @Html.HiddenFor(m => m.Estimation.PolicyId)
+                                                @ViewBag.PolicyType
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="lower p-4 py-5 text-white d-lg-flex justify-content-between" style="background: rgb(31, 89, 165);">
+                                        <div class="d-flex flex-column mb-3"> <span>Cost including service charges</span> <small>This nuber may change depending on replair and your home conditions</small> </div>
+                                        <h3 class="fw-bold ms-4 text-warning">@String.Format("{0, 0:C2}" ,Model.Estimation.Premium)</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+@section validateScripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

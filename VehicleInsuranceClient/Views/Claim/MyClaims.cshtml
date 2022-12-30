@@ -1,0 +1,67 @@
+﻿@model List<ClaimViewModel>
+
+<section id="personal">
+    <div class="bg">
+        <h2 class="text-center" style="padding-top: 6rem;">View your claims, from lodgement to checking the status of a claim</h2>
+    </div>
+    <div id="certificates">
+        <div class="card-wrapper" style="margin:-100px 200px 0 200px" !important;>
+            <div class="card-item py-5 bg-white">
+
+                <div class="row card-content">
+                    <div class="card-item">
+                    
+                        <div class="d-flex flex-row justify-content-between">
+                            <h3 class="pt-1 pb-5">My Claims</h3>
+                            <div>
+                                <a class="btn btn-outline-warning me-4 px-4" href="@Url.Action("CreateClaim","Claim", new { policyNo = @ViewBag.policyNo })">Create A Claim</a>
+                            </div>
+                        </div>
+
+                        <div id="claims-content">
+
+                        </div>
+
+                        <input type="hidden" value="@ViewBag.userID" id="currentId" />
+                        <input type="hidden" value="@ViewBag.policyNo" id="policyNo" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        var id = $("#currentId").val();
+        var policyNo = $("#policyNo").val();
+        $.ajax({
+            url: "@(Program.ApiAddress + "/Claim/MyClaims/")",
+            type: "GET",
+            data: {
+                id: id,
+                policyNo: policyNo
+            },
+            success: function (result) {
+                GetViewMyClaims(result);
+            }
+        });
+    });
+
+    function GetViewMyClaims(claimList) {
+        $.ajax({
+            url: "/Claim/GetMyClaims",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(claimList),
+            success: function (dataView) {
+                $("#claims-content").html(dataView);
+            }
+        });
+    }
+</script>

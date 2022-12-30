@@ -1,18 +1,28 @@
 ﻿
 <section id="sidebar">
-    <div class="logo">
-        <img src="" alt="logo">
-        <h2>X</h2>
+    <div class="logo d-flex justify-content-center">
+        <img src="~/img/logo/logo.png" asp-append-version="true" style="width:150px;" />
     </div>
+
     <div class="items">
-        <li><i class="fal fa-beer"></i><a asp-controller="Certificate" asp-action="Index">Certificates</a></li>
-        <li><i class="fal fa-beer"></i><a>Claims</a></li>
-        <li><i class="fal fa-beer"></i><a>Payment Schedule</a></li>
-        <li><i class="fal fa-beer"></i><a>Monthly sell report</a></li>
-        <li><i class="fal fa-beer"></i><a>Claims report</a></li>
-        <li><i class="fal fa-beer"></i><a>Vehicle wise report</a></li>
-        <li><i class="fal fa-beer"></i><a>Policies due renewals report</a></li>
-        <li><i class="fal fa-beer"></i><a>Policies lapsed report</a></li>
-        <li><a asp-controller="Account" asp-action="logoutAdmin" class="btn btn-primary" style="background:#F3DC49; color:white">Logout</a></li>
+        <li class=""><i class="fas fa-file-certificate"></i><a asp-controller="Certificate" asp-action="Index">Certificates</a></li>
+        <li><i class="fas fa-star-exclamation"></i><a asp-controller="Claim" asp-action="Index">Claims</a></li>
+        <li><i class="fas fa-calendar-check"></i><a>Payment Schedule</a></li>
+        <li><i class="fab fa-sellsy"></i><a>Monthly sell report</a></li>
+        <li><i class="fas fa-file-exclamation"></i><a>Claims report</a></li>
+        <li><i class="fad fa-car-side"></i><a>Vehicle wise report</a></li>
+        <li><i class="fas fa-file"></i><a>Policies due renewals report</a></li>
+        <li><i class="fas fa-page-break"></i><a>Policies lapsed report</a></li>
+
+        <div style="margin: 1rem 0 0 2rem;">
+            <a asp-controller="Account" asp-action="logoutAdmin" class="btn btn-primary" style="background:#F3DC49; color:black">Logout</a>
+        </div>
     </div>
 </section>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(".items li").click(function(){
+        $(this).addClass("active").siblings().removeClass("active");
+    })
+</script>

@@ -1,12 +1,12 @@
 ﻿
 
-@model List<CertificatesModel>
+@model List<CertificateModel>
 
 <section id="certificates">
     <div class="bg">
         <div class="d-flex justify-content-around">
             <div class="flex-column pt-5">
-                <p class="cust-name pb-3">Hi customer's name</p>
+                <p class="cust-name pb-3">Hi, @ViewBag.userName !</p>
                 <a asp-controller="Estimate" asp-action="Index" class="btn btn-secondary">Get An Estimate</a>
             </div>
             <div class="text-light"></div>
@@ -21,20 +21,20 @@
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M10.368 2.22a.75.75 0 01.75-.75h9.764a.75.75 0 01.75.75v.878h4.271a.75.75 0 01.75.75v25.933a.75.75 0 01-.75.75H6.097a.75.75 0 01-.75-.75V3.848a.75.75 0 01.75-.75h4.271V2.22zm0 2.378H6.847v24.433h18.306V4.598h-3.521v1.279a.75.75 0 01-.75.75h-9.764a.75.75 0 01-.75-.75V4.598zm9.764-1.629h-8.264v2.158h8.264V2.969zm-6.795 7.896a6.848 6.848 0 112.667 13.17h-.003A6.868 6.868 0 019.12 17.19v-.003a6.847 6.847 0 014.218-6.322zM17 11.941a5.347 5.347 0 00-6.38 5.245 5.368 5.368 0 005.378 5.348A5.347 5.347 0 0017 11.941zm2.332 3.09a.75.75 0 01-.005 1.06l-3.71 3.672a.75.75 0 01-1.055.001l-1.896-1.87a.75.75 0 011.054-1.067l1.368 1.349 3.183-3.15a.75.75 0 011.061.005z" clip-rule="evenodd"></path> </svg>
                     </span>
-                    <a class="text-link" asp-controller="Customer" asp-action="Index">Update personal details</a>
+                    <a class="text-link" asp-controller="Account" asp-action="Details">Person Information</a>
                 </div>
                 <div class="col border-end border-4 d-flex flex-column">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M10.368 2.22a.75.75 0 01.75-.75h9.764a.75.75 0 01.75.75v.878h4.271a.75.75 0 01.75.75v25.933a.75.75 0 01-.75.75H6.097a.75.75 0 01-.75-.75V3.848a.75.75 0 01.75-.75h4.271V2.22zm0 2.378H6.847v24.433h18.306V4.598h-3.521v1.279a.75.75 0 01-.75.75h-9.764a.75.75 0 01-.75-.75V4.598zm9.764-1.629h-8.264v2.158h8.264V2.969zm-6.795 7.896a6.848 6.848 0 112.667 13.17h-.003A6.868 6.868 0 019.12 17.19v-.003a6.847 6.847 0 014.218-6.322zM17 11.941a5.347 5.347 0 00-6.38 5.245 5.368 5.368 0 005.378 5.348A5.347 5.347 0 0017 11.941zm2.332 3.09a.75.75 0 01-.005 1.06l-3.71 3.672a.75.75 0 01-1.055.001l-1.896-1.87a.75.75 0 011.054-1.067l1.368 1.349 3.183-3.15a.75.75 0 011.061.005z" clip-rule="evenodd"></path> </svg>
                     </span>
 
-                    <a href="" class="text-link">Initiate a Claim</a>
+                    <a class="text-link" asp-controller="Claim" asp-action="CreateClaim">Initiate a Claim</a>
                 </div>
                 <div class="col border-end border-4 d-flex flex-column">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M10.368 2.22a.75.75 0 01.75-.75h9.764a.75.75 0 01.75.75v.878h4.271a.75.75 0 01.75.75v25.933a.75.75 0 01-.75.75H6.097a.75.75 0 01-.75-.75V3.848a.75.75 0 01.75-.75h4.271V2.22zm0 2.378H6.847v24.433h18.306V4.598h-3.521v1.279a.75.75 0 01-.75.75h-9.764a.75.75 0 01-.75-.75V4.598zm9.764-1.629h-8.264v2.158h8.264V2.969zm-6.795 7.896a6.848 6.848 0 112.667 13.17h-.003A6.868 6.868 0 019.12 17.19v-.003a6.847 6.847 0 014.218-6.322zM17 11.941a5.347 5.347 0 00-6.38 5.245 5.368 5.368 0 005.378 5.348A5.347 5.347 0 0017 11.941zm2.332 3.09a.75.75 0 01-.005 1.06l-3.71 3.672a.75.75 0 01-1.055.001l-1.896-1.87a.75.75 0 011.054-1.067l1.368 1.349 3.183-3.15a.75.75 0 011.061.005z" clip-rule="evenodd"></path> </svg>
                     </span>
-                    <a href="" class="text-link">Something 1</a>
+                    <a class="text-link" asp-controller="Claim" asp-action="MyClaims">My Claims</a>
                 </div>
                 <div class="col d-flex flex-column">
                     <span>
@@ -53,6 +53,7 @@
 
    
             </div>
+            <input type="hidden" value="@ViewBag.userID" id="userID" />
         </div>
     </div>
 </section>
@@ -61,17 +62,34 @@
 
 <script>
     $(document).ready(function () {
+        var id = $("#userID").val();
         $.ajax({
             url: "@(Program.ApiAddress + "/Certificate/GetCertificates")",
             type: "GET",
             data: {
-                id:1
+                id: id,
             },
             success: function (result) {
                 GetViewProduct(result);
             }
         });
+
+        //$("#manageClaimBtn").on("click", function() {
+        //    $.ajax({
+        //        url: "@(Program.ApiAddress + "/Claim/MyClaims/")",
+        //        type: "GET",
+        //        data: {
+        //            policyNo: policyNo,
+        //        },
+        //        success: function (result) {
+        //           console.log(result);
+        //        }
+        //    });
+        //})
+   
+      
     });
+
 
     function GetViewProduct(productList) {
         $.ajax({

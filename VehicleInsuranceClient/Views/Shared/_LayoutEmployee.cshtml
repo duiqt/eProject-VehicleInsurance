@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/employee.css" asp-append-version="true" />
     <link rel="stylesheet" type="text/css" href="~/lib/DataTables/css/datatables.min.css" asp-append-version="true" />
-
-   
 </head>
 
 <body>
@@ -32,16 +30,16 @@
                 </div>
             </div>
             <!-- Profile -->
-            <div class="profile">
+          @*  <div class="profile">
                 <img src="" alt="profile-image">
-            </div>
+            </div>*@
         </div>
 
         @RenderBody()
 
     </section>
- 
-  
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
 

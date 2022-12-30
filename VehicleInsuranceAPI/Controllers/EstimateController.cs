@@ -12,6 +12,87 @@ namespace VehicleInsuranceAPI.Controllers
         {
             _db = db;
         }
+
+        /// <summary>
+        /// Estimate car insurance premium
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Estimate(EstimateModel model)
+        {
+
+            return Ok(GetEstimate(model));
+        }
+
+        /// <summary>
+        /// Calculate Estimate car insurance premium
+        /// Simple logic to calculate depending on PolicyTypes and Vehicle price only
+        /// </summary>
+        /// <param name="model">Estimate Model</param>
+        /// <returns>estimated premium typeof decimal</returns>
+        decimal GetEstimate(EstimateModel model)
+        {
+            decimal premium = 0;
+            try
+            {
+                Policy policy = _db.Policies.Where(p => p.Id.Equals(model.PolicyId)).FirstOrDefault()!;
+                if (policy != null)
+                {
+                    premium += policy.Annually;
+                }
+                premium += GetRateOnPrice(model.VehicleRate) * model.VehicleRate;
+                //premium += GetRateOnVersion(model.VehicleVersion) * model.VehicleRate;
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return premium;
+        }
+        /// <summary>
+        /// Calculate the increased rate depending on vehicleRate (Price)
+        /// </summary>
+        /// <param name="vehicleRate"></param>
+        /// <returns>Increased rate</returns>
+        decimal GetRateOnPrice(decimal vehicleRate)
+        {
+
+            if (vehicleRate > 110000)
+            {
+                return 0.018m;
+            }
+            else if (vehicleRate > 90000)
+            {
+                return 0.016m;
+            }
+            else if (vehicleRate > 60000)
+            {
+                return 0.015m;
+            }
+            else if (vehicleRate > 50000)
+            {
+                return 0.014m;
+            }
+            else if (vehicleRate > 40000)
+            {
+                return 0.012m;
+            }
+            else if (vehicleRate > 30000)
+            {
+                return 0.01m;
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Get vehicles list for estimate view
+        /// </summary>
+        /// <returns>List of vehicles</returns>
         [HttpGet]
         [Route("GetVehicles")]
         public IActionResult GetVehicles()
@@ -26,6 +107,10 @@ namespace VehicleInsuranceAPI.Controllers
 
             return Ok(data);
         }
+        /// <summary>
+        /// Get policies list for estimate view
+        /// </summary>
+        /// <returns>List of policies</returns>
         [HttpGet]
         [Route("GetPolicies")]
         public IActionResult GetPolicies()
@@ -49,100 +134,17 @@ namespace VehicleInsuranceAPI.Controllers
                 }
             }
         }
-        /// <summary>
-        /// Estimate car insurance premium
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+
         [HttpPost]
-        public IActionResult Estimate(EstimateModel model)
+        [Route("CreateVehicle")]
+        public IActionResult CreateVehicle(Vehicle model)
         {
-
-            return Ok(GetEstimate(model));
+            _db.Vehicles.Add(model);
+            if (_db.SaveChanges() > 0)
+            {
+                return Ok(model);
+            }
+            return BadRequest();
         }
-
-        /// <summary>
-        /// Business Logic for Estimate car insurance premium
-        /// </summary>
-        /// <param name="model">Estimate Model</param>
-        /// <returns>estimated premium typeof decimal</returns>
-        decimal GetEstimate(EstimateModel model)
-        {
-            decimal premium = 0;
-            try
-            {
-                Policy policy = _db.Policies.Where(p => p.PolicyType.Equals(model.PolicyType)).FirstOrDefault()!;
-                if (policy != null)
-                {
-                    premium += policy.Annually;
-                }
-                //if (model.Seats > 4)
-                //{
-                //    premium += 0.05m * model.VehicleRate;
-                //}
-                premium += GetRateOnPrice(model.VehicleRate) * model.VehicleRate;
-                //premium += GetRateOnVersion(model.VehicleVersion) * model.VehicleRate;
-            }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return premium;
-        }
-        /// <summary>
-        /// Calculate the increased rate depending on vehicleRate (Price)
-        /// </summary>
-        /// <param name="vehicleRate"></param>
-        /// <returns>Increased rate</returns>
-        decimal GetRateOnPrice(decimal vehicleRate)
-        {
-
-            if (vehicleRate > 70000)
-            {
-                return 0.015m;
-            }
-            else if (vehicleRate > 50000)
-            {
-                return 0.012m;
-            }
-            else if (vehicleRate > 30000)
-            {
-                return 0.01m;
-            }
-            return 0;
-        }
-        //decimal GetRateOnVersion(string verion)
-        //{
-        //    int thisYear = System.DateTime.Now.Year;
-
-        //    switch (thisYear - Int16.Parse(verion))
-        //    {
-        //        case 0:
-        //        case 1:
-        //            return 0;
-        //            break;
-        //        case 2:
-        //        case 3:
-        //            return 0.015m;
-        //            break;
-        //        case 4:
-        //        case 5:
-        //            return 0.016m;
-        //            break;
-        //        case 6:
-        //        case 7:
-        //        case 8:
-        //        case 9:
-        //            return 0.0175m;
-        //            break;
-        //        default:
-        //            return 0.019m;
-        //            break;
-        //    }
-        //}
     }
 }

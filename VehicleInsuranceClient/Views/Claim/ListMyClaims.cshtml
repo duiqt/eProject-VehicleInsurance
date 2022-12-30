@@ -1,0 +1,10 @@
+﻿@{
+    Layout = null;
+}
+
+@model List<ClaimViewModel>
+
+@foreach (ClaimViewModel item in Model)
+{
+    @Html.Partial("BoxMyClaims", item)
+}

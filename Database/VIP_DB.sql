@@ -8,7 +8,7 @@ create table [Customer] (
 	CustomerEmail varchar(50) unique not null,
 	[Password] varchar(50) not null,
 	CustomerName varchar(50) not null,
-	CustomerAddress varchar(100),
+	CustomerAddress varchar(100) not null,
 	CustomerPhone bigint unique not null
 );
 go
@@ -91,7 +91,7 @@ create table [Certificate] (
 	VehicleEngineNumber varchar(50) not null,
 	VehicleWarranty varchar(50) default 'Not Available' 
 		Check (VehicleWarranty IN ('Not Available','Available','Pending')),
-	Prove varchar(200)
+	Prove varchar(200) not null,
 	CONSTRAINT FK_Estimate_Certificate FOREIGN KEY (EstimateNo) REFERENCES [Estimate](EstimateNo),
 	CONSTRAINT FK_Customer_Certificate FOREIGN KEY (CustomerID) REFERENCES Customer(ID)
 ); 

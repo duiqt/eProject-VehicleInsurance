@@ -8,6 +8,8 @@ using System.Net;
 using VehicleInsuranceAPI.IResponsitory;
 using VehicleInsuranceAPI.Models;
 using VehicleInsuranceAPI.Models.Dtos;
+using System.Net.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace VehicleInsuranceAPI.Controllers
 {
@@ -17,75 +19,57 @@ namespace VehicleInsuranceAPI.Controllers
     {
         private readonly VipDbContext _context;
         private readonly ICustomer service;
-        private readonly IConfiguration _configuration;
-        public CustomerController(ICustomer service)
+        public CustomerController(ICustomer _service, VipDbContext context)
         {
-            this.service = service;
-            this._configuration = _configuration;
+            this._context = context;
+            this.service = _service;
+
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginDto req)
+        public async Task<IActionResult> LoginAdmin(LoginDto req)
         {
             return Ok(await service.Login(req));
         }
 
-        //        [HttpGet]
-        //        public async Task<ActionResult<Customer>> GetRegister()
-        //        {
-        //            return await _context.Customers.FirstOrDefaultAsync();
-        //        }
-
-        //        [HttpPost("Register")]
-        //        public async Task<ActionResult<Register>> Register(Register register)
-        //        {
-        //            _context.Entry(register).State = EntityState.Added;
-        //// _context.Customers.Add(customer);
-        //            await _context.SaveChangesAsync();
-        //            return register;
-        //            //return CreatedAtAction("GetRegister", new { id = customer.Id }, customer);
-
-        //        }
-
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Register([FromForm] RegisterDto request)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState);
-
-        //    var result = await service.Register(request);
-        //    if (!result)
-        //    {
-        //        return BadRequest("Register is unsuccessful.");
-        //    }
-        //    return Ok();
-        //}
-
-
-        [HttpPost("signup")]
-        public async Task<IActionResult> SignUp([FromForm] SignUpDto signUpDto)
+        [HttpPost("SignUp")]
+        public async Task<IActionResult> SignUp(Customer customer)
         {
-            var result = await service.SignUpAsync(signUpDto);
-            if (result.Succeeded)
+            var result = await service.SignUpCustomer(customer);
+
+            if (result == null)
             {
-                return Ok(result.Succeeded);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Sign Up New Account Unsuccessfully");
             }
-            return Unauthorized();
+            return Ok("Sign Up New Account Successfully");
         }
 
-        //[HttpPost("signup")]
-        //public string registration(Customer customer)
-        //{
-        //    SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection").ToString());
-        //    SqlCommand cmd = new SqlCommand("INSERT INTO CUSTOMER(Username,Password,CustomerEmail,CustomerName, CustomerAddress, CustomerPhone)VALUES('" + customer.Username + "', '" + customer.Password + "', '" + customer.CustomerEmail + "', '" + customer.CustomerName + "','" + customer.CustomerAddress + "', '" + customer.CustomerEmail + "')", con);
-        //    int i = cmd.ExecuteNonQuery();
-        //    if (i > 0)
-        //    {
-        //        return "New member inserted";
-        //    }
-        //    return "Error";
-        //}
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Customer>> GetCustomer(int id)
+        {
+            var customer = await _context.Customers.Where(p => p.Id == id).FirstOrDefaultAsync();
 
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+
+            return customer;
+        }
+
+        [HttpPost("EditEmployee")]
+        public async Task<ActionResult<Customer>> EditEmployee(Customer customer)
+        {
+            _context.Entry(customer).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return customer;
+        }
+
+        [HttpPost("NewPassword")]
+        public async Task<ActionResult<Customer>> NewPassword([FromBody] ChangePasswordDto changePasswordDto)
+        {
+            var result = await service.ChangePassword(changePasswordDto);
+            return result;
+        }
     }
 }

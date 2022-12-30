@@ -7,7 +7,7 @@ public partial class Customer
 {
     public int Id { get; set; }
 
-    public string Username { get; set; } = null!;
+    public string CustomerEmail { get; set; } = null!;
 
     public string Password { get; set; } = null!;
 
@@ -17,5 +17,5 @@ public partial class Customer
 
     public long CustomerPhone { get; set; }
 
-    public virtual ICollection<Estimate> Estimates { get; } = new List<Estimate>();
+    public virtual ICollection<Certificate> Certificates { get; } = new List<Certificate>();
 }

@@ -1,0 +1,131 @@
+﻿@model CertificateModel;
+@{
+}
+<div class="row">
+    @using (Html.BeginForm("PayLater", "Payment", FormMethod.Post, new { @class = "" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-6 p-5 pt-4 mt-3">
+            <div class="bg-white p-4 shadow">
+                <div class="row d-flex justify-content-center ">
+                    <div class="col">
+                        <div class="summaryCard">
+                            <div>
+                                <div class="d-flex justify-content-between">
+                                    <h2 class="pb1 fw-bolder">
+                                        Confirm Your Payment
+                                    </h2>
+                                </div>
+                                <hr>
+                                <div class="policyDuration mb-4">
+                                    <div class="d-flex justify-content-between rounded-1 py-2 px-3 shadow-sm">
+                                        <h5 class="fw-bold">Policy number</h5>
+                                        <h5>
+                                            @Html.DisplayFor(m => m.PolicyNo, new { @readonly = "readonly", @class="border-0 bg-white text-end text-dark" })
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="policyDuration mb-4">
+                                    <div class="rounded-1 py-2 px-3 shadow-sm">
+                                        <h5 class="fw-bold">Contract duration</h5>
+                                        <div class="d-flex justify-content-between">
+                                            <h5>@Html.Label("Start Date ")</h5>
+                                            <h5>
+                                                @Model.PolicyDate.ToString("ddMMMyyyy")
+                                            </h5>
+                                        </div>
+                                        <div class="d-flex justify-content-between ">
+                                            <h5>Duration</h5>
+                                            <h5>
+                                                @Html.DisplayFor(m=>m.PolicyDuration) <small>months</small>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="policyDuration mb-4">
+                                    <div class="d-flex justify-content-between rounded-1 py-2 px-3 shadow-sm h5">
+                                        <h5 class="fw-bold">Annual premium</h5>
+                                        <h5>@String.Format("{0, 0:C2}" ,Model.Premium)</h5>
+                                    </div>
+                                </div>
+                                <div class="policyDuration mb-4">
+                                    <div class="d-flex justify-content-between rounded-1 py-2 px-3 shadow-sm">
+                                        <h5 class="fw-bold">Vehicle</h5>
+                                        <h5>
+                                            @Html.DisplayFor(m => m.VehicleName)
+                                            @Html.DisplayFor(m => m.VehicleModel)
+                                            @Html.DisplayFor(m => m.VehicleVersion)
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="policyDuration mb-4">
+                                    <div class="d-flex justify-content-between rounded-1 py-2 px-3 shadow-sm">
+                                        <h5 class="fw-bold">Your policy</h5>
+                                        <h5>
+                                            @Html.HiddenFor(m => m.Id)
+                                            @ViewBag.PolicyType
+                                        </h5>
+                                    </div>
+                                </div>
+
+
+                                <div class="lower p-4 py-5 text-white d-lg-flex justify-content-between" style="background: rgb(31, 89, 165);">
+                                    <div class="d-flex flex-column mb-3"> <span>Cost including service charges</span> <small>This nuber may change depending on replair and your home conditions</small> </div>
+                                    <h3 class="fw-bold ms-4 text-warning">@String.Format("{0, 0:C2}" ,Model.Premium)</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 p-5 pt-4 ">
+            <div class="w-100 p-4">
+                <div class="row">
+                    Payment Method
+                </div>
+                <hr />
+                @*<a asp-action="#" asp-controller="#" class="btn btn-secondary btn_estimate rounded-1 pt-1 mb-3 w-100" role="button">
+                    <strong class="">Pay Later</strong>
+                </a>*@
+                <button type="submit" class="btn btn-secondary w-100">
+
+                </button>
+                <br />
+                <!-- Replace "test" with your own sandbox Business account app client ID -->
+                <script src="https://www.paypal.com/sdk/js?client-id=AW4l8IwM4jt4bOGNAaqkB_bM_hMEV4wazJ-RvniYBbyFtjjvPk8oQdhofwu2mj8C48J6G-M50T04tyGl&currency=USD"></script>
+                <!-- Set up a container element for the button -->
+                <div id="paypal-button-container"></div>
+                <script>
+                    paypal.Buttons({
+                        // Sets up the transaction when a payment button is clicked
+                        createOrder: (data, actions) => {
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: '@Model.Premium' // Can also reference a variable or function
+                                    }
+                                }]
+                            });
+                        },
+                        // Finalize the transaction after payer approval
+                        onApprove: (data, actions) => {
+                            return actions.order.capture().then(function (orderData) {
+                                // Successful capture! For dev/demo purposes:
+                                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                const transaction = orderData.purchase_units[0].payments.captures[0];
+                                alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                                // When ready to go live, remove the alert and show a success message within this page. For example:
+                                // const element = document.getElementById('paypal-button-container');
+                                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                // Or go to another URL:  actions.redirect('thank_you.html');
+
+                            });
+                        }
+                    }).render('#paypal-button-container');
+                </script>
+            </div>
+
+        </div>
+    }
+</div>

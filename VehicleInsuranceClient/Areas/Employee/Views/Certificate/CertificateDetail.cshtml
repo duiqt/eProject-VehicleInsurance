@@ -1,0 +1,124 @@
+﻿@using VehicleInsuranceClient.Areas.Employee.Models;
+@model List<CertificateAdminModel>
+<!-- Title -->
+@foreach (CertificateAdminModel item in Model)
+{
+    <h3 class="title" style="text-align:center;">@item.CustomerName Certificate Detail</h3>
+}
+
+<div class="container" style="padding: 1.2rem;">
+    <div style="text-align:center">
+        <div class="row">
+            <div class="col-md-3" style="background: lightblue">
+                <form asp-action="Detail" method="" asp-controller="Home">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @foreach (CertificateAdminModel item in Model)
+                    {
+                        <div class="form-group">
+                            <label asp-for="@item.PolicyNo" class="control-label"></label>
+                            <input asp-for="@item.PolicyNo" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.PolicyType" class="control-label"></label>
+                            <input asp-for="@item.PolicyType" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <input asp-for="@item.VehicleWarranty" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.PolicyDate" class="control-label"></label>
+                            <input for="" placeholder="@Html.DisplayFor(modelItem => item.PolicyDate)" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.PolicyDuration" class="control-label"></label>
+                            <input asp-for="@item.PolicyDuration" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Expiry Date</label>
+                            <input for="" placeholder="@Html.DisplayFor(modelItem => item.PolicyDate)" readonly class="form-control" />
+                        </div>
+                        <Br />
+                    }
+                </form>
+            </div>
+            <div class="col-md-3" style="background: lightblue">
+                <form asp-action="Detail" method="" asp-controller="Home">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @foreach (CertificateAdminModel item in Model)
+                    {
+                        <div class="form-group">
+                            <label asp-for="@item.VehicleName" class="control-label"></label>
+                            <input asp-for="@item.VehicleName" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.VehicleVersion" class="control-label"></label>
+                            <input asp-for="@item.VehicleVersion" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.VehicleModel" class="control-label"></label>
+                            <input asp-for="@item.VehicleModel" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.VehicleNumber" class="control-label"></label>
+                            <input asp-for="@item.VehicleNumber" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.VehicleBodyNumber" class="control-label"></label>
+                            <input asp-for="@item.VehicleBodyNumber" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.VehicleEngineNumber" class="control-label"></label>
+                            <input asp-for="@item.VehicleEngineNumber" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.Prove" class="control-label"></label>
+                            <input asp-for="@item.Prove" readonly class="form-control" />
+                        </div>
+                        <br />
+                    }
+                </form>
+            </div>
+            <div class="col-md-3" style="background: lightblue">
+
+                <form asp-action="Detail" method="" asp-controller="Home">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @foreach (CertificateAdminModel item in Model)
+                    {
+                        <div class="form-group">
+                            <label asp-for="@item.CustomerName" class="control-label"></label>
+                            <input asp-for="@item.CustomerName" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.CustomerAddress" class="control-label"></label>
+                            <input asp-for="@item.CustomerAddress" readonly class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@item.CustomerPhone" class="control-label"></label>
+                            <input asp-for="@item.CustomerPhone" readonly class="form-control" />
+                        </div>
+                        <br />
+                    }
+                </form>
+            </div>
+            <div class="col-md-3" style="background: lightblue">
+                <form asp-action="Detail" method="" asp-controller="Home">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @foreach (CertificateAdminModel item in Model)
+                    {
+                        <div class="form-group">
+                            <label asp-for="@item.Amount" class="control-label"></label>
+                            <input asp-for="@item.Amount" readonly class="form-control" />
+                        </div>
+                        <br />
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div style="text-align:right">
+        <a asp-action="Index">Back to Certificates List</a>
+    </div>
+</div>
+

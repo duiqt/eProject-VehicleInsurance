@@ -1,4 +1,6 @@
-﻿<!-- Title -->
+﻿@using VehicleInsuranceClient.Areas.Employee.Models;
+@model List<CertificateAdminModel>
+<!-- Title -->
 <h3 class="title">Certificates</h3>
 
 <div class="container border my-4 p-4">
@@ -15,28 +17,32 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Ross</td>
-                <td>1111</td>
-                <td>Complete Care</td>
-                <td>Honda City VTi-L</td> 
-                <td>Available</td>
-                <td>
-                    <button type="button" class="btn btn-info">Details</button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Monica</td>
-                <td>2222</td>
-                <td>Comprehensive</td>
-                <td>BMW M5 F10</td>
-                <td>Available</td>
-                <td>
-                    <button type="button" class="btn btn-info">Details</button>
-                </td>
-            </tr>
+            @foreach (CertificateAdminModel item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.CustomerName
+                    </td>
+                    <td>
+                        @item.PolicyNo
+                    </td>
+                    <td>
+                        @item.PolicyType
+                    </td>
+                    <td>
+                        @item.VehicleName @item.VehicleModel @item.VehicleVersion
+                    </td>
+                    <td>
+                        @item.VehicleWarranty
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-info" href="@Url.Action("CertificateDetail", "Certificate", new { CertId=item.Id })">Details</a>
+                    </td>
+                </tr>
+            }
         </tbody>
         <tfoot>
             <tr>

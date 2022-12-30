@@ -24,7 +24,7 @@ body {
 
 /****************** SideMenu ********************/
 #sidebar {
-    background-color: var(--primary-dark);
+    background-color: #1F5AA5;
     width: 300px;
     height: 100%;
     position: fixed; /* take complete heigh */
@@ -52,7 +52,21 @@ body {
             list-style: none;
             padding: 15px 0;
             transition: 0.3s ease;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
         }
+
+            #sidebar .items li.active {
+                background: var(--primary-light);
+            }
+
+                #sidebar .items li.active a{
+                    color: var(--black-light);
+                }
+
+                #sidebar .items li.active i {
+                    color: var(--black-light);
+                }
 
             #sidebar .items li i {
                 color: var(--yellow-color);
@@ -79,7 +93,7 @@ body {
 
                 #sidebar .items li:hover i,
                 #sidebar .items li:hover a {
-                    color: var(--primary-dark);
+                    color: var(--black-light);
                 }
 
 
