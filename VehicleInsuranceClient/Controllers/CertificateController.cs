@@ -147,27 +147,12 @@ namespace VehicleInsuranceClient.Controllers
 
             return View(contract);
         }
-        public CustomerContractModel? GetCustomer(int id)
-        {
-            using (var client = new HttpClient())
-            {
-                try
-                {
-                    var response = client.GetAsync(Program.ApiAddress + "/Customer/GetCustomer/" + id).Result;
-                    var data = response.Content.ReadAsStringAsync().Result;
-                    if (data != null)
-                    {
-                        CustomerContractModel model = JsonSerializer.Deserialize<CustomerContractModel>(data)!;
-                        return model;
-                    }
-                }
-                catch (Exception)
-                {
-                }
-            }
-            return null;
-        }
 
+        /// <summary>
+        /// Create Certificate after customer submit Contract form
+        /// </summary>
+        /// <param name="model">Contract</param>
+        /// <returns>Certificates of a customer</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Contract(ContractModel model)
