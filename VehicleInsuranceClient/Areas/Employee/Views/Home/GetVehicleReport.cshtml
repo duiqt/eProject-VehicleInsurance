@@ -1,0 +1,89 @@
+﻿@using VehicleInsuranceClient.Areas.Employee.Models.Dtos
+@model IEnumerable<CertificateDto>
+
+@{
+    ViewData["Title"] = "GetVehicleReport";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<h1>GetVehicleReport</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Vehicle Name 
+            </th>
+            <th>
+                2023
+            </th>
+            <th>
+                2022
+            </th>
+            <th>
+                2021
+            </th>
+            <th>
+                MRK Share % 2023
+            </th>
+            <th>
+                MRK Share % 2022
+            </th>
+            <th>
+                MRK Share % 2021
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleCountYearA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleCountYearB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleCountYearC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehiclePercenYearA)%
+            <td>
+                @Html.DisplayFor(modelItem => item.VehiclePercenYearB)%
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehiclePercenYearC)%
+            </td>
+        </tr>
+}
+        <tr style="background: pink">
+            <td >
+                Total
+            </td>
+            <td>
+                @Model.Sum(a => a.VehicleCountYearA)
+            </td>
+            <td>
+                @Model.Sum(a => a.VehicleCountYearB)
+            </td>
+            <td>
+                @Model.Sum(a => a.VehicleCountYearC)
+            </td>
+            <td>
+                @ViewBag.TotalPercenYearA %
+            </td>
+            <td>
+                @ViewBag.TotalPercenYearB %
+            </td>
+            <td>
+                @ViewBag.TotalPercenYearC %
+            </td>
+        </tr>
+    </tbody>
+</table>

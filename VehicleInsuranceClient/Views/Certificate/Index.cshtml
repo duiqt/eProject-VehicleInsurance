@@ -6,7 +6,8 @@
     <div class="bg">
         <div class="d-flex justify-content-around">
             <div class="flex-column pt-5">
-                <p class="cust-name pb-3">Hi, @ViewBag.userName !</p>
+                <p class="cust-name pb-3">Hello, @ViewBag.userName !</p>
+                
                 <a asp-controller="Estimate" asp-action="Index" class="btn btn-secondary">Get An Estimate</a>
             </div>
             <div class="text-light"></div>
@@ -18,19 +19,21 @@
             <div class="row text-center">
 
                 <div class="col border-end border-4 d-flex flex-column">
-                    <span>
+                    <span style="margin-left:80px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M10.916 6.209a3.88 3.88 0 100 7.76 3.88 3.88 0 000-7.76zm-5.38 3.88a5.38 5.38 0 1110.76 0 5.38 5.38 0 01-10.76 0z" clip-rule="evenodd"></path> <path fill-rule="evenodd" d="M7.122 15.797a1.7 1.7 0 00-1.648 1.7v8.294h10.9V17.5a1.7 1.7 0 00-1.7-1.7h-7.5c-.018 0-.035 0-.052-.002zm.113-1.498h7.439a3.2 3.2 0 013.2 3.2v9.042a.75.75 0 01-.75.75h-12.4a.75.75 0 01-.75-.75v-9.045A3.2 3.2 0 017.235 14.3zM22.634 7.971a.75.75 0 01.672.418l1.26 2.554 2.818.411a.75.75 0 01.415 1.28l-2.04 1.986.484 2.807a.75.75 0 01-1.088.79l-2.522-1.324-2.523 1.325a.75.75 0 01-1.088-.791l.483-2.806-2.04-1.988a.75.75 0 01.415-1.279l2.818-.41 1.263-2.555a.75.75 0 01.673-.418zm-.001 2.444l-.765 1.546a.75.75 0 01-.564.41l-1.704.248 1.234 1.203a.75.75 0 01.216.664l-.292 1.698 1.527-.802a.75.75 0 01.697 0l1.524.8-.292-1.696a.75.75 0 01.216-.665l1.234-1.202-1.704-.248a.75.75 0 01-.564-.41l-.763-1.546z" clip-rule="evenodd"></path> </svg>
+                    </span>
+                    <a class="text-link" style="cursor: pointer;" asp-controller="Account" asp-action="Details">Personal Information</a>
+                </div>
+                <div class="col border-4 d-flex flex-column">
+                    <span style ="margin-left:70px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M10.368 2.22a.75.75 0 01.75-.75h9.764a.75.75 0 01.75.75v.878h4.271a.75.75 0 01.75.75v25.933a.75.75 0 01-.75.75H6.097a.75.75 0 01-.75-.75V3.848a.75.75 0 01.75-.75h4.271V2.22zm0 2.378H6.847v24.433h18.306V4.598h-3.521v1.279a.75.75 0 01-.75.75h-9.764a.75.75 0 01-.75-.75V4.598zm9.764-1.629h-8.264v2.158h8.264V2.969zm-6.795 7.896a6.848 6.848 0 112.667 13.17h-.003A6.868 6.868 0 019.12 17.19v-.003a6.847 6.847 0 014.218-6.322zM17 11.941a5.347 5.347 0 00-6.38 5.245 5.368 5.368 0 005.378 5.348A5.347 5.347 0 0017 11.941zm2.332 3.09a.75.75 0 01-.005 1.06l-3.71 3.672a.75.75 0 01-1.055.001l-1.896-1.87a.75.75 0 011.054-1.067l1.368 1.349 3.183-3.15a.75.75 0 011.061.005z" clip-rule="evenodd"></path> </svg>
                     </span>
-                    <a class="text-link" asp-controller="Account" asp-action="Details">Person Information</a>
+                  
+                    <a class="text-link pointer-event" href="#">Initiate A Claim</a>
+              
+             
                 </div>
-                <div class="col border-end border-4 d-flex flex-column">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M10.368 2.22a.75.75 0 01.75-.75h9.764a.75.75 0 01.75.75v.878h4.271a.75.75 0 01.75.75v25.933a.75.75 0 01-.75.75H6.097a.75.75 0 01-.75-.75V3.848a.75.75 0 01.75-.75h4.271V2.22zm0 2.378H6.847v24.433h18.306V4.598h-3.521v1.279a.75.75 0 01-.75.75h-9.764a.75.75 0 01-.75-.75V4.598zm9.764-1.629h-8.264v2.158h8.264V2.969zm-6.795 7.896a6.848 6.848 0 112.667 13.17h-.003A6.868 6.868 0 019.12 17.19v-.003a6.847 6.847 0 014.218-6.322zM17 11.941a5.347 5.347 0 00-6.38 5.245 5.368 5.368 0 005.378 5.348A5.347 5.347 0 0017 11.941zm2.332 3.09a.75.75 0 01-.005 1.06l-3.71 3.672a.75.75 0 01-1.055.001l-1.896-1.87a.75.75 0 011.054-1.067l1.368 1.349 3.183-3.15a.75.75 0 011.061.005z" clip-rule="evenodd"></path> </svg>
-                    </span>
-
-                    <a class="text-link" asp-controller="Claim" asp-action="CreateClaim">Initiate a Claim</a>
-                </div>
-                <div class="col border-end border-4 d-flex flex-column">
+            @*    <div class="col border-end border-4 d-flex flex-column">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M10.368 2.22a.75.75 0 01.75-.75h9.764a.75.75 0 01.75.75v.878h4.271a.75.75 0 01.75.75v25.933a.75.75 0 01-.75.75H6.097a.75.75 0 01-.75-.75V3.848a.75.75 0 01.75-.75h4.271V2.22zm0 2.378H6.847v24.433h18.306V4.598h-3.521v1.279a.75.75 0 01-.75.75h-9.764a.75.75 0 01-.75-.75V4.598zm9.764-1.629h-8.264v2.158h8.264V2.969zm-6.795 7.896a6.848 6.848 0 112.667 13.17h-.003A6.868 6.868 0 019.12 17.19v-.003a6.847 6.847 0 014.218-6.322zM17 11.941a5.347 5.347 0 00-6.38 5.245 5.368 5.368 0 005.378 5.348A5.347 5.347 0 0017 11.941zm2.332 3.09a.75.75 0 01-.005 1.06l-3.71 3.672a.75.75 0 01-1.055.001l-1.896-1.87a.75.75 0 011.054-1.067l1.368 1.349 3.183-3.15a.75.75 0 011.061.005z" clip-rule="evenodd"></path> </svg>
                     </span>
@@ -41,7 +44,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> <path fill-rule="evenodd" d="M10.368 2.22a.75.75 0 01.75-.75h9.764a.75.75 0 01.75.75v.878h4.271a.75.75 0 01.75.75v25.933a.75.75 0 01-.75.75H6.097a.75.75 0 01-.75-.75V3.848a.75.75 0 01.75-.75h4.271V2.22zm0 2.378H6.847v24.433h18.306V4.598h-3.521v1.279a.75.75 0 01-.75.75h-9.764a.75.75 0 01-.75-.75V4.598zm9.764-1.629h-8.264v2.158h8.264V2.969zm-6.795 7.896a6.848 6.848 0 112.667 13.17h-.003A6.868 6.868 0 019.12 17.19v-.003a6.847 6.847 0 014.218-6.322zM17 11.941a5.347 5.347 0 00-6.38 5.245 5.368 5.368 0 005.378 5.348A5.347 5.347 0 0017 11.941zm2.332 3.09a.75.75 0 01-.005 1.06l-3.71 3.672a.75.75 0 01-1.055.001l-1.896-1.87a.75.75 0 011.054-1.067l1.368 1.349 3.183-3.15a.75.75 0 011.061.005z" clip-rule="evenodd"></path> </svg>
                     </span>
                     <a href="" class="text-link">Something 2</a>
-                </div>
+                </div>*@
 
             </div>
         </div>

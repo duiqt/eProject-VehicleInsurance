@@ -30,13 +30,12 @@ namespace VehicleInsuranceClient.Models
         public string VehicleVersion { get; set; } = string.Empty;
         [Required]
         public int PolicyId { get; set; }
+
         [Required(ErrorMessage = "Start date is required")]
-
-        [DataType(DataType.Date)]
-        public DateTime? EstimateDate { get; set; } = DateTime.Now!;
-
         [DataType(DataType.Date)]
         public DateTime? PolicyDate { get; set; } = null!;
+        [DataType(DataType.Date)]
+        public DateTime? EstimateDate { get; set; } = DateTime.Now!;
 
         public int PolicyDuration { get; set; } = 12;
 

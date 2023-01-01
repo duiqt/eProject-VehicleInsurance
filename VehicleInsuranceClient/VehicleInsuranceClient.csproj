@@ -68,12 +68,18 @@
 
   <ItemGroup>
     <Folder Include="Areas\Employee\Data\" />
+    <Folder Include="wwwroot\img\Claim\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Areas\Employee\Views\Account\LoginAdmin.cshtml" />
+    <None Include="Areas\Employee\Views\CompanyExpense\CompanyExpenseDetail.cshtml" />
+    <None Include="Areas\Employee\Views\CompanyExpense\Index.cshtml" />
+    <None Include="Areas\Employee\Views\CustomerBill\CustomerBill.cshtml" />
+    <None Include="Areas\Employee\Views\CustomerBill\CustomerBillUpdate.cshtml" />
+    <None Include="Areas\Employee\Views\PolicyLapsed\Index.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
     <None Include="Views\Account\SignUp.cshtml" />
     <None Include="Views\Claim\ClaimDetail.cshtml" />

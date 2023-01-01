@@ -1,0 +1,112 @@
+﻿@using VehicleInsuranceClient.Areas.Employee.Models;
+@model List<ClaimDetailCompanyExpenseAdminModel>
+<!-- Title -->
+<h3 class="title" style="text-align:center;">Claim Detail</h3>
+
+<div class="container border w-50">
+    <div class="p-4">
+        <div>
+            @foreach (ClaimDetailCompanyExpenseAdminModel item in Model.Where(u => u.Status == "Approved"))
+            {
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Customer Name:</div> @item.CustomerName
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Customer Address: </div> @item.CustomerAddress
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Customer Phone: </div> @item.CustomerPhone
+                </div>
+                <hr />
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Policy no: </div> @item.PolicyNo
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Policy Type: </div> @item.PolicyType
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Policy Duration: </div> @item.PolicyDuration
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Policy Date: </div> @item.PolicyDate.Value.ToString("ddMMMyyyy")
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Policy Expired Day: </div> @item.ExpiryDate.Value.ToString("ddMMMyyyy")
+                </div>
+                <hr />
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Vehicle Name: </div> @item.VehicleName
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Vehicle Version: </div> @item.VehicleVersion
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Vehicle Model: </div> @item.VehicleModel
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Vehicle Number: </div> @item.VehicleNumber
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Vehicle Body Number: </div> @item.VehicleBodyNumber
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Vehicle Engine Number: </div> @item.VehicleEngineNumber
+                </div>
+                <hr />
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Date Of Accident: </div> @item.DateOfAccident.ToString("ddMMMyyyy")
+                </div>
+                <div>
+                    <div class="fw-semibold me-3">Image :</div>
+                    <img src="~/img/Claim/@item.Image" style="height: 80px; width: 80px">
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Insured Amount: </div> @item.InsuredAmount
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="fw-semibold me-3">Claimable Amount: </div> @item.ClaimableAmount
+                </div>
+                <div class="pb-3 d-flex flex-row">
+                    <div class="d-flex align-items-center me-3 fw-semibold">Claim Status: </div>
+                    @if (@item.Status == "Lodged")
+                    {
+                        <button type="button" class="btn btn-warning">@item.Status</button>
+                    }
+                    else if (@item.Status == "Inspecting")
+                    {
+                        <button type="button" class="btn btn-info">@item.Status</button>
+                    }
+                    else if (@item.Status == "Insufficient")
+                    {
+                        <button type="button" class="btn btn-secondary">@item.Status</button>
+                    }
+                    else if (@item.Status == "Approved")
+                    {
+                        <button type="button" class="btn btn-success">@item.Status</button>
+                    }
+                    else if (@item.Status == "Rejected")
+                    {
+                        <button type="button" class="btn btn-danger">@item.Status</button>
+                    }
+                    else
+                    {
+                        <div>@item.Status</div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="container my-4 p-4">
+    <div style="text-align:right">
+        <a asp-action="Index">Back To Company Expense List Page</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+
+}

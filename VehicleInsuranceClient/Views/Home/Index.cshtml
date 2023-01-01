@@ -8,16 +8,17 @@
     <div class="container">
         <div class="row pt-4" >
             <div class="col-12 col-lg-6 my-5">
-                <h1 class="fw-bolder">
+                <h1 class="fw-bolder mb-5">
                     <span>Welcome to </span>
-                    <span>Vehicle Insurance Portal</span> <br />
-                    ...
+                    <span>
+                        RaCE<br />
+                        <small>
+                            An Vehicle Insurance Portal
+                        </small>
+
+                    </span>
                 </h1>
-                <p class="text-muted">
-                    ... <br />
-                    ...
-                </p>
-                <a class="btn btn-primary">Retrieve An Estimate</a>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#Retrieve" class="btn btn-primary">Retrieve An Estimate</button>
 
                 <a asp-controller="Estimate" asp-action="Index" class="btn btn-secondary">Get An Estimate</a>
             </div>
@@ -37,3 +38,24 @@
 </section>  <!-- End of Type of Insurance -->
 
 <partial name="_LineFooter" />
+
+<!-- Modal -->
+<div class="modal fade p-2" id="Retrieve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="Contract" asp-controller="Certificate" method="get">
+                <div class="modal-header" style="background: rgb(31, 89, 165);">
+                    <h1 class="modal-title fs-4 fw-bold text-white" id="staticBackdropLabel">Retrieve your estimate</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="estimateNo" id="estimateNo" class="form-control" placeholder="Enter estimate number to retrieve" />
+                </div>
+                <div class="modal-footer p-2" asp-action="Contract" asp-controller="Certificate" method="get">
+                    <button type="button" class="btn btn-secondary rounded-0 p-3 fs-5 border-0" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="align-self-center rounded-0 p-3 fs-5 border-0" style="background-color: rgb(238, 209, 46);" value="Retrieve" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

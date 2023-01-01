@@ -1,13 +1,9 @@
 ﻿using DataAccess.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 using VehicleInsuranceAPI.IResponsitory;
 using VehicleInsuranceAPI.Models.Dtos;
 using VehicleInsuranceAPI.Models;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace VehicleInsuranceAPI.Controllers
 {
@@ -23,8 +19,6 @@ namespace VehicleInsuranceAPI.Controllers
             _db = db;
             service = _service;
         }
-
-        //######## TRUC DUY
 
         // GET: api/Claim
         [HttpGet]
@@ -72,8 +66,6 @@ namespace VehicleInsuranceAPI.Controllers
             }
             return Ok("Create New Claim Unsuccessfully");
         }
-
-        //######## NGAN
 
         /// <summary>
         /// Get Claims - Admin page
@@ -160,23 +152,6 @@ namespace VehicleInsuranceAPI.Controllers
                          InsuredAmount = cla.InsuredAmount,
                          ClaimableAmount = cla.ClaimableAmount,
                      }).ToList();
-
-            //model = (from cer in _db.Certificates
-            //         join cus in _db.Customers on cer.CustomerId equals cus.Id
-            //         join cla in _db.Claims on cer.PolicyNo equals cla.PolicyNo
-            //         where cus.Id == id && cer.PolicyNo == policyNo
-            //         select new ClaimViewModel
-            //         {
-            //             ClaimNo = cla.ClaimNo,
-            //             PolicyNo = cla.PolicyNo,
-            //             PlaceOfAccident = cla.PlaceOfAccident,
-            //             DateOfAccident = cla.DateOfAccident,
-            //             Description = cla.Description,
-            //             Status = cla.Status,
-            //             Image = cla.Image,
-            //             InsuredAmount = cla.InsuredAmount,
-            //             ClaimableAmount = cla.ClaimableAmount
-            //         }).ToList()!;
             return Ok(model);
 
         }
@@ -189,7 +164,7 @@ namespace VehicleInsuranceAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("UpdateClaim")]
-        public async Task UpdateClaim(ClaimViewModel model)
+        public async Task<IActionResult> UpdateClaim(ClaimViewModel model)
         {
             //var claim = _db.Claims.FirstOrDefaultAsync(c => c.ClaimNo == model.ClaimNo);
 
@@ -209,36 +184,8 @@ namespace VehicleInsuranceAPI.Controllers
 
             _db.Claims.Update(claim);
             await _db.SaveChangesAsync();
+            return Ok("Update Status Successfully");
         }
 
-        //[HttpPut]
-        //[Route("UpdateClaim/{claimNo}")]
-        //public async Task<ActionResult<ClaimViewModel>> UpdateClaim([FromRoute] int claimNo, Claim claim)
-        //{
-        //    var isclaimFound = await _db.Claims.FirstOrDefaultAsync(c => c.ClaimNo == claimNo);
-
-        //    if (isclaimFound == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _db.Entry(claim).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _db.SaveChangesAsync();
-        //    }
-
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (_db.Claims.Find(claimNo) == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //        throw;
-        //    }
-
-        //    return NoContent();
-        //}
     }
 }

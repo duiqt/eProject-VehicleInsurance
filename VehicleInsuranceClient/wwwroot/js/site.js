@@ -25,7 +25,6 @@ $(document).ready(function () {
 
         if ($("#checkBoxAgree").is(":checked") == false) {
             e.preventDefault();
-            alert("Please agree with our terms and conditions!");
             checkAgreementBox();
         }
 

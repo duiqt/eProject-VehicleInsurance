@@ -6,9 +6,11 @@
     <title>@ViewData["Title"] - VehicleInsuranceClient</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/20.1.55/material.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/employee.css" asp-append-version="true" />
     <link rel="stylesheet" type="text/css" href="~/lib/DataTables/css/datatables.min.css" asp-append-version="true" />
+    <script src="https://cdn.syncfusion.com/ej2/20.1.55/dist/ej2.min.js"></script>
 </head>
 
 <body>
@@ -39,7 +41,7 @@
 
     </section>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    <ejs-scripts></ejs-scripts>
 </body>
 </html>
 
@@ -49,4 +51,5 @@
 <script type="text/javascript" src="~/lib/DataTables/js/datatables.min.js" asp-append-version="true"></script>
 <script src="~/js/employee.js" asp-append-version="true"></script>
 
-@await RenderSectionAsync("CustomJS", required: false)
+@await RenderSectionAsync("validateScripts", required: false)
+@await RenderSectionAsync("Scripts", required: false)

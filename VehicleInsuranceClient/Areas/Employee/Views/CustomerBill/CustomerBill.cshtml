@@ -1,0 +1,82 @@
+﻿@using VehicleInsuranceClient.Areas.Employee.Models;
+@model List<CustomerBillAdminModel>
+<!-- Title -->
+<h3 class="title">Customer Bill</h3>
+
+<div class="container border my-4 p-4">
+    <table id="myTable" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Bill No.</th>
+                <th>Policy No.</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CustomerBillAdminModel item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.BillNo
+                    </td>
+                    <td>
+                        @item.PolicyNo
+                    </td>
+                    <td>
+                        @item.Date
+                    </td>
+                    <td>
+                        @item.Amount
+                    </td>
+                    <td>
+                        @if (item.Status == "Pending")
+                        {
+                            <button type="button" class="btn btn-warning">@item.Status</button>
+                        }
+                        else if (item.Status == "Completed")
+                        {
+                            <button type="button" class="btn btn-info">@item.Status</button>
+                        }
+                    </td>
+                    <td>
+                        <a type="button" class="btn m-2 btn-sm btn-warning" href="@Url.Action("CustomerBillUpdate", "CustomerBill", new { BillId = item.Id })">Maintain</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>No.</th>
+                <th>Bill No.</th>
+                <th>Policy No.</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    $(function () {
+        $('#myTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "order": [
+                [0, 'desc']
+            ],
+            "info": true,
+            "autoWidth": false,
+        });
+    }());
+</script>

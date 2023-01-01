@@ -6,7 +6,7 @@
             <h3 class="pb-4">@Model.PolicyType Car Insurance</h3>
             <div class="card-item">
                 <h5 class="pb-1">Product details</h5>
-                <ul class="px-0 my-0">
+                <ul class="p-0 my-0">
                     <li class="fw-bold d-flex flex-row">Policy type: <div class="fw-normal mx-3">@Model.PolicyType</div></li>
                     <li class="fw-bold d-flex flex-row">Policy number: <div class="fw-normal mx-3">@Model.PolicyNo</div></li>
                     <li class="fw-bold d-flex flex-row">Status: <div class="fw-normal mx-3">@Model.VehicleWarranty</div></li>
@@ -41,7 +41,7 @@
             </div>
             <hr>
             <div class="card-item">
-                @if (Model.VehicleWarranty == "Pending")
+                @if (Model.VehicleWarranty == "Not Available")
                 {
                     <h5 class="pb-1 fw-bold">Your premium</h5>
                     <ul class="px-0 my-0">
@@ -55,11 +55,11 @@
             </div>
             <div class="card-item">
 
-                @if (Model.VehicleWarranty == "Pending")
+                @if (Model.VehicleWarranty == "Not Available")
                 {
 
                     <h5 class="pb-2">Payment method</h5>
-                    <div class="w-50">
+                    <div class="w-75">
                         @*<a  href="@Url.Action("PayLater","Payment", new { id = Model.PolicyNo })" class="btn btn-secondary rounded-1 align-self-center mb-3 w-50 fs-5 fw-bold ">Pay Later</a>*@
                         <button type="button" data-bs-toggle="modal" data-bs-target="#confirmPayLater" class="btn btn-secondary rounded-1 align-self-center mb-3 w-50 fs-5 fw-bold ">
                             Pay later
@@ -95,7 +95,6 @@
                                         // const element = document.getElementById('paypal-button-container');
                                         // element.innerHTML = '<h3>Thank you for your payment!</h3>';
                                         // Or go to another URL:  actions.redirect('thank_you.html');
-
                                     });
                                 }
                             }).render('#paypal-button-container');
@@ -107,7 +106,8 @@
                 else if (Model.VehicleWarranty == "Available")
                 {
                     <h5 class="pb-2">Print your certificate</h5>
-                    <a href="@Url.Action("Print","Certificate", new { Id = Model.Id })" class="btn btn-outline-info px-5 ">Print</a>
+                    @*<a href="@Url.Action("Print","Certificate", new { Id = Model.Id })" class="btn btn-outline-info px-5 ">Print</a>*@
+                    <a href="javascript:window.print()" class="btn btn-success"><i class="fa fa-print"></i></a>
                 }
                 else
                 {

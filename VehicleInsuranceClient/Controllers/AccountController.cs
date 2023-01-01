@@ -144,7 +144,7 @@ namespace VehicleInsuranceClient.Controllers
 
 
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult ChangePassword()
         {
             var userString = HttpContext.Session.GetString("user");
             if (userString == null)
@@ -164,7 +164,7 @@ namespace VehicleInsuranceClient.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ChangePasswordDto changePasswordDto)
+        public IActionResult ChangePassword(ChangePasswordDto changePasswordDto)
         {
 
             if (string.Compare(changePasswordDto.ChangePassword, changePasswordDto.ConfirmPassword) == 0)

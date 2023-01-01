@@ -11,7 +11,7 @@
         public string? Status { get; set; }
         public string? Image { get; set; }
         public decimal InsuredAmount { get; set; }
-        public decimal? ClaimableAmount { get; set; }
+        public decimal? ClaimableAmount { get; set; } = 0;
         public string SelectedStatus { get; set; }
     }
 }

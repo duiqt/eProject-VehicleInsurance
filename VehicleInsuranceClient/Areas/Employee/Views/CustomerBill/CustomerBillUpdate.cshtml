@@ -1,0 +1,79 @@
+﻿@model VehicleInsuranceClient.Areas.Employee.Models.CustomerBillViewModel
+<!-- Title -->
+
+<h3 class="title" style="text-align:center;">Bill Detail</h3>
+
+<div class="container border w-50">
+    <div class="p-4">
+        <div>
+            <div class="d-flex flex-row">
+                <div class="fw-semibold me-3">Bill Id :</div> @Model.Id
+            </div>
+            <hr />
+            <div class="d-flex flex-row">
+                <div class="fw-semibold me-3">Bill no :</div> @Model.BillNo
+            </div>
+            <div class="d-flex flex-row">
+                <div class="fw-semibold me-3">Policy no :</div> @Model.PolicyNo
+            </div>
+            <hr />
+            <div class="d-flex flex-row">
+                <div class="fw-semibold me-3">Date:</div> @Model.Date
+            </div>
+            <hr />
+            <div class="d-flex flex-row">
+                <div class="fw-semibold me-3">Amount:</div> @Model.Amount
+            </div>
+            <hr />
+
+
+            <form id="claim-form" asp-action="CustomerBillUpdate" method="post" asp-controller="CustomerBill">
+                <input type="hidden" name="Id" id="Id" value="@Model.Id" class="form-control">
+                <input type="hidden" name="BillNo" id="BillNo" value="@Model.BillNo" class="form-control">
+                <input type="hidden" name="PolicyNo" id="PolicyNo" value="@Model.PolicyNo" class="form-control">
+                <input type="hidden" name="Date" id="Date" value="@Model.Date" class="form-control">
+                <input type="hidden" name="Amount" id="Amount" value="@Model.Amount" class="form-control">
+                @*<input type="hidden" name="Status" id="Status" value="@Model.Status" class="form-control">*@
+                    <div class="pb-3">
+                        <div class="pb-3 d-flex flex-row">
+                            <div class="d-flex align-items-center me-3 fw-semibold">Status: </div>
+                            @if (@Model.Status == "Pending")
+                            {
+                                <button type="button" class="btn btn-warning">@Model.Status</button>
+                            }
+                            else if (@Model.Status == "Completed")
+                            {
+                                <button type="button" class="btn btn-info">@Model.Status</button>
+                            }
+                            else
+                            {
+                                <div>@Model.Status</div>
+                            }
+
+
+                        </div>
+                        <select asp-for="SelectedStatus" class="form-select shadow-none mt-3" asp-items="@ViewBag.Status">
+                            <option>Choose</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="SelectedStatus" class="text-danger"></span>
+
+                    <button type="submit" id="claimBtn" class="btn btn-primary my-3">Confirm</button>
+                </form>
+            
+        </div>
+    </div>
+</div>
+<div class="container my-4 p-4">
+    <div style="text-align:right">
+        <a asp-action="CustomerBill">Customer Bill Page</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+
+}

@@ -6,7 +6,7 @@
     ViewData["User"] = ViewBag.user;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var returnUrl = ViewBag.url == null ? "" : ViewBag.url;
+    var returnUrl = ViewBag.returnUrl == null ? "" : ViewBag.returnUrl;
 }
 
 <style>
@@ -94,7 +94,7 @@
 
                     <form asp-action="Login" class="user-form" id="loginForm" method="post">
                         <h5 class="text-danger" style="color:red">@ViewBag.msg </h5>
-                        <input hidden value="@returnUrl" id="returnUrl" />
+                        <input hidden value="@returnUrl" id="returnUrl" name="returnUrl" />
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">

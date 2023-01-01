@@ -1,0 +1,41 @@
+﻿@model CustomerBill
+
+<section id="cer-details">
+    <div class="card-wrapper bg-white">
+        <div class="card-content m-5 p-5">
+            <h3 class="pb-4 d-flex flex-row"> <div class="fw-bold pe-2">Bill no. </div> #@Model.BillNo</h3>
+  
+            <div class="card-item">
+                <h5 class="pb-1">Bill details</h5>
+                <ul class="px-0 my-0">
+                    <li class="fw-bold d-flex flex-row">Policy number: <div class="fw-normal mx-3">@Model.PolicyNo</div></li>
+                </ul>
+            </div>
+            <hr>
+            <div class="card-item d-flex flex-row">
+                @if (Model.Status == "Completed")
+                {
+                    <h5 class="pb-1  mt-3 fw-bold pe-3">Status: </h5>
+                    <button type="button" class="btn btn-success">Completed</button>
+                }
+                else if(Model.Status == "Pending")
+                {
+                    <h5 class="pb-1 fw-bold">Status</h5>
+                    <button type="button" class="btn btn-secondary">Pending</button>
+                }
+            </div>
+            <hr>
+            <div class="card-item">
+                <ul class="px-0 my-0">
+                    <li class="fw-bold d-flex flex-row">Date: <div class="fw-normal mx-3">@Model.Date.Value.ToString("dd-MMM-yyyy")</div></li>
+                </ul>
+            </div>
+            <hr>
+            <div class="card-item">
+                <ul class="px-0 my-0">
+                    <li class="fw-bold d-flex flex-row">Amount: <div class="fw-normal mx-3">@Model.Amount</div></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

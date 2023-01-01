@@ -1,0 +1,66 @@
+﻿@using VehicleInsuranceClient.Areas.Employee.Models;
+@model List<ClaimDetailAdminModel>
+<!-- Title -->
+<h3 class="title" style="text-align:center;">Customer All Claim</h3>
+
+<div class="container border my-4 p-4">
+    <table id="myTable" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Claim No.</th>
+                <th>Customer Name</th>
+                <th>Place Of Accident</th>
+                <th>Date of Accident</th>
+                <th>Insured Ammount</th>
+                <th>Claimable Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ClaimDetailAdminModel item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.ClaimNo
+                    </td>
+                    <td>
+                        @item.CustomerName
+                    </td>
+                    <td>
+                        @item.PlaceOfAccident
+                    </td>
+                    <td>
+                        @item.DateOfAccident
+                    </td>
+                    <td>
+                        @item.InsuredAmount
+                    </td>
+                    <td>
+                        @item.ClaimableAmount
+                    </td>
+                    <td>
+                     @*   <button type="button" class="btn btn-info">@Html.ActionLink("Claim By", "CertificateDetail", new {  CertId=item.Id  })</button>*@
+                        <a type="button" class="btn m-2 btn-sm btn-warning" href="@Url.Action("CertificateDetail", "Certificate", new { CertId=item.Id })">Maintain</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Claim No.</th>
+                <th>Customer Name</th>
+                <th>Place Of Accident</th>
+                <th>Date of Accident</th>
+                <th>Insured Ammount</th>
+                <th>Claimable Amount</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
+    <div style="text-align:right">
+        <a asp-action="Index">Back to Certificates List</a>
+    </div>
+</div>
+<br />
+
+

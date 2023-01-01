@@ -12,19 +12,35 @@
     <div class="flex-grow-1 align-self-center">
         <p class="m-0 pol-type">@Model.PolicyType</p>
         <p class="m-0">@Model.VehicleName @Model.VehicleModel @Model.VehicleVersion</p>
-        <p class="m-0">policy No. @Model.PolicyNo - expires @Model.PolicyDate.ToString("MM/dd/yyyy")</p>
+        <p class="m-0">policy No. @Model.PolicyNo - Starts on @Model.PolicyDate.ToString("ddMMMyyyy")</p>
     </div>
     <input type="hidden" id="bill_@Model.PolicyNo" value="@Model.PolicyNo" />
     <input type="hidden" id="policyNo" value="@Model.PolicyNo" />
 
-    @if (Model.VehicleWarranty.Equals("Pending"))
+    @if (Model.VehicleWarranty.Equals("Available"))
     {
-        <a class="btn btn-warning align-self-center me-4 px-4" href="@Url.Action("Details","Certificate", new { id = Model.Id })">Pay Now</a>
+        @if (Model.PolicyDate <= DateTime.Today)
+        {
+            <a class="btn btn-outline-warning align-self-center me-4 px-4" id="manageClaimBtn" href="@Url.Action("MyClaims","Claim", new { policyNo = Model.PolicyNo })">Manage Claims</a>
+           
+        }
+        else
+        {
+            <a class="btn btn-outline-warning align-self-center me-4 px-4 disabled" id="manageClaimBtn" href="@Url.Action("MyClaims","Claim", new { policyNo = Model.PolicyNo })">Manage Claims</a>
+        }
+
+        <a class="btn btn-outline-warning align-self-center me-4 px-4" href="@Url.Action("Details","Certificate", new { id = Model.Id })">View details</a>
+
+        <a class="btn btn-outline-warning align-self-center me-4 px-4" href="@Url.Action("Index","Bill", new { policyNo = Model.PolicyNo })">Bill</a>
+    
     }
-    else
+    else if (Model.VehicleWarranty.Equals("Pending"))
     {
         <a class="btn btn-outline-warning align-self-center me-4 px-4" href="@Url.Action("Details","Certificate", new { id = Model.Id })">View details</a>
     }
+    else
+    {
+        <a class="btn btn-warning align-self-center me-4 px-4" href="@Url.Action("Details","Certificate", new { id = Model.Id })">Pay Now</a>
+    }
 
-    <a class="btn btn-outline-warning align-self-center me-4 px-4" id="manageClaimBtn" href="@Url.Action("MyClaims","Claim", new { policyNo = Model.PolicyNo })">Manage Claims</a>
 </div>

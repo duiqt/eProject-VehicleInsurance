@@ -23,7 +23,6 @@ namespace VehicleInsuranceAPI.Models
         public string VehicleVersion { get; set; } = string.Empty;
         [Required]
         public int PolicyId { get; set; }
-        public int? OptionDetailsId { get; set; }
         [Required(ErrorMessage = "Start date is required")]
         [DataType(DataType.Date)]
         public DateTime? PolicyDate { get; set; } = null!;

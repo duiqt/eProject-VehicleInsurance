@@ -13,8 +13,11 @@ namespace VehicleInsuranceClient.Controllers
         [HttpPost]
         public IActionResult PayLater([FromForm] int PolicyNo, [FromForm] decimal Premium)
         {
-            int policyNo = PolicyNo;
-            decimal premium = Premium;
+            if (PolicyNo <= 0 || Premium <= 0)
+            {
+                ViewBag.ErrorMessage = "Invalid payment. Please dial (028)38460846 for more details";
+                return RedirectToAction("Index", "Certificate");
+            }
             try
             {
                 using (var client = new HttpClient())
@@ -23,10 +26,10 @@ namespace VehicleInsuranceClient.Controllers
                     StringContent stringContent = new StringContent(JsonSerializer.Serialize(new
                     {
                         BillNo = billNo.ToString(),
-                        PolicyNo = policyNo,
+                        PolicyNo = PolicyNo,
                         Status = "Pending",
                         Date = DateTime.Now.Date.ToString("yyyy-MM-dd"),
-                        Amount = premium.ToString()
+                        Amount = Premium.ToString()
                     }), Encoding.UTF8, "application/json");
                     var response = client.PostAsync(Program.ApiAddress + "/Bill/PostCustomerBill", stringContent).Result;
                     var data = response.Content.ReadAsStringAsync().Result;

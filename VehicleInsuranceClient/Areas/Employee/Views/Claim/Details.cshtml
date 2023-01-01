@@ -1,8 +1,12 @@
 ﻿
 
 @model VehicleInsuranceClient.Areas.Employee.Models.ClaimViewModel
-<!-- Title -->
 
+@{
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<!-- Title -->
 <h3 class="title" style="text-align:center;">Claim Detail</h3>
 
 <div class="container border w-50">
@@ -20,7 +24,7 @@
                 <div class="fw-semibold me-3">Place Of Accident :</div> @Model.PlaceOfAccident
             </div>
             <div class="d-flex flex-row">
-                <div class ="fw-semibold me-3">Date of Accident:</div> @Model.DateOfAccident
+                <div class="fw-semibold me-3">Date of Accident:</div> @Model.DateOfAccident.ToString("ddMMMyyyy")
             </div>
             <hr />
             <div>
@@ -29,7 +33,8 @@
             </div>
             <hr />
             <div class="d-flex flex-row">
-                <div class="fw-semibold me-3">Image:</div> @Model.Image
+                <div class="fw-semibold me-3">Image:</div>
+                <img src="~/img/Claim/@Model.Image" style="height: 80px; width: 80px">
             </div>
             <hr />
             <div class="d-flex flex-row">
@@ -79,7 +84,7 @@
 
                         
                         </div>
-                        <select asp-for="SelectedStatus" class="form-select shadow-none mt-3" asp-items="@ViewBag.Status">
+                        <select asp-for="SelectedStatus" class="form-select shadow-none mt-3" asp-items="@ViewBag.Status" >
                             <option>Choose</option>
                         </select>
                     </div>
@@ -115,26 +120,22 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-
     }
- 
+    <script>
+        $(() => {
+            $("#claim-form").validate({
+                rules: {
+                    claimableamount: {
+                        required: true,
+                    }
+                }, messages: {
+                    claimableamount: {
+                        required: "Claimable Amount is required."
+                    }
+                }
+            });
+        });
+    </script>
 }
-@*
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-<script>
-  //$(document).ready(function(){
-  //  $("#claimBtn").on("click", function () {
-
-  //          location.reload(true);
-  //  });
-        
-  //})
-    $(document).on("click", "#claimBtn", function () {
-        document.location.reload(true)
-    });
-      
-  
-   
-</script>*@
          

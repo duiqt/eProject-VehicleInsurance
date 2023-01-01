@@ -47,28 +47,6 @@ namespace VehicleInsuranceClient.Areas.Employee.Controllers
             return null;
         }
 
-        //public ClaimModel GetRelated ()
-        //{
-        //    try
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            var response = client.GetAsync(Program.ApiAddress + "/Claim/GetRelated").Result;
-        //            var data = response.Content.ReadAsStringAsync().Result;
-        //            if (data != null)
-        //            {
-        //                ClaimModel relatedClaim = System.Text.Json.JsonSerializer.Deserialize<ClaimModel>(data, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        //                RelatedClaim = relatedClaim;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    return null;
-        //}
-
         [HttpGet("claimNo")]
         public IActionResult Details(int claimNo)
         {
@@ -98,10 +76,14 @@ namespace VehicleInsuranceClient.Areas.Employee.Controllers
                 try
                 {
                     var data = client.PostAsJsonAsync<ClaimViewModel>(Program.ApiAddress + "/Claim/UpdateClaim", model).Result;
+                    if(data != null)
+                    {
+                        return RedirectToAction("Index", "Claim");
+                    }
                 }
                 catch (Exception)
                 {
-               
+                    throw;
                 }
             }
             return NoContent();

@@ -12,24 +12,31 @@
        
             <div class="row my-3">
                 <div class="col">
-                    <p class="m-0">Claim no: @Model.ClaimNo</p>
-                    <p class="m-0">Policy no: @Model.PolicyNo</p>
+                    <div class=" d-flex flex-row">
+                        <p class="m-0"><div class="fw-bold pe-2">Claim no:</div> @Model.ClaimNo</p>
+                    </div>
+                    <div class=" d-flex flex-row">
+                        <p class="m-0"><div class="fw-bold pe-2">Policy no: </div> @Model.PolicyNo</p>
+                    </div>
                 </div>
                 <div class="col">
-                    <p class="m-0">Place of Accident: @Model.PlaceOfAccident</p>
-                    <p class="m-0">Date of Accident: @Model.DateOfAccident.ToString("dd-MMM-yyyy")</p>
+                    <div class=" d-flex flex-row">
+                        <p class="m-0"><div class="fw-bold pe-2">Place of Accident: </div>@Model.PlaceOfAccident</p>
+                    </div>
+                    <div class=" d-flex flex-row">
+                    <p class="m-0"><div class="fw-bold pe-2">Date of Accident:</div> @Model.DateOfAccident.ToString("ddMMMyyyy")</p>
+                    </div>
                 </div>
+    
                 <div class="col">
-                    <p class="m-0">Description: @Model.Description</p>
-                    <p class="m-0">Insured Amount: @Model.InsuredAmount</p>
+                    <div class=" d-flex flex-row">
+                        <p class="m-0"><div class="fw-bold pe-2">Description: </div> @Model.Description</p>
+                    </div>
+                    <div class=" d-flex flex-row">
+                    <p class="m-0"><div class="fw-bold pe-2">Insured Amount: </div> @Model.InsuredAmount.ToString("C2")</p>
+                    </div>
                 </div>
             </div>
-          @*  <p class="m-0">Claim no: @Model.ClaimNo</p>
-            <p class="m-0">Policy no: @Model.PolicyNo</p>
-            <p class="m-0">Place of Accident: @Model.PlaceOfAccident</p>
-            <p class="m-0">Date of Accident: @Model.DateOfAccident.ToString("dd-MMM-yyyy")</p>
-            <p class="m-0">Description: @Model.Description</p>
-            <p class="m-0">Insured Amount: @Model.InsuredAmount</p>*@
       
       
   
@@ -64,7 +71,20 @@
             </div>
         }
     </div>
-        <div>
+        @*<div>
             <a class="btn btn-outline-warning align-self-center me-4 px-4" href="@Url.Action("Details","Claims", new { id = Model.Id })">View details</a>
+        </div>*@
+
+        <div class="d-flex flex-column">
+            <div class="mt-1 pe-2 d-flex flex-row">
+                <div class="fw-bold pe-2">Claimable Amount: </div> @Model.ClaimableAmount.Value.ToString("C2")
+            </div>
+        <div class="d-flex justify-content-center">
+                <img src="~/img/Claim/@Model.Image" style="height: 80px; width: 80px">
+            </div>
+            
         </div>
+    
+  
+
 </div>

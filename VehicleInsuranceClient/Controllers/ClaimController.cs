@@ -6,6 +6,7 @@ using System.Security.Policy;
 using VehicleInsuranceClient.Models.Dtos;
 using Microsoft.AspNetCore.Hosting;
 using VehicleInsuranceClient.Models;
+using Microsoft.AspNetCore.Routing.Matching;
 
 namespace VehicleInsuranceClient.Controllers
 {
@@ -24,17 +25,17 @@ namespace VehicleInsuranceClient.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            var userString = HttpContext.Session.GetString("user");
-            if (userString == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            var model = JsonConvert.DeserializeObject<IEnumerable<ClaimDto>>(client.GetStringAsync(urlClaim).Result);
-            return View(model);
-        }
+        //[HttpGet]
+        //public IActionResult Index()
+        //{
+        //    var userString = HttpContext.Session.GetString("user");
+        //    if (userString == null)
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+        //    var model = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<ClaimDto>>(client.GetStringAsync(urlClaim).Result);
+        //    return View(model);
+        //}
 
         //[HttpGet]
         //public IActionResult ClaimDetailById()
@@ -110,7 +111,7 @@ namespace VehicleInsuranceClient.Controllers
             if (response.IsSuccessStatusCode)
             {
                 ViewBag.msg = string.Format("Create New Claim Successfully");
-                return RedirectToAction("Index", "Claim");
+                return RedirectToAction("MyClaims", "Claim", new { policyNo = createClaimDto.PolicyNo} );
             }
             ViewBag.msg = string.Format("Your Claim was fail");
             return View();
@@ -120,7 +121,6 @@ namespace VehicleInsuranceClient.Controllers
         }
 
 
-        //######## NGAN
 
         [HttpGet]
         public IActionResult MyClaims(int policyNo)

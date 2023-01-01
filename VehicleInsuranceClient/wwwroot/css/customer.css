@@ -4,8 +4,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
-   
 }
+
 body {
     background-color: #f1f4f8;
 }
@@ -299,6 +299,73 @@ body {
     background-color: #f1f4f8;
 }
 
+/****************** Testimonials ******************/
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter&family=Space+Grotesk:wght@500&display=swap');
+
+main {
+    height: 280vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+.quote:not(:last-child) {
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 2.5rem;
+}
+
+.quote {
+    max-width: 800px;
+    width: 100%;
+}
+
+    .quote img {
+        width: 90px;
+        height: 90px;
+        border-radius: 100%;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .quote p {
+        font-family: 'Amiri', serif;
+        font-style: italic;
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+        margin: 1.5rem 0;
+    }
+
+.quote-author h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+}
+
+.quote-author p {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 0.9rem;
+    color: #9e9e9e;
+    margin: 0;
+}
+
+.item-quote .fa-quote-left {
+    color: #000;
+    font-size: 2rem;
+}
+
+
+@media only screen and (max-width:678px) {
+    main {
+        height: 100%;
+        padding: 1rem;
+    }
+
+    .quote {
+        padding: 2.5rem 0;
+    }
+}
+
 /****************** Footer ******************/
 footer {
     background-image: linear-gradient(to bottom, #f9fbfd 0, #ffffff 100%);
@@ -433,9 +500,9 @@ footer {
 
 .top-nav-bar {
     font-size: 0;
-    padding: 0.9375rem 0;
+    padding: 0.9375rem 0 0 0;
     text-align: right;
-    margin-right: 183px;
+    margin-right: 135px;
 }
 
 @media (min-width: 992px) {
@@ -483,7 +550,7 @@ footer {
 
 /****************** Yellow line above footer ******************/
 #line-footer {
-    height: 100px;
+    height: 90px;
     background-color: var(--yellow-color);
 }
 
@@ -603,7 +670,7 @@ footer {
 
 /*################################### Certificate Details #########################################*/
 #cer-details .card-wrapper {
-    margin: 0 300px;
+    margin: 0 20px;
     box-shadow: 0 4px 10px rgba(22, 28, 45, 0.1), 0 2px 4px 3px rgba(22, 28, 45, 0.1) !important;
 }
 
@@ -624,7 +691,7 @@ footer {
     }
 
     #cer-details hr {
-        margin: 2rem 0;
+        margin: 1rem 0;
     }
 
     #cer-details h3, h5 {
@@ -633,7 +700,7 @@ footer {
 
         #cer-details .card-content ul li {
             list-style: none;
-            padding: 7px 0;
+            padding: 3px 0;
         /*    font-weight: 500;*/
         }
 

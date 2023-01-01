@@ -5,14 +5,14 @@
     </div>
 
     <div class="items">
+        <li><i class="fas fa-calendar-check"></i><a asp-controller="Home" asp-action="Index">Dashboard</a></li></li>
         <li class=""><i class="fas fa-file-certificate"></i><a asp-controller="Certificate" asp-action="Index">Certificates</a></li>
         <li><i class="fas fa-star-exclamation"></i><a asp-controller="Claim" asp-action="Index">Claims</a></li>
-        <li><i class="fas fa-calendar-check"></i><a>Payment Schedule</a></li>
-        <li><i class="fab fa-sellsy"></i><a>Monthly sell report</a></li>
-        <li><i class="fas fa-file-exclamation"></i><a>Claims report</a></li>
-        <li><i class="fad fa-car-side"></i><a>Vehicle wise report</a></li>
-        <li><i class="fas fa-file"></i><a>Policies due renewals report</a></li>
-        <li><i class="fas fa-page-break"></i><a>Policies lapsed report</a></li>
+        <li><i class="fab fa-sellsy"></i><a asp-controller="CustomerBill" asp-action="CustomerBill">Customer Bill</a></li>
+        <li><i class="fas fa-file-exclamation"></i><a asp-controller="CompanyExpense" asp-action="Index">Company Expense</a></li>
+        <li><i class="fas fa-car-side"></i><a asp-controller="Home" asp-action="GetVehicleReport">Vehicle wise report</a></li>
+        <li><i class="fas fa-page-break"></i><a asp-controller="PolicyLapsed" asp-action="Index">Policies Lapsed Report</a></li>
+        <li><i class="fas fa-file"></i><a href="#">Policies Due Renewal</a></li>
 
         <div style="margin: 1rem 0 0 2rem;">
             <a asp-controller="Account" asp-action="logoutAdmin" class="btn btn-primary" style="background:#F3DC49; color:black">Logout</a>

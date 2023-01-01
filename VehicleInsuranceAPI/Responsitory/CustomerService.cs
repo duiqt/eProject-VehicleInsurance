@@ -108,8 +108,10 @@ namespace VehicleInsuranceAPI.Responsitory
                 PlaceOfAccident = objCreateClaim.PlaceOfAccident,
                 DateOfAccident = objCreateClaim.DateOfAccident,
                 Description = objCreateClaim.Description,
+                Status = "Lodged",
                 Image = objCreateClaim.Image,
                 InsuredAmount = objCreateClaim.InsuredAmount,
+                ClaimableAmount = 0
             };
 
             db.Claims.Add(claim);

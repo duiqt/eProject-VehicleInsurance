@@ -1,0 +1,136 @@
+﻿<div class="container-fluid my-5">
+    <p>Index</p>
+</div>
+<div id="home" class="mb-5">
+    <div class="container">
+        <div class="col-xl-10 col-lg-10" style="padding-left: 180px">
+            <div class="card shadow mb-4" style="height:310px">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Policy Lapsed Report</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="memAreaChart" style="height:230px!important"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  <!-- End of Container -->
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "/Employee/PolicyLapsed/GetDashboard",
+            type: "GET",
+            success: (data) => {
+                if (data != null && data.length > 0) {
+                    var months = [];
+                    var values = [];
+                    for (let i = 0; i < data.length; i++) {
+                        months.push(data[i].PolicyDate)
+                        values.push(data[i].PolicyNo)
+                    }
+                    var barColors = ["red", "green", "blue", "orange", "brown", "Magenta", "Yellow", "tomato", "chartreuse", "lightseagreen", "dodgerblue", "hotpink"];
+                    var ctx = document.getElementById("memAreaChart");
+                    var myLineChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: months,
+                            datasets: [{
+                                label: "Policy Expired No",
+                                lineTension: 0.3,
+                                backgroundColor: barColors,
+                                borderColor: "rgba(78, 115, 223, 1)",
+                                pointRadius: 3,
+                                pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                                pointBorderColor: "rgba(78, 115, 223, 1)",
+                                pointHoverRadius: 3,
+                                pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                                pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                                pointHitRadius: 10,
+                                pointBorderWidth: 2,
+                                data: values,
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            layout: {
+                                padding: {
+                                    left: 10,
+                                    right: 25,
+                                    top: 25,
+                                    bottom: 0
+                                }
+                            },
+                            scales: {
+                                xAxes: [{
+                                    time: {
+                                        unit: 'date'
+                                    },
+                                    gridLines: {
+                                        display: false,
+                                        drawBorder: false
+                                    },
+                                    ticks: {
+                                        maxTicksLimit: 7
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        maxTicksLimit: 5,
+                                        padding: 10,
+                                        // Include a dollar sign in the ticks
+                                        //callback: function (value, index, values) {
+                                        //    return number_format(value) + " m";
+                                        //}
+                                        values
+                                    },
+                                    gridLines: {
+                                        color: "rgb(234, 236, 244)",
+                                        zeroLineColor: "rgb(234, 236, 244)",
+                                        drawBorder: false,
+                                        borderDash: [2],
+                                        zeroLineBorderDash: [2]
+                                    }
+                                }],
+                            },
+                            legend: {
+                                display: false
+                            },
+                            tooltips: {
+                                backgroundColor: "rgb(255,255,255)",
+                                bodyFontColor: "#858796",
+                                titleMarginBottom: 10,
+                                titleFontColor: '#6e707e',
+                                titleFontSize: 14,
+                                borderColor: '#dddfeb',
+                                borderWidth: 1,
+                                xPadding: 15,
+                                yPadding: 15,
+                                displayColors: false,
+                                intersect: false,
+                                mode: 'index',
+                                caretPadding: 10,
+                                callbacks: {
+                                    label: function (tooltipItem, chart) {
+                                        var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                        return datasetLabel + ': ' + number_format(tooltipItem.yLabel) + ' m';
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    $("#errorMessage").html("<b style='color:red'>" + data.msg + "</b>");
+                }
+            }
+        });
+    });
+
+</script>

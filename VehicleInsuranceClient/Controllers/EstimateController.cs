@@ -13,6 +13,10 @@ namespace VehicleInsuranceClient.Controllers
         static List<PoliciesViewModel>? Policies;
         public List<PoliciesViewModel> GetPolicies()
         {
+            if (Policies == null)
+            {
+                Policies = InitializePolicies();
+            }
             return Policies;
         }
         public static List<SelectListItem>? vehicleNamesItems;

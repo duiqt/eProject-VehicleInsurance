@@ -4,15 +4,10 @@
     <div class="container">
         <div class="header-top-bar">
             <nav class="top-nav-bar">
-                <ul class="top-grid">
+                <ul class="top-grid pt-3">
                     <li class="nav-bar-item">
                         <a class="text-link" asp-controller="Home" asp-action="AboutUs">
                             About Us
-                        </a>
-                    </li>
-                    <li class="nav-bar-item">
-                        <a class="text-link">
-                            Help &amp; Support
                         </a>
                     </li>
                     <li class="nav-bar-item">
@@ -65,8 +60,11 @@
                     {
                         <ul class="navbar-nav ms-5">
                             <li>
-                                <a asp-controller="Account" asp-action="Logout" class="btn btn-primary">Logout</a>
+                                <a asp-controller="Certificate" asp-action="Index" class="btn btn-primary me-5" style="background:white !important; color: #0e6fc5 !important;">My Certificates</a>
                             </li>
+                            <li>
+                                <a asp-controller="Account" asp-action="Logout" class="btn btn-primary">Logout</a>
+                            </li>    
                         </ul>
                     }
 

@@ -1,124 +1,216 @@
-﻿@using VehicleInsuranceClient.Areas.Employee.Models;
-@model List<CertificateAdminModel>
+﻿@using VehicleInsuranceClient.Models;
+@model CertificateModel
 <!-- Title -->
-@foreach (CertificateAdminModel item in Model)
-{
-    <h3 class="title" style="text-align:center;">@item.CustomerName Certificate Detail</h3>
-}
 
-<div class="container" style="padding: 1.2rem;">
-    <div style="text-align:center">
-        <div class="row">
-            <div class="col-md-3" style="background: lightblue">
-                <form asp-action="Detail" method="" asp-controller="Home">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    @foreach (CertificateAdminModel item in Model)
+<div class="container w-75">
+    @using (Html.BeginForm("CertificateDetail", "Certificate", FormMethod.Post, new { @id = "formCertificateDetail", @class = "mt-5 pt-5" }))
+    {
+        <div class="bg-white shadow border mt-5">
+            <div class="px-5 pb-5">
+                <h3 class="cerTitle" style="text-align:center;">
+                    @Model.PolicyDate.ToString("yyyy")-@Model.PolicyDate.AddMonths(Model.PolicyDuration).ToString("yyyy")
+                    Certificate of Insurance @Model.PolicyType Motor
+                </h3>
+                <div class="d-flex text-warning fw-bolder round-1 p-3 mt-4 mb-2" style="background: rgb(31, 89, 165);">
+                    <h3 class="">Current details</h3>
+                    <h3 class="ms-auto d-flex align-self-end">Updating</h3>
+                </div>
+                <div class="">
+                    @if (ViewBag.isSuccess != null)
                     {
-                        <div class="form-group">
-                            <label asp-for="@item.PolicyNo" class="control-label"></label>
-                            <input asp-for="@item.PolicyNo" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.PolicyType" class="control-label"></label>
-                            <input asp-for="@item.PolicyType" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Status</label>
-                            <input asp-for="@item.VehicleWarranty" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.PolicyDate" class="control-label"></label>
-                            <input for="" placeholder="@Html.DisplayFor(modelItem => item.PolicyDate)" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.PolicyDuration" class="control-label"></label>
-                            <input asp-for="@item.PolicyDuration" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Expiry Date</label>
-                            <input for="" placeholder="@Html.DisplayFor(modelItem => item.PolicyDate)" readonly class="form-control" />
-                        </div>
-                        <Br />
+                        @if (ViewBag.isSuccess)
+                        {
+                            <p class="text-success text-center">"Update certificate successfully"</p>
+                        }
+                        else
+                        {
+                            <p class="text-danger text-center">"Update certificate unsuccessfully"</p>
+                        }
                     }
-                </form>
-            </div>
-            <div class="col-md-3" style="background: lightblue">
-                <form asp-action="Detail" method="" asp-controller="Home">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    @foreach (CertificateAdminModel item in Model)
-                    {
-                        <div class="form-group">
-                            <label asp-for="@item.VehicleName" class="control-label"></label>
-                            <input asp-for="@item.VehicleName" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.VehicleVersion" class="control-label"></label>
-                            <input asp-for="@item.VehicleVersion" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.VehicleModel" class="control-label"></label>
-                            <input asp-for="@item.VehicleModel" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.VehicleNumber" class="control-label"></label>
-                            <input asp-for="@item.VehicleNumber" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.VehicleBodyNumber" class="control-label"></label>
-                            <input asp-for="@item.VehicleBodyNumber" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.VehicleEngineNumber" class="control-label"></label>
-                            <input asp-for="@item.VehicleEngineNumber" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.Prove" class="control-label"></label>
-                            <input asp-for="@item.Prove" readonly class="form-control" />
-                        </div>
-                        <br />
-                    }
-                </form>
-            </div>
-            <div class="col-md-3" style="background: lightblue">
+                    <ul class="list-group list-group-flush">
 
-                <form asp-action="Detail" method="" asp-controller="Home">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    @foreach (CertificateAdminModel item in Model)
-                    {
-                        <div class="form-group">
-                            <label asp-for="@item.CustomerName" class="control-label"></label>
-                            <input asp-for="@item.CustomerName" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.CustomerAddress" class="control-label"></label>
-                            <input asp-for="@item.CustomerAddress" readonly class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@item.CustomerPhone" class="control-label"></label>
-                            <input asp-for="@item.CustomerPhone" readonly class="form-control" />
-                        </div>
-                        <br />
-                    }
-                </form>
+                        <li class="list-group-item">
+                            <span class="fw-bold"> Policy type</span>
+                            <div class="d-flex flex-row">@Model.PolicyType</div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="fw-bold"> Policy number</span>
+                            <div class="d-flex flex-row">@Model.PolicyNo</div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="fw-bold"> Customer:</span>
+                            <div class="d-flex flex-row">Name: @Model.CustomerName</div>
+                            <div class="d-flex flex-row">Phone: @Model.CustomerPhone</div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="fw-bold">Address:</span>
+                            <div class="d-flex flex-row">@Model.CustomerAddress</div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="fw-bold">Vehicle:</span>
+                            <div class="d-flex flex-row">@Model.VehicleName @Model.VehicleModel @Model.VehicleVersion</div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-flex">
+                                <strong>Registeration</strong>
+                                <span class="ms-auto d-flex align-self-end text-secondary">Replacement</span>
+                            </span>
+
+                            <div class="row">
+                                <div class="col-lg-5 d-flex align-items-center">
+                                    <span class="text-nowrap text-secondary">Vehicle number: @Model.VehicleNumber</span>
+                                </div>
+                                <div class="col-lg-7">
+                                    @Html.EditorFor(m=>m.VehicleNumber, new { htmlAttributes = new { placeholder="Vehicle number", @class = "form-control text-end" }})
+                                    <p><span asp-validation-for="VehicleNumber" class="text-danger small"></span></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-flex">
+                                <strong>Vehicle body number</strong>
+                                <span class="ms-auto d-flex align-self-end text-secondary">Replacement</span>
+                            </span>
+
+                            <div class="row">
+                                <div class="col-lg-5 d-flex align-items-center">
+                                    <span class="text-nowrap text-secondary">@Model.VehicleBodyNumber</span>
+                                </div>
+                                <div class="col-lg-7">
+                                    @Html.EditorFor(m=>m.VehicleBodyNumber, new { htmlAttributes = new { placeholder="Vehicle body number", @class = "form-control text-end" }})
+                                    <p><span asp-validation-for="VehicleBodyNumber" class="text-danger small"></span></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-flex">
+                                <strong>Vehicle engine number</strong>
+                                <span class="ms-auto d-flex align-self-end text-secondary">Replacement</span>
+                            </span>
+
+                            <div class="row">
+                                <div class="col-lg-5 d-flex align-items-center">
+                                    <span class="text-nowrap text-secondary">@Model.VehicleEngineNumber</span>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input asp-for="VehicleEngineNumber" value="@Model.VehicleEngineNumber" type="text" class="form-control text-end" />
+                                    <p><span asp-validation-for="VehicleEngineNumber" class="text-danger small"></span></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="d-flex">
+                                <strong>Policy date</strong>
+                                <span class="ms-auto d-flex align-self-end text-secondary">Replacement</span>
+                            </span>
+                            <div class="row">
+                                <div class="col-lg-5 d-flex align-items-center">
+                                    <span class="text-nowrap text-secondary">Started at <strong>@Model.PolicyDate.ToString("ddMMMyyyy")</strong> </span>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input asp-for="PolicyDate" type="date" min="@DateTime.Today.Date.ToString("yyyy-MM-dd")" class="form-control text-end" />
+                                    <p><span asp-validation-for="PolicyDate" class="text-danger small"></span></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="fw-bold">Vehicle warranty status</span>
+                            <div class="row">
+                                <div class="col-lg-5 d-flex align-items-center">
+                           
+                                    @if (Model.VehicleWarranty == "Available")
+                                    {
+                                        <button type="button" class="btn btn-success">@Model.VehicleWarranty</button>
+                                    }
+                                    else if (Model.VehicleWarranty == "Pending")
+                                    {
+                                        <button type="button" class="btn btn-info">@Model.VehicleWarranty</button>
+                                    }
+                                    else if (Model.VehicleWarranty == "Not Available")
+                                    {
+                                        <button type="button" class="btn btn-danger">@Model.VehicleWarranty</button>
+                                    }
+
+                                </div>
+                                <div class="col-lg-7">
+                                    <select id="VehicleWarranty" name="VehicleWarranty" class="form-select text-end" aria-label="Vehicle warranty status update">
+                                        <option value="@Model.VehicleWarranty" selected>Verifying status</option>
+                                        <option value="Available">Available - Coverage begins</option>
+                                        <option value="Pending">Pending - Coverage wait to start</option>
+                                        <option value="Not Available">Not Available</option>
+                                    </select>
+                                    <p><span asp-validation-for="VehicleWarranty" class="text-danger small"></span></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="fw-bold">Documents</span>
+                            <div class="row">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#ProvesModal" class="btn rounded-1 text-dark btn-outline-info col-lg-5 mx-2">
+                                    Display Prove Images
+                                </button>
+                            </div>
+                        </li>
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.EstimateNo)
+                        @Html.HiddenFor(m => m.CustomerId)
+                        @Html.HiddenFor(m => m.CustomerEmail)
+                        @Html.HiddenFor(m => m.CustomerName)
+                        @Html.HiddenFor(m => m.CustomerAddress)
+                        @Html.HiddenFor(m => m.CustomerPhone)
+                        @Html.HiddenFor(m => m.PolicyNo)
+                        @Html.HiddenFor(m => m.PolicyType)
+                        @Html.HiddenFor(m => m.VehicleName)
+                        @Html.HiddenFor(m => m.VehicleModel)
+                        @Html.HiddenFor(m => m.VehicleVersion)
+                        @Html.HiddenFor(m => m.PolicyDuration)
+                        @Html.HiddenFor(m => m.Premium)
+                        @Html.HiddenFor(m => m.Prove)
+                        <li class="list-group-item text-end">
+                            <input type="submit" class="btn btn-lg btn-primary rounded-0" onclick="return confirm('Update this certificate!');" value="Update" />
+                        </li>
+                    </ul>
+
+                </div>
             </div>
-            <div class="col-md-3" style="background: lightblue">
-                <form asp-action="Detail" method="" asp-controller="Home">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    @foreach (CertificateAdminModel item in Model)
-                    {
-                        <div class="form-group">
-                            <label asp-for="@item.Amount" class="control-label"></label>
-                            <input asp-for="@item.Amount" readonly class="form-control" />
-                        </div>
-                        <br />
+        </div>
+    }
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ProvesModal" tabindex="-1" aria-labelledby="ProvesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background: rgb(31, 89, 165);">
+                <h1 class="modal-title fs-5" id="ProvesModalLabel">Customer Prove Images</h1>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    @{
+                        var count = 1;
+                        if (ViewBag.Proves != null)
+                        {
+                            foreach (string item in ViewBag.Proves)
+                            {
+                                <strong>
+                                    Image @(count++):
+                                </strong>
+                                <img class="w-100 m-2" src="~/img/proveGallery/@ViewBag.Directory@item" width="250px;" />
+                                <hr />
+                            }
+                        }
                     }
-                </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="background: rgb(31, 89, 165);">
+                <button type="button" class="btn btn-secondary text-warning" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-    <br />
-    <div style="text-align:right">
-        <a asp-action="Index">Back to Certificates List</a>
-    </div>
 </div>
-
+@section validateScripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

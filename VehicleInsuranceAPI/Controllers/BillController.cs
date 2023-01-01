@@ -86,7 +86,7 @@ namespace VehicleInsuranceAPI.Controllers
                 //{
                 //    return Ok(-1);
                 //}
-                certificate.VehicleWarranty = "Not Available";
+                certificate.VehicleWarranty = "Pending";
                 CustomerBill bill = new CustomerBill()
                 {
                     BillNo = model.BillNo,

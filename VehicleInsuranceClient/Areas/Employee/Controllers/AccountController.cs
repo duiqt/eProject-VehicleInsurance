@@ -21,6 +21,11 @@ namespace VehicleInsuranceClient.Areas.Employee.Controllers
         Random random = new Random();
         public IActionResult Index()
         {
+            var userString = HttpContext.Session.GetString("admin");
+            if (userString == null)
+            {
+                return RedirectToAction("LoginAdmin", "Account");
+            }
             return View();
         }
 
@@ -76,10 +81,11 @@ namespace VehicleInsuranceClient.Areas.Employee.Controllers
         //    return RedirectToAction("loginAdmin", "Account");
         //}
         [HttpGet("logoutAdmin")]
-        public IActionResult LogoutAdmin()
+        [AllowAnonymous]
+        public IActionResult logoutAdmin()
         {
             HttpContext.Session.Remove("admin");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LoginAdmin", "Account");
         }
 
     }
