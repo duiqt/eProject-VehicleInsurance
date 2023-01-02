@@ -28,7 +28,7 @@
                     </td>
                     <td>
                     @*    <button type="btn m-2 btn-sm btn-warning" class="btn btn-info">@Html.ActionLink("Detail", "CompanyExpenseDetail", new {  CEId=item.Id })</button>*@
-                        <a type="button" class="btn m-2 btn-sm btn-info" href="@Url.Action("CompanyExpenseDetail", "CompanyExpense", new { CEId=item.Id })">Detail</a>
+                        <a type="button" class="btn m-2 btn-sm btn-info" href="@Url.Action("CompanyExpenseDetail", "CompanyExpense", new { claimNo=item.ClaimNo })">Detail</a>
                     </td>
                 </tr>
             }

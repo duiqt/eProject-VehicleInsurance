@@ -12,6 +12,7 @@ namespace VehicleInsuranceClient.Areas.Employee.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfAccident { get; set; }
         public string PolicyType { get; set; }
+        public int ClaimNo { get; set; }
         public decimal ClaimableAmount { get; set; }
         public string? Status { get; set; }
     }

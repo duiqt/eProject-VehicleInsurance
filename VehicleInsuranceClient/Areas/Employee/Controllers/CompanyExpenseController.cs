@@ -16,9 +16,9 @@ namespace VehicleInsuranceClient.Areas.Employee.Controllers
         }
 
         [HttpGet]
-        public IActionResult CompanyExpenseDetail(int CEId)
+        public IActionResult CompanyExpenseDetail(int claimNo)
         {
-            var model = JsonConvert.DeserializeObject<IEnumerable<ClaimDetailCompanyExpenseAdminModel>>(client.GetStringAsync(Program.ApiAddress + "/CompanyExpense/GetCompanyExpenseDetail/" + CEId).Result);
+            var model = JsonConvert.DeserializeObject<IEnumerable<ClaimDetailCompanyExpenseAdminModel>>(client.GetStringAsync(Program.ApiAddress + "/CompanyExpense/GetCompanyExpenseDetail/" + claimNo).Result);
             return View(model);
         }
     }

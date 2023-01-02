@@ -27,8 +27,8 @@ namespace VehicleInsuranceAPI.Controllers
         public IActionResult GetAllCustomerBill()
         {
             List<CustomerBillModel> model = new List<CustomerBillModel>();
-            model = (from cusbill in _db.CustomerBills 
-                     join est in _db.Estimates on cusbill.Id equals est.Id
+            model = (from cusbill in _db.CustomerBills
+                     join cer in _db.Certificates on cusbill.PolicyNo equals cer.PolicyNo
                      select new CustomerBillModel
                      {
                          Id = cusbill.Id,
@@ -36,9 +36,21 @@ namespace VehicleInsuranceAPI.Controllers
                          Status = cusbill.Status,
                          Date = cusbill.Date,
                          PolicyNo = cusbill.PolicyNo,
-                         Amount = est.Premium,
-                         //Premium = est.Premium,
+                         Amount = cusbill.Amount
                      }).ToList();
+
+            //from cusbill in _db.CustomerBills 
+            //     join est in _db.Estimates on cusbill.Id equals est.Id
+            //     select new CustomerBillModel
+            //     {
+            //         Id = cusbill.Id,
+            //         BillNo = cusbill.BillNo,
+            //         Status = cusbill.Status,
+            //         Date = cusbill.Date,
+            //         PolicyNo = cusbill.PolicyNo,
+            //         Amount = est.Premium,
+            //         //Premium = est.Premium,
+            //     }).ToList();
             return Ok(model);
         }
 
