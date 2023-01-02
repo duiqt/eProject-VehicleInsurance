@@ -25,11 +25,15 @@ namespace VehicleInsuranceClient.Areas.Employee.Controllers
             return View(model);
         }
 
-        public IActionResult CertificateDetail(int CertId, bool? isSuccess = null)
+        public IActionResult CertificateDetail(int CertId, bool? isSuccess = null, string? billErrorMess = null)
         {
             if (isSuccess != null)
             {
                 ViewBag.isSuccess = isSuccess;
+            }
+            if(billErrorMess != null)
+            {
+                ViewBag.BillError = billErrorMess;
             }
             var userString = HttpContext.Session.GetString("admin");
             if (userString == null)
@@ -72,6 +76,20 @@ namespace VehicleInsuranceClient.Areas.Employee.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.VehicleWarranty.Equals("Available"))
+                {
+                    using (var clt = new HttpClient())
+                    {
+                        var res = clt.GetAsync(Program.ApiAddress + "/Bill/" + model.PolicyNo).Result;
+                        var billNo = res.Content.ReadAsStringAsync().Result;
+                        if (int.Parse(billNo) < 0 )
+                        {
+                            
+                            return RedirectToAction("CertificateDetail", new { CertId = model.Id, isSuccess = false, billErrorMess = "Please check Bill or payment method of this certificate" });
+                        }
+                    }
+                }
+
                 bool isSuccess = false;
                 using var client = new HttpClient();
                 StringContent stringContent = new StringContent(System.Text.Json.JsonSerializer.Serialize(new
@@ -89,9 +107,11 @@ namespace VehicleInsuranceClient.Areas.Employee.Controllers
                 if (data == null || !data.Equals("Success"))
                 {
                     isSuccess = false;
-                    return View(model);
                 }
-                isSuccess = true;
+                else
+                {
+                    isSuccess = true;
+                }
                 return RedirectToAction("CertificateDetail", new { CertId = model.Id, isSuccess = isSuccess });
             }
             return RedirectToAction("CertificateDetail", new { CertId = model.Id });

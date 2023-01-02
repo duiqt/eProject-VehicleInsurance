@@ -15,8 +15,6 @@
         <p class="m-0">policy No. @Model.PolicyNo - Starts on @Model.PolicyDate.ToString("ddMMMyyyy")</p>
     </div>
     <input type="hidden" id="bill_@Model.PolicyNo" value="@Model.PolicyNo" />
-    <input type="hidden" id="policyNo" value="@Model.PolicyNo" />
-
     @if (Model.VehicleWarranty.Equals("Available"))
     {
         @if (Model.PolicyDate <= DateTime.Today)

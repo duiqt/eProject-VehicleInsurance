@@ -26,9 +26,9 @@ namespace VehicleInsuranceAPI.Controllers
 
         // GET: api/Bill/5
         [HttpGet("{policyNo}")]
-        public IActionResult GetCustomerBill(int policyNo)
+        public IActionResult Bill(int policyNo)
         {
-            var customerBill = _db.CustomerBills.Where(b => b.PolicyNo == policyNo).FirstOrDefault();
+            var customerBill = _db.CustomerBills.Where(b => b.PolicyNo == policyNo && b.Status.Equals("Completed")).FirstOrDefault();
 
             if (customerBill == null)
             {
