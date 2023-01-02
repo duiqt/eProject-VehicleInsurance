@@ -122,7 +122,7 @@ namespace VehicleInsuranceClient.Controllers
                 var userString = HttpContext.Session.GetString("user");
                 if (userString == null)
                 {
-                    string returnUrl = HttpContext.Request.Path;
+                    string returnUrl = HttpContext.Request.Path + $"/{estimateNo}";
                     return RedirectToAction("Login", "Account", new { returnUrl = returnUrl });
                 }
                 CustomerDto customer = JsonSerializer.Deserialize<CustomerDto>(userString);
